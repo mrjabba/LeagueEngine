@@ -1,0 +1,13 @@
+<% puts "<p>"+flash[:notice]+"</p>" if flash[:notice] %> </p>
+<% form_for :team, :url => { :action => :add_team } do |form| %>
+<fieldset>
+	<h3>Add team</h3>
+  <%= render :partial => 'shared/team_form', :locals => { :form => form } %>
+</fieldset> 
+<%= submit_tag "Add team" %> 
+	<% if @team.league_id %>
+		<%= link_to 'Back', :action => 'list', :id => @team.league_id %>
+	<% else%>
+		<%= link_to 'Back', :action => 'list' %>
+	<% end%>
+<% end %>

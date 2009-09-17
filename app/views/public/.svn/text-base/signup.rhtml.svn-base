@@ -1,0 +1,9 @@
+<br>
+<div id="form">
+	<p>Register to be notified when we launch?</p>
+	<form action="signup" method="post">
+			<label for="email">email:</label> 
+			<input type="text" name="email" size="30"><br>
+			<input id="submit" type="submit" value="email me">
+	</form>
+</div>

@@ -1,0 +1,19 @@
+<table class="structure">
+	<tr>
+<td class="structure">
+	<h3><%= @league.name %></h3>
+  <%= render(:partial => "league_list", :locals => { :league => @league })%>
+</td>
+<td class="structure">
+	<div id="rmenu">
+			<%= link_to('Add team', {:action => "add_team", :id => @league})%><br />
+			<%= link_to('Create View', {:action => "create_view", :id => @league})%><br/>
+			<%= link_to('Regenerate', {:action => "create_view", :id => @league})%><br/>
+			<%= link_to 'Delete league', { :action => 'delete_league', :id => @league }, 
+																:confirm => "Are you sure?", 
+																:method => :post %> <br/>
+			
+	</div>
+</td>
+</tr>
+</table>

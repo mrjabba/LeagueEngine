@@ -1,0 +1,52 @@
+8
+
+dir
+16
+svn://mini/subversion/leaguest/app/views/public
+svn://mini/subversion/leaguest
+
+
+
+2007-10-26T07:10:52.292361Z
+14
+trev
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+63a913f7-2836-0410-b0c0-dcefad034e35
+
+signup.rhtml
+file
+
+
+
+
+2007-10-26T07:11:48.000000Z
+ee33ff590b880f28dfe11ca2a9c4951d
+2007-10-26T07:10:52.292361Z
+14
+trev
+
+thanks.rhtml
+file
+
+
+
+
+2007-10-23T11:32:43.000000Z
+74258b047bcf91d65a01c47528cf2843
+2007-10-23T11:24:26.068594Z
+13
+trev
+

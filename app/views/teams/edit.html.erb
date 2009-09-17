@@ -1,0 +1,6 @@
+<h2><%= @team.name %></h2>
+<% form_for @team do |f| %>
+	Name: <%=f.text_field :name, :size=>35 %><br/>
+	Captain:<%=f.text_field :captain, :size=>35 %><br/>
+	<%= submit_tag "Update" %><%= link_to 'Cancel', :action => 'index' %> 
+<% end %>	

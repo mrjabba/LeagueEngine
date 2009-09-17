@@ -1,0 +1,15 @@
+<div style="float:left">
+	<h3><%= @league.name %></h3>
+  <%= render(:partial => "league_list_edit", :locals => { :league => @league })%>
+</div>
+<div id="LeaguesEditRightMenu" style="float:left">
+	<%= link_to 'Add team', new_league_team_path(@league), {:id => 'LeaguesAddTeam'} %><br />
+	<form method="post" action ="/teams/create" id="LeaguesAddTeamForm" >
+		<input type="hidden" name="team[league_id]" value="<%= @league.id %>">
+		<input name="team[name]" value="team name" type="text"> <input type='submit' value="add team" >
+	</form>
+	<%= link_to 'Regenerate', :action => "refresh", :id => @league %><br/>
+	<%= link_to 'Stat Options', :action => "refresh", :id => @league %><br/>
+	<%= link_to 'Embed this league', {:action => "create_view", :id => @league} %><br/>
+	<%= link_to 'Delete league', :action => 'destroy', :id => @league %> <br/>
+</div>

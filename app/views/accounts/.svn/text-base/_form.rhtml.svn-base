@@ -1,0 +1,8 @@
+<%= error_messages_for 'accounts' %>
+
+<!--[form:accounts]-->
+<p><label for="accounts_name">Name</label><br/>
+<%= text_field 'accounts', 'name'  %></p>
+
+<!--[eoform:accounts]-->
+

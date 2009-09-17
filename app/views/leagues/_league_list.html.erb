@@ -1,0 +1,17 @@
+<table class="greentable">
+  <thead>
+   <tr>
+	  <th>Team</th>
+<%  for stat in league.ordered_league_stats  -%>
+    <th><%=stat.tag.capitalize -%></th>
+<% end %>
+    </tr>
+  </thead>
+
+   <tbody>     
+<% for item in league.league_lists.sort_by {|league_list| [-league_list.sort_val, league_list.team.name]} -%> <!--  -->
+	<%= render(:partial => "league_list_row", :locals => { :item => item })%>
+<% end %>
+  </tbody> 
+</table>
+<br />

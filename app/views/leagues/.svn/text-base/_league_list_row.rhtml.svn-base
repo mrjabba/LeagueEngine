@@ -1,0 +1,10 @@
+<tr class="<%= cycle('odd', 'even')%>">
+  <td scope="row" class="left">
+  <% if form ||= nil %>
+    <%= check_box 'checked', item.id-%>
+  <% end %>
+  <%= link_to item.team.name, :controller => "teams", :action => "display", :id => item.id -%></td>
+  <% for stat in item.league.ordered_league_stats-%>
+    <td><%= item.stats[stat.name] -%></td>
+  <% end %>
+</tr>

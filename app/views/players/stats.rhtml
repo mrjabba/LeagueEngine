@@ -1,0 +1,22 @@
+<style type="text/css">
+div.team{
+	margin-bottom: 20px;
+}
+div.team span{
+	font-size: 16px;
+}
+div.team table{
+	border: 1px;
+}
+div.team table tr th{
+	padding: 0 10px;
+}
+div.team table tr td{
+	text-align: center;
+}
+div.team table tr td.name{
+	text-align: left;
+}
+</style>
+
+<%= render(:partial => "team", :collection => @teams )%>

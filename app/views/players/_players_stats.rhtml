@@ -1,0 +1,38 @@
+<table>
+	<tr>
+		<th>Player</th>
+		<% games = team.games.sort_by { |game| game[:date] }.each do |g| %>
+			<th><%= g.date.strftime("%d %b") %></th>
+		<% end%>
+		<th>
+			CCWP Rego Due
+		</th>
+		<th>
+			Qualified
+		</th>
+		<th>
+			Games Played
+		</th>
+	</tr>
+	<% team.players.all(:order => "name").each do |p| %>
+	<tr>
+		<td class='name'><%=p.name %></td>
+		<% gamecount = 0 
+			 games.each do |g| %>
+			<td>
+				<%= "x" if p.played_game?(g) %>
+				<% gamecount = gamecount+1 if p.played_game?(g) %>
+			</td>
+		<% end %>
+		<td>
+			<%= 'Y' if gamecount > 2 %>
+		</td>
+		<td>
+		<%= 'Y' if gamecount > 8 %>
+		</td>
+		<td>
+		<%= gamecount%>
+		</td>
+	</tr>
+	<% end %>
+</table>

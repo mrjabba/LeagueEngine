@@ -1,0 +1,11 @@
+<tr class="<%= cycle('odd', 'even')%>"> 
+  <td scope="row" class="left">
+    <%= link_to item.team.name, edit_team_path(item.team) -%>
+  </td>
+    <% for stat in item.league.ordered_league_stats-%>
+      <td><%= item.stats[stat.name] -%></td>
+    <% end %>
+  <td class="extend">
+  <a href='<%= url_for confirm_destroy_team_path(item.team) %>' id='<%= item.team.id%>' class='ui-icon ui-icon-trash LeagueTeamDestroy'>Delete</a>
+  </td>
+</tr>

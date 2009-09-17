@@ -1,0 +1,28 @@
+<table class="center">
+  <thead>
+   <tr>
+    <th>Team Name</th>
+    <th>Captain</th>
+    <th>League</th>
+    </tr>
+  </thead>
+  <tfoot> 
+    <tr>
+       <th scope="row">Total</th>
+        <td colspan="4"><%=@teams.size%> teams</td>
+     </tr>
+   </tfoot>
+
+   <tbody>     
+<% for team in @teams -%>
+  <tr class="<%= cycle('odd', 'even')%>">
+    <td scope="row"><%= team.name -%></td>
+    <td><%= team.captain -%></td>
+    <td><%= team.league.name -%></td>
+  </tr>
+<% end %>
+  </tbody> 
+</table>
+
+<br />
+

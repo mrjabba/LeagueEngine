@@ -1,0 +1,9 @@
+<li>
+	<%= link_to menu.name, {:controller=>menu.name, :action=>'list'} %>
+	<!--%= menu.name%-->
+	<ul>
+		<% menu.sub_menu.each do |sm| %>
+			<li><%= link_to sm, {:controller=>menu.name, :action=>sm} %></li>
+		<% end %>
+	</ul>
+</li>

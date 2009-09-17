@@ -1,0 +1,108 @@
+/**********************************************************************
+*********            Common Elements
+***********************************************************************/
+body {
+  font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
+  font-size: 13px;
+}
+ul {margin:0;padding:0;}
+#content{width: 80%; margin: 0 200px;}
+
+table.center {margin-left:auto; margin-right:auto;}
+
+hr { border: 0; clear:both; color:#EEEEEE; height:0; margin:10px; width:60%;}
+
+/**********************************************************************
+*********            Menu
+***********************************************************************/
+#menu {position:absolute; top: 100px;}
+#menu ul li {list-style-type:0;}
+#menu ul li a {display:block;width:90px; padding: 3px 10px; text-decoration: none; background-color:#CFF5B4; color:#4FA34F;}
+#menu ul li a:hover {background-color:#4FA34F; color:#CFF5B4;}
+#menu ul li ul li a {background-color:#F7FCF7; color:#718ABE;}
+
+/**********************************************************************
+*********            green table
+***********************************************************************/
+
+table.greentable, table.greentable th {border: 0;border-collapse: collapse;font-family: Veranda, Arial, sans-serif; color: #4FA34F;}
+table.greentable td{ border-top: 1px solid #D4EED5; border-bottom: 1px solid #D4EED5;}
+
+table.greentable td.first{	padding-left: 20px; text-align: left; }
+
+table.greentable td.last{ padding-right:20px; }
+
+table.greentable td.league_col{ padding-left:30px; padding-right:30px; }
+
+caption { font-size: 150%; font-weight: bold; margin: 5px; }
+
+table.greentable td, table.greentable th { padding: 4px; }
+
+table.greentable thead th { text-align: center; background: #CFF5B4; color: #4FA34F; font-size: 90%;}
+
+table.greentable tbody th { font-weight: bold;}
+table.greentable tbody tr { background: #FCFEFC; }
+table.greentable tbody tr.overdue { background: #fbbeaf; }
+table.greentable tbody tr.even { background: #F7FCF7; }
+table.greentable tbody tr.active { background: #FBFF94; }
+table.greentable tbody tr td { text-align: center;padding: 2px 6px; }
+
+table.greentable tbody tr td.left { text-align: left; }
+table.greentable tbody tr td.right { text-align: right;}
+table.greentable tbody tr td.extend{ border: 0; background:0;}
+
+table.greentable a:link { color: #718ABE; text-decoration: none; }
+table.greentable a:visited { color: #718ABE; text-decoration: none;}
+table.greentable a:hover { color: #718ABE; text-decoration: underline !important;}
+
+table.greentable tfoot th, table.greentabletfoot td { font-size: 85%;}
+
+/**********************************************************************
+*********            form
+***********************************************************************/
+fieldset {border:0;}
+  legend {display:none;}
+  fieldset ul li {display:block; list-style-type:none; overflow:none;}
+  label {float:left;display:block; width:100px; text-align:right; margin-top:9px;}
+  input[type="text"] {float:left;display:block; margin: 5px 0 0 10px;}
+
+/**********************************************************************
+*********            Rounded cornder boxes
+***********************************************************************/
+.rc_box_grey {      background: #cccccc; }
+  .rc_top_grey div {  background: url(/images/rounded_corners/rc_grey_tl.png) no-repeat top left; }
+  .rc_top_grey {      background: url(/images/rounded_corners/rc_grey_tr.png) no-repeat top right; }
+  .rc_bottom_grey div {   background: url(/images/rounded_corners/rc_grey_bl.png) no-repeat bottom left; }
+    .rc_bottom_grey {       background: url(/images/rounded_corners/rc_grey_br.png) no-repeat bottom right; }
+  .rc_top_grey div, .rc_top_grey, 
+  .rc_bottom_grey div, .rc_bottom_grey { width: 100%; height: 10px; font-size: 1px; }
+    .rc_content_grey { margin: 0 10px; }
+
+/**********************************************************************
+*********            League Index
+***********************************************************************/
+ul.ListOfLeagues li {display:inline-block; list-style-type:none;display: -moz-inline-stack; display: inline-block; vertical-align:top} 
+ul.ListOfLeagues li div {padding: 0 20px;}
+
+/**********************************************************************
+*********            League Edit
+***********************************************************************/
+#LeaguesAddTeamForm {display:none;}
+#LeaguesEditRightMenu{margin: 60px 0 0 40px;}
+
+/**********************************************************************
+*********            Game New
+***********************************************************************/
+fieldset.gameDateTime ul li label{width:75px;}
+fieldset.gameDateTime ul li label.checkbox {display:inline; width:auto;}
+fieldset.gameDateTime ul li input[type="text"] {width:150px;}
+fieldset.gameDateTime ul li input[type="checkbox"] {margin-left:85px;}
+
+input.team_goals { float:none;font-size: 30px; width:60px; text-align:center; margin: 10px auto;}
+
+#games_polo_teams       {min-width:550px; float:left;}
+#games_polo_details     {width:300px; float:left; margin-left:10px;}
+#games_polo_team_lists  {width:550px; clear:both; float:left; margin-top:10px;}
+#games_polo_player_stats  {width:300px; float:left; margin: 10px 0 0 10px;}
+
+span.team_header        {display:block;margin-bottom:5px;}

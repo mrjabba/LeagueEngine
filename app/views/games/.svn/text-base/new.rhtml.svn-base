@@ -1,0 +1,9 @@
+<% form_for :game, :url => { :action => :new } do |form| %>
+<fieldset>
+	<h3>New game</h3>
+  <%= render :partial => 'form', :object => form %>
+</fieldset> 
+<%= submit_tag "Add game" %> 
+<%= link_to 'Back', :action => 'list' %>
+<% end %>
+

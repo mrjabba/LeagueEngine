@@ -1,0 +1,12 @@
+<p class="error"><%= error_messages_for :game %></p>
+<label for="game_date">Date</label>
+<!--%=form.text_field :date, :size=>35,  %-->
+<%= form.calendar_date_select :date, :value => Time.now, :buttons => false %>
+<!--%= form.datetime_select(:date, :start_year =>2006, :minute_step => 5) %--><br />
+<span style="margin-left: 375px;">Score</span>
+<label for="game_team1_id">Home Team</label><%=  form.collection_select(:team1_id, @teams, :id, :name_for_select) %> 
+<%= form.text_field :team1_points, :size=>5, :value=>"0" %><br /> 		
+<label for="game_team2_id">Away Team</label><%=  form.collection_select(:team2_id, @teams, :id, :name_for_select) %>  
+<%= form.text_field :team2_points, :size=>5, :value=>"0" %>	
+
+

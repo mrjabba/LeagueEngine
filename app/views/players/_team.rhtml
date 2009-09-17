@@ -1,0 +1,9 @@
+<div class="team">
+	<span><%= team.name %> - <%= team.league.name %></span>
+	
+	<% if !@stat.nil? %>
+		<%= render(:partial => "players_stats", :locals => {:team => team } )%>	
+  <% else %>
+		<%= render(:partial => "players", :locals =>{ :players => team.players } )%>
+	<% end %>
+</div>

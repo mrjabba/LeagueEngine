@@ -1,0 +1,14 @@
+<span><%=team.name%></span>
+<table style="margin: 0 auto;">
+<% 
+	members = nil
+	#members = game.players_in_number_order(team) if !game.nil?
+	members = team.members_in_number_order if members.nil? || members.empty?
+%>
+<% (1..14).each do |i| %>
+	<tr>
+		<td><%= i %></td><td><%= text_field_tag "game[teams][#{team.id}][players][]", members[i], :size=>20 %> </td>
+	</tr>
+<% end %>
+</table>
+<%= check_box_tag "game[teams][#{team.id}][remember_team]", '1', true %> Remember this team 

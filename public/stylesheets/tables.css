@@ -1,0 +1,136 @@
+table.center {margin-left:auto; margin-right:auto;}
+
+hr {
+	border: 0;
+	clear:both;
+	color:#EEEEEE;
+	height:0;
+	margin:10px;
+	width:60%;
+}
+
+table.greentable, table.greentable th {
+	border: 0;
+	border-collapse: collapse;
+	font-family: Veranda, Arial, sans-serif;
+	color: #4FA34F;
+}
+table.greentable td{
+	border-top: 1px solid #D4EED5;
+	border-bottom: 1px solid #D4EED5;
+}
+
+table.greentable td.first{
+	padding-left: 20px;
+	text-align: left;
+}
+
+table.greentable td.last{
+ padding-right:20px;
+}
+
+table.greentable td.league_col{
+	padding-left:30px;
+	padding-right:30px;
+}
+
+/*table.greentable, table.greentable th, table.greentable td {
+	border: 1px solid #D4EED5;
+	border-collapse: collapse;
+	font-family: Veranda, Arial, sans-serif;
+	color: #4FA34F;
+}*/
+
+caption {
+	font-size: 150%;
+	font-weight: bold;
+	margin: 5px;
+}
+
+table.greentable td, table.greentable th {
+	padding: 4px;
+}
+
+table.greentable thead th {
+	text-align: center;
+	background: #CFF5B4;
+	color: #4FA34F;
+	font-size: 90%;
+}
+
+table.greentable tbody th {
+	font-weight: bold;
+}
+
+table.greentable tbody tr { background: #FCFEFC; }
+
+table.greentable tbody tr.overdue { background: #fbbeaf; }
+
+table.greentable tbody tr.even { background: #F7FCF7; }
+
+table.greentable tbody tr.active { background: #FBFF94; }
+
+table.greentable tbody tr td {
+	text-align: center;
+	padding: 2px 6px;
+}
+
+table.greentable tbody tr td.left {
+	text-align: left;
+}
+
+table.greentable tbody tr td.right {
+	text-align: right;
+}
+
+table.greentable a:link {
+	color: #718ABE;
+	text-decoration: none;
+}
+
+table.greentable a:visited {
+	color: #718ABE;
+	text-decoration: none;
+}
+
+table.greentable a:hover {
+	color: #718ABE;
+	text-decoration: underline !important;
+}
+
+table.greentable tfoot th, table.greentabletfoot td {
+	font-size: 85%;
+}
+
+div.table_buttons {
+	text-align:right;
+	padding-bottom: 4px;
+}
+
+table.structure {
+	text-align: left;
+	margin: 0 auto 0 auto;
+	border: 0;
+	background: #FFF;
+}	
+
+td.structure {
+  vertical-align: top;
+  padding: 20px;
+  border: 0px;
+	background: #FFF;
+}
+
+#leagueListHeader {
+	margin: 31px 0 5px 0;
+}
+
+.hidden {display:none;}
+
+.open{ 
+	display:block;
+	left:10px;
+	position:absolute;
+	top:-9px;
+	width:90px;
+}

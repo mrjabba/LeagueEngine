@@ -1,0 +1,75 @@
+<p class="error"><%= error_messages_for :game %></p>
+<div id='games_polo_teams' class="rc_box_grey">
+  <div class="rc_top_grey"><div></div></div>
+    <div class="rc_content_grey">
+	      <div style="text-align:center;float:left;min-width:250px;">
+		      <span class="team_header">Team 1</span>
+			    <%=  form.collection_select :team1_id, @teams, :id, :name_for_select,{},  {:class => 'teamSelect'} %><br /> 
+			    <%= form.text_field :team1_goals, :class=>"team_goals" %> 		  
+	      </div>
+	      <div style="text-align:center;float:left;">v</div>
+	      <div style="text-align:center;float:left;min-width:250px;">
+		      <span class="team_header">Team 2</span>
+		      <%=  form.collection_select :team2_id, @teams, :id, :name_for_select,{}, {:class => 'teamSelect'} %><br /> 
+		      <%= form.text_field :team2_goals, :class=>"team_goals" %>
+	      </div>
+        <div style="clear:both;"></div>
+    </div>
+  <div class="rc_bottom_grey"><div></div></div>
+</div>
+<div id='games_polo_details' class="rc_box_grey">
+  <div class="rc_top_grey"><div></div></div>
+    <div class="rc_content_grey">
+      <fieldset class="gameDateTime">
+		    <legend>game date and time</legend>
+		    <ul>
+		    <li>
+		      <label for="game_date_dmy">Date</label> 
+		      <%= form.text_field :date_dmy %>
+  		  </li>
+  		  <li>
+  		    <label for="game_date_time">Time</label>
+  		    <%= form.text_field :time %>
+  		  </li>
+  		  <li>
+  		    <label for="game_where">Where</label> 
+  		    <%= form.text_field :where %>
+  		  </li>
+        </ul>
+      </fieldset>
+    </div>
+  <div class="rc_bottom_grey"><div></div></div>
+</div>
+<div style="clear:both"></div>
+<div id="games_polo_team_lists" class="rc_box_grey">
+  <div class="rc_top_grey"><div></div></div>
+    <div class="rc_content_grey">	
+		  <span>Team Lists</span>
+		  <div id="team1" style="text-align:center;float:left;width:250px;">	
+			  <%= render :partial => 'form_teamlist', :locals => {:game => game, :team=>game.team1, :form=>form} %>
+		  </div>
+		  <div id="team2" style="text-align:center;float:left;width:250px;margin-left:5px;">
+			  <%= render :partial => 'form_teamlist', :locals => {:game => game, :team=>game.team2, :form=>form } %>
+		  </div>
+	    <div style="clear:both;"></div>
+    </div>
+  <div class="rc_bottom_grey"><div></div></div>
+</div>
+<div id='games_polo_player_stats' class="rc_box_grey">
+  <div class="rc_top_grey"><div></div></div>
+    <div class="rc_content_grey">
+      <table>
+        <tr>
+          <th>Time</th><th>Number</th><th>Stat Type</th><th>Value</th>
+        </tr>
+        <% for pStat in game.player_stats %>
+          <% fields_for "...", pStat do |ps_form| %>
+          <tr>
+            <td><%= ps_form.text_field :time %></td><td> <%= ps_form.text_field :number %> </td><td><%= ps_form.text_field :stat_type %></td><td><%= ps_form.text_field :value %></td>
+          </tr>
+          <% end %>
+        <% end%>
+      </table>
+    </div>
+  <div class="rc_bottom_grey"><div></div></div>
+</div>

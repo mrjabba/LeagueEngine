@@ -1,0 +1,17 @@
+<% form_for :user, :url => { :action => :login } do |form| %> 
+<fieldset>
+<h3>Login</h3> 
+
+<label for="user_login">Username</label>
+<%= form.text_field "login", :size => 20 %><br/>
+
+<label for="user_password">Password</label>
+<%= form.password_field "password", :size => 20 %><br/><br/>  
+
+<%if false #flash error-%>
+<%= link_to 'Forgotten my password',{ :controller => "user", :action => 'forgot_password' }%>
+<%= link_to 'Register',{ :controller => "user", :action => 'signup' }%>
+<%end-%>
+</fieldset>
+<%= submit_tag "Submit" %> 
+<% end %>

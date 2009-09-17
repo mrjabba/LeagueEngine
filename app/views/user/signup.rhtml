@@ -1,0 +1,53 @@
+<%= form_tag :action=> "signup" %>
+
+<%= error_messages_for 'user' %><br/>
+
+<label for="user_login">Username</label>
+<%= text_field "user", "login", :size => 20 %><br/>
+
+<label for="user_password">Password</label>
+<%= password_field "user", "password", :size => 20 %><br/>
+
+<label for="user_password_confirmation">Password Confirmation</label>
+<%= password_field "user", "password_confirmation", :size => 20 %><br/>
+
+<label for="user_email">Email</label>
+<%= text_field "user", "email",  :size => 20 %><br/><br/>
+
+<%= submit_tag "Signup" %>
+
+</form>
+
+<% form_for :account, :url => { :action => :create } do |form| %> 
+<%= error_messages_for :account %> 
+Account Name: <%= form.text_field :title %><br/>  
+url: <%=form.text_field :url %><br/> 
+Sport:<%=form.text_field :sport %><br/>
+<fieldset> 
+<legend>Account Administrator...</legend> 
+<%= error_messages_for :user %> 
+<% fields_for :user do |user| %> 
+User Name: <%= user.text_field :login %><br/> 
+Password: <%= user.password_field :password %><br/>
+Confirm Password: <%= user.password_field :password_confirmation %><br/>
+email: <%= user.text_field :email %><br/> 
+<% end %> 
+</fieldset> 
+<%= submit_tag %> 
+<% end %>
+
+<% form_for :product, :url => { :action => :create } do |form| %> 
+<%= error_messages_for :product %> 
+Title: <%= form.text_field :title %><br/> 
+Description: <%= form.text_area :description, :rows => 3 %><br/> 
+Image url: <%=form.text_field :image_url %><br/> 
+<fieldset> 
+<legend>Details...</legend> 
+<%= error_messages_for :details %> 
+<% fields_for :details do |detail| %> 
+SKU: <%= detail.text_field :sku %><br/> 
+Manufacturer: <%= detail.text_field :manufacturer %> 
+<% end %> 
+</fieldset> 
+<%= submit_tag %> 
+<% end %>

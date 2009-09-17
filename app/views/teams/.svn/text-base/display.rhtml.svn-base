@@ -1,0 +1,19 @@
+<h3><%= @team.name%></h3>
+<table class="structure">
+<tr>
+<td class="structure">
+		<% if @upcoming_games.length != 0 %>
+					<p>up coming games</p>
+					<%= render :partial => 'games_table', :object => @upcoming_games %>
+		<% end %>
+		<br />
+		<%= render :partial => 'games_table', :object => @played_games %>
+	<p>played games</p>
+
+</td>
+<td class="structure">
+	<p>team list</p>
+	
+</td>
+</tr>
+</table>

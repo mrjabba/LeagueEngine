@@ -1,0 +1,29 @@
+<br />
+<% if @upcoming_games.length != 0 %>
+<table class="greentable center">
+	  <thead>
+	   <tr>
+	    <th colspan="4">Upcoming Games</th>
+	   </tr>
+	  </thead>
+
+	   <tbody>
+			<%= render :partial => 'game_row', :collection => @upcoming_games %>
+	  </tbody> 
+</table>
+<% end %>
+<br />
+<table class="greentable center">
+	  <thead>
+	   <tr>
+	    <th colspan="4">Completed Games</th>
+	   </tr>
+	  </thead>
+
+	   <tbody>
+			<%= render :partial => 'game_row', :collection => @played_games %>
+	  </tbody> 
+</table>
+
+
+

@@ -1,0 +1,7 @@
+<tr <%if game_row.date < Time.now and !game_row.completed  -%> class="overdue" <%end-%>>
+  <td scope="row" class="right"><%= game_row.team1.name -%></td>
+  <td> v </td>
+  <td class="left"><%= game_row.team2.name -%></td>
+  <td><%= game_row.league.name -%></td>
+  <td><%= game_row.date.strftime("%d-%m-%Y %H:%M ") -%></td>
+</tr>

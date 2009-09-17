@@ -1,0 +1,11 @@
+<h3>New league</h3>
+<p class="error"><%= error_messages_for :league %></p>
+
+<% form_for @league do |form| %>
+<fieldset>
+	<label for="league_name">League name</label>
+	<%=form.text_field :name, :size=>35 %>
+</fieldset> 
+<%= submit_tag "Create league" %> 
+<%= link_to 'Back', :action => 'list' %>
+<% end %>

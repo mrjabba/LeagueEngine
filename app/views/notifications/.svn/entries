@@ -1,0 +1,40 @@
+8
+
+dir
+16
+svn://mini/subversion/leaguest/app/views/notifications
+svn://mini/subversion/leaguest
+
+
+
+2007-07-26T11:37:34.666035Z
+1
+trev
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+63a913f7-2836-0410-b0c0-dcefad034e35
+
+forgot_password.rhtml
+file
+
+
+
+
+2007-10-23T11:32:42.000000Z
+052c846a6109fb2cb0b8b27534117814
+2007-07-26T11:37:34.666035Z
+1
+trev
+

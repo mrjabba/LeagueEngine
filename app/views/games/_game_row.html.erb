@@ -1,0 +1,17 @@
+<tr class="<%= cycle('odd', 'even')%><%= puts ' overdue' if game_row.date < Time.now and !game_row.completed -%>">
+  <td scope="row" class="first">
+     <%= game_row.team1.name -%>
+     <%= " <span style='color:718ABE;'>#{game_row.team1_goals}</span>"  if game_row.team1_goals != "" %> 
+			<%= game_row.completed? ? '-' : 'v' %> 
+		 <%= game_row.team2.name -%>
+		 <%= " <span style='color:718ABE;'>#{game_row.team2_goals}</span>"  if game_row.team2_goals != "" %> 
+  <td class="league_col"><%= game_row.league.name -%></td>
+  <td><%= format_date(game_row.date) -%></td>
+	<td><div style="position:relative;">
+			<div>
+				<%= link_to 'edit', :action=>'edit', :id=>game_row.id %>
+				<%= link_to 'x', :action=>'delete', :id=>game_row.id %>
+			</div>
+		</div>
+	</td>
+</tr>

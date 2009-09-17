@@ -1,0 +1,33 @@
+<table class="center">
+  <thead>
+   <tr>
+    <th>Name</th>
+    <th>Owner</th>
+    <th>Created on</th>
+    <th>Last Updated</th>
+    <th>Actions</th>
+    </tr>
+  </thead>
+  <tfoot> 
+    <tr>
+       <th scope="row">Total</th>
+        <td colspan="4"><%=@accounts.size%> accounts</td>
+     </tr>
+   </tfoot>
+
+   <tbody>     
+<% for account in @accounts -%>
+  <% if AccountsUser.is_active(account.id, session[:user]) -%>
+   <tr class="active">
+  <% else-%>
+   <tr class="<%= cycle('odd', 'even')%>">
+  <% end -%>
+    <td scope="row" class="left"><%= account.name -%></td>
+    <td><%= User.find(account.owner_id).login -%></td>
+    <td><%= account.created_on.strftime("%d/%m/%Y") -%></td>
+    <td><%= account.updated_on.strftime("%d/%m/%Y") -%></td>
+    <td><%= link_to 'Select', :action => 'select', :id => account.id %>
+  </tr>
+<% end %>
+  </tbody> 
+</table>

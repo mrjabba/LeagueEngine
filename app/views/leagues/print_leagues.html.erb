@@ -1,0 +1,4 @@
+<%= link_to "back", :url => session[:last_page] %><br /><br />
+<% for league in @leagues -%>
+<%= render( :partial => "league_list", :locals => { :league => league }) %>
+<% end%>

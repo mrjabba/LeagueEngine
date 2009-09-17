@@ -1,0 +1,44 @@
+<html>
+<head>
+  <title>Leaguest - <%= controller.controller_name.capitalize %></title>
+  
+	<%= javascript_include_tag  'jquery-1.3.2' %>
+	
+	<script src="/javascripts/plugins/jquery-ui/jquery-ui-1.7.2.custom.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="/javascripts/plugins/jquery-ui/smoothness/jquery-ui-1.7.2.custom.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	
+	<%= stylesheet_link_tag 'back' %>
+	<%= javascript_include_tag  'back' %>
+	
+	<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+</head>
+<body>
+		<div id="top_nav">
+			<% if current_user%>
+		  		<!--%= link_to "My Account", account_path %--> |
+				<%= link_to "Logout", user_sessions_path, :method => :destroy, :confirm => "Are you sure you want to logout?" %>
+			<% end %>
+		</div>
+		
+		<div id="menu">
+			<ul>
+				<li><a href="/leagues">leagues</a>
+					<ul>
+						<li><a href='/leagues/new'>add</a></li>
+					</ul>
+				</li>
+				<li><a href="/games">games</a></li>
+				<li><a href="/teams">teams</a></li>
+				<li><a href="/players">players</a></li>
+			</ul>
+		</div>
+		
+		<div id="content">
+	  	<%- flash.each do |name, msg| -%>
+				<%= content_tag :div, msg, :id => "flash_#{name}" %>
+			<%- end -%>
+	
+			<%= yield %>
+		</div>
+</body>
+</html>

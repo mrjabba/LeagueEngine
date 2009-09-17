@@ -1,0 +1,10 @@
+<table>
+	<tr>
+		<th></th><th>Player</th><th></th>
+	</tr>
+	<% players.each do |p| %>
+	<tr>
+		<td><input type='checkbox' name='player[<%= p.id%>]' /></td><td><%=p.name %></td><td>edit x</td>
+	</tr>
+	<% end %>
+</table>

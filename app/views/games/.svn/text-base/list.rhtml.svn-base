@@ -1,0 +1,13 @@
+<div id ="item_menu">
+  <%= link_to 'add game', :action => 'new' %></td>
+</div>
+
+<br />
+<% if @upcoming_games.length != 0 %>
+			<%= render :partial => 'games_table', :object => @upcoming_games %>
+<% end %>
+<br />
+<%= render :partial => 'games_table', :object => @played_games %>
+
+
+

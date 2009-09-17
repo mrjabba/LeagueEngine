@@ -1,0 +1,3 @@
+<p class="error"><%= error_messages_for :league %></p>
+<label for="league_name">League name</label>
+<%=form.text_field :name, :size=>35 %>	

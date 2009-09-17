@@ -1,0 +1,12 @@
+<ul class="ListOfLeagues">
+<% for league in @leagues -%>
+  <li>
+	<div class="listblock">
+	  <h3 class="leagueListHeader"><%= league.name %></h3>
+	  <%= render(:partial => "league_list", :locals => { :league => league })%>
+	  <%= link_to 'edit', edit_league_path(league)%>
+	</div>
+  </li>
+<% end %>
+</ul>
+<div style="clear:both"></div>

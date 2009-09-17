@@ -1,0 +1,46 @@
+<table class="structure">
+	<tr>
+		<td class="structure">
+		<% form_for :leagues, :url => {:action=>:league_action, }, :html => { :id => 'leagues_form' } do |form| %>
+			<div class="table_buttons">
+				<%= link_to('<img src="/images/green_buttons/add.gif"  title="Create new league" alt="Create new league" border=0 />', 
+							{:action => "new"}) %>			
+				<input name="print_button" value="print" type="image" src="/images/green_buttons/print.gif" alt="Print Leagues" title="Print Leagues"/>
+				<input name="archive_button" value="archive" type="image" src="/images/green_buttons/download.gif" alt="Archive Leagues" title="Archive Leagues"/>
+			</div>
+		<table class="greentable">
+		  <thead>
+		   <tr>
+		    <th>Leagues</th>
+		    </tr>
+		  </thead>
+
+		   <tbody>     
+		<% for league in @leagues -%>
+			<% if league.id == @league.id -%>
+		   <tr class="active">
+	  	<% else-%>
+		  	<tr class="<%= cycle('odd', 'even')%>">
+			<% end %>
+		    <td  class="left" scope="row"><%= check_box 'checked', league.id-%>
+			  <%= link_to league.name, :action => 'list', :id => league.id %></td>	
+		  </tr>
+		<% end %>
+		  </tbody> 
+		</table>
+		<% end %>
+</td>
+<td class="structure">
+	<h3 id="leagueListHeader"><%= @league.name %></h3>
+  <%= render(:partial => "league_list", :locals => { :league => @league })%>
+	<div class="table_buttons">
+		<%= link_to('edit', {:action => "edit", :id => @league})%>
+	</div>
+	<div>
+	<!--p>embed this league<br />
+		<input type="text" value="ksadkfjalfkhasldfjasjhfvaskjhcdaksjcdkasbclaks"/>
+	</p-->
+	</div>
+</td>
+</tr>
+</table>

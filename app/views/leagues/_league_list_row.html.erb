@@ -1,0 +1,8 @@
+<tr class="<%= cycle('odd', 'even')%>"> 
+  <td scope="row" class="left">
+    <%= link_to item.team.name, team_path(item.team) -%>
+  </td>
+    <% for stat in item.league.ordered_league_stats-%>
+      <td><%= item.stats[stat.name] -%></td>
+    <% end %>
+</tr>
