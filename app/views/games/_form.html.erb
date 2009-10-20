@@ -58,18 +58,7 @@
 <div id='games_polo_player_stats' class="rc_box_grey">
   <div class="rc_top_grey"><div></div></div>
     <div class="rc_content_grey">
-      <table>
-        <tr>
-          <th>Time</th><th>Number</th><th>Stat Type</th><th>Value</th>
-        </tr>
-        <% for pStat in game.player_stats %>
-          <% fields_for "...", pStat do |ps_form| %>
-          <tr>
-            <td><%= ps_form.text_field :time %></td><td> <%= ps_form.text_field :number %> </td><td><%= ps_form.text_field :stat_type %></td><td><%= ps_form.text_field :value %></td>
-          </tr>
-          <% end %>
-        <% end%>
-      </table>
+      <%= render :partial => 'player_stats', :locals => {:player_stats => game.player_stats.not_game_played} %>
     </div>
   <div class="rc_bottom_grey"><div></div></div>
 </div>

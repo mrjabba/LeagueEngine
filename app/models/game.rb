@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   has_many :game_stats
-  has_many :player_stats
+  has_many :player_stats, :dependent => :destroy
   has_many :players, :through => :player_stats
   
   belongs_to :league
@@ -11,7 +11,33 @@ class Game < ActiveRecord::Base
              :class_name => "Team", 
              :foreign_key => "team2_id"
              
+             
   attr_accessor :teams, :team1_stats, :team2_stats, :completed_before_save
+  
+  def new_player_stats=(player_stat_attributes)
+    player_stats_attributes.each do |stat|
+      ps = player_stats.build(stat)
+      ps.player_id = get_player(ps.team_id, ps.number)
+    end
+  end
+  
+  def existing_player_stats=(player_stat_attributes)
+    player_stats.not_game_played.reject(&:new_record?).each do |stat|
+      attributes = player_stat_attributes[task.id.to_s]
+      if attributes
+        task.attributes = attributes
+      else 
+        tasks.delete(task)
+      end
+    end
+  end
+  
+  def get_player(team, number)
+    team = Team.find(team)
+    if(team)
+      tm = team.team_members.find(:first)
+    end
+  end
   
   def before_save
     g = Game.find(id) if !id.nil?
@@ -21,6 +47,7 @@ class Game < ActiveRecord::Base
   def after_create
     process_team_lists
     save_game_stats
+    save_player_stats
     update_league if completed?
   end
   

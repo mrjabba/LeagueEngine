@@ -36,6 +36,7 @@ class GamesController < ApplicationController
     @game.date = Time.now
     @game.team1 = @teams[0]
     @game.team2 = @teams[1]
+    @teams_on_card = [@teams[0], @teams[1]]
   end
   
   def create

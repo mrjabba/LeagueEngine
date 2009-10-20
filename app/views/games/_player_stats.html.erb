@@ -1,0 +1,16 @@
+<table id='player_stats'>
+  <tr>
+    <th>Time</th><th>Team</th><th>Number</th><th>Stat Type</th><th>Value</th>
+  </tr>
+  <% for pStat in player_stats %>
+    <% fields_for_player_stat(pStat) do |ps_form| %>
+    <tr>
+      <td class='time'><%= ps_form.text_field :time %></td>
+			<td class='teams'><%= ps_form.collection_select :team_id, @teams_on_card, :id, :name  %></td>
+			<td class='number'> <%= ps_form.text_field :number %> </td>
+			<td class='stat_type'><%= ps_form.text_field :stat_type %></td>
+			<td class='value'><%= ps_form.text_field :value %></td>
+    </tr>
+    <% end %>
+  <% end%>
+</table>

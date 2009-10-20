@@ -13,4 +13,8 @@ module GamesHelper
     end 
   end
   
+  def fields_for_player_stat(player_stat, &block)
+    prefix = player_stat.new_record? ? 'new' : 'existing'
+    fields_for("game[#{prefix}_player_stats][]", player_stat, &block)
+  end
 end
