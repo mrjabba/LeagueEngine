@@ -30,13 +30,15 @@ class GamesController < ApplicationController
   
   def new
     @game = Game.new(params[:game])
-    3.times {@game.player_stats.build}
+    3.times {@game.player_stats.build({:stat_type_id => 100})}
     @leagues = active_account().leagues
     @teams = Team.all_teams(active_account())
     @game.date = Time.now
     @game.team1 = @teams[0]
     @game.team2 = @teams[1]
     @teams_on_card = [@teams[0], @teams[1]]
+    @player_stat_types = StatType.player_stats
+    @player_game_played = StatType.player_game_played
   end
   
   def create

@@ -106,3 +106,9 @@ input.team_goals { float:none;font-size: 30px; width:60px; text-align:center; ma
 #games_polo_player_stats  {width:300px; float:left; margin: 10px 0 0 10px;}
 
 span.team_header        {display:block;margin-bottom:5px;}
+
+#player_stats td input {text-align: center;}
+#player_stats td.time input {width:50px;} 
+#player_stats td.number input {width:30px;}
+#player_stats td.stat_type input {width:30px;}  
+#player_stats td.value input {width:30px;} 
