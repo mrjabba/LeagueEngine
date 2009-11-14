@@ -1,8 +1,15 @@
-<% form_for :game, :url => { :action => :edit } do |form| %>
-<fieldset>
-	<h3>Edit game</h3>
-  <%= render :partial => 'form', :object => form, :locals => {:game => @game} %>
-</fieldset> 
-<%= submit_tag "update game" %> 
-<%= link_to 'Cancel', :action => 'list' %>
+<% form_for :game, :url => { :action => :update } do |form| #, :url => { :action => :update } %>
+	  <h3>Edit game</h3>
+    <div>
+    <%= render :partial => 'form', :object => form, :locals => {:game => @game} %> 
+    </div>
+    <div style="clear:both;">
+  <% if @game.completed %>
+    <%= submit_tag "Save game" %> 
+    <%= submit_tag "Game Completed", :name => 'game[completed]', :value => '1' %>
+  <% else %>
+    <%= submit_tag "Update Game", :name => 'update' %>
+  <% end %>
+  <%= link_to 'Back', :action => 'list' %>
+  </div>
 <% end %>

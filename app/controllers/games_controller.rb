@@ -31,41 +31,68 @@ class GamesController < ApplicationController
   def new
     @game = Game.new(params[:game])
     3.times {@game.player_stats.build({:stat_type_id => 100})}
-    @leagues = active_account().leagues
-    @teams = Team.all_teams(active_account())
+    #@leagues = active_account().leagues
+    required_for_view
     @game.date = Time.now
     @game.team1 = @teams[0]
     @game.team2 = @teams[1]
     @teams_on_card = [@teams[0], @teams[1]]
-    @player_stat_types = StatType.player_stats
-    @player_game_played = StatType.player_game_played
+    @members[@team[0]] = @team[0].members_in_number_order if !@team[0].nil?
+    @members[@team[1]] = @team[1].members_in_number_order if !@team[1].nil?
   end
   
   def create
     @game = Game.new(params[:game])
-      if @game.save
-        flash[:notice] = 'Games was successfully created.'
+    @game.league_id = @game.team1.league_id
+    if @game.save
+      flash[:notice] = 'Game saved'
+      if @game.completed
+        @game.update_league
+        flash[:notice] = 'Game created'
         redirect_to :action => 'list'
-      else
-        render :action => 'new'
-      end      
-  end
-
-  def edit
-    @game = Game.find(params[:id])
-    if request.post?
-      if @game.update_attributes(params[:game])
-        flash[:notice] = 'Games was successfully updated.'
-        redirect_to :action => 'list'
-      else
-        render :action => 'edit'
       end
     else
-      @leagues = active_account().leagues
-      @teams = Team.all_teams(active_account())
-    end
+      render :action => 'new'
+    end      
   end
 
+  def required_for_view
+    @teams = Team.all_teams(active_account())
+    @player_stat_types = StatType.player_stats
+    @player_game_played = StatType.player_game_played
+  end
+    
+  def edit
+    @game = Game.find(params[:id])
+    @teams_on_card = [@game.team1, @game.team2]
+    @teams = Team.all_teams(active_account())
+    @player_stat_types = StatType.player_stats
+    @player_game_played = StatType.player_game_played
+    
+    @members = {@game.team1_id => [], @game.team2_id => []}  
+    @members[@game.team1_id] = @game.players_in_number_order(@game.team1)
+    @members[@game.team2_id] = @game.players_in_number_order(@game.team2)
+  end
+
+  def upate
+    @game = Game.new(params[:game])
+    @game.league_id = @game.team1.league_id
+    if @game.save
+      flash[:notice] = 'Game saved'
+      if @game.completed
+        @game.update_league
+        flash[:notice] = 'Game created'
+        redirect_to :action => 'list'
+      elsif @game.update
+        @game.league.refresh!
+        flash[:notice] = 'Game updated'
+        redirect_to :action => 'list'
+      end
+    else
+      render :action => 'new'
+    end  
+  end
+  
   def destroy
     Game.find(params[:id]).destroy
     redirect_to :action => 'list'
@@ -74,7 +101,8 @@ class GamesController < ApplicationController
   def replace_team
     #@game = Game.find(params[:gameid])
     @team = Team.find(params[:teamid])
-    @whichteam = params[:team]
+    #@whichteam = params[:team]
+    @members[@team] = @team.members_in_number_order
     respond_to do |format|
       format.html { redirect_to :new}
       format.js {}

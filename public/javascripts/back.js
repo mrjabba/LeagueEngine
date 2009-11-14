@@ -42,4 +42,9 @@ function GameInit () {
 	  $.post("/games/replace_team", {teamid: teamid, team: tagid}, null, "script"); 
 	 	//$("#team1").html("ok the replace works");
 	}); 
+	
+	$('table.teamlist input').change(function(){
+	  $('table.teamlist')
+	  $(this).parents('table').find('input').each('')
+	});
 }

@@ -6,11 +6,14 @@ class StatType < ActiveRecord::Base
   #named_scope :player_game_played, :conditions => {:entity => 'Player', :name => 'GamePlayed' }
   
   def self.player_stats
-    st = find(:first, :conditions => {:entity => 'Player'})
-    st
+    find(:all, :conditions => {:entity => 'Player'})
   end
   
   def self.player_game_played
-    st = find(:first, :conditions => {:name => 'GamePlayed', :entity => 'Player'})
+    find(:first, :conditions => {:name => 'GamePlayed', :entity => 'Player'})
+  end
+  
+  def self.player_not_game_played
+    find(:first, :conditions => ["entity = 'Player'", "name <> 'GamePlayed'"])
   end
 end

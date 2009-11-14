@@ -110,5 +110,5 @@ span.team_header        {display:block;margin-bottom:5px;}
 #player_stats td input {text-align: center;}
 #player_stats td.time input {width:50px;} 
 #player_stats td.number input {width:30px;}
-#player_stats td.stat_type input {width:30px;}  
-#player_stats td.value input {width:30px;} 
+#player_stats td.stat_type {overflow:none;}
+#player_stats td.stat_type input {width:30px; float:left;}  
