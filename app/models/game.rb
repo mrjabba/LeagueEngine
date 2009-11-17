@@ -123,23 +123,13 @@ class Game < ActiveRecord::Base
     t = DateTime.parse(time)
     self.date = DateTime.new(date.year, date.mon, date.day, t.hour, t.min, 0)
   end
-
-  def self.get_upcoming_games(account)
-    get_games(account, false)
-  end
   
-  def self.get_played_games(account)
-    get_games(account, true)
-  end
-  
-  def self.get_games(account, completed)
-    games = []
+  def self.get_games(games, params)
     for league in account.leagues
       for game in Game.all(:conditions => {:league_id => league, :completed => completed})
         games << game
       end
     end
-    games.sort_by { |game| game[:date] }.reverse!
   end 
   
   def process_team_lists

@@ -1,5 +1,5 @@
 class LeaguesController < ApplicationController
-  #layout :determine_layout
+  layout :determine_layout
   before_filter :require_user
   #after_filter :last_rendered_page, :except => [ :league_action]
 
@@ -37,7 +37,7 @@ class LeaguesController < ApplicationController
     @league = League.find(params[:id])
   end
   
-  def save
+  def update
     @league = League.find(params[:id])
   end
   
@@ -73,6 +73,10 @@ class LeaguesController < ApplicationController
     end
   end  
   
+  def league_plugin
+    @league = League.find(params[:id])
+  end
+  
   def refresh_league
     @league = League.find(params[:id])
     @league.refresh_league
@@ -80,8 +84,8 @@ class LeaguesController < ApplicationController
   end
   
   def determine_layout 
-    return "print" if params[:action] =~ /print_leagues/ 
-    return 'master'
+    return 'blank' if params[:action] =~ /league_plugin/ 
+    return 'application'
     #return  "base2"
     #return "test" 
   end  
