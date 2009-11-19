@@ -11,5 +11,9 @@
   Sport.find_or_create_by_name(s)
 end
     
-StatType.create(:name => 'GamePlayed', :entity =>'All')
+StatType.create(:name => 'GamePlayed', :entity =>'Player')
 StatType.create(:name => 'Goals', :entity =>'Team')
+StatType.create(:name => 'Goals', :entity =>'Player')
+StatType.create(:name => 'Exclusion', :entity =>'Player')
+StatType.create(:name => 'Goals Multi', :entity =>'Player')
+StatType.create(:name => 'Exclusion Multi', :entity =>'Player')
