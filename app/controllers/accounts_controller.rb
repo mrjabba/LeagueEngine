@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   #layout :determine_layout 
-  #before_filter :require_user, :except => [:new, :pricing]
+  before_filter :require_user, :except => [:new, :create]
   #after_filter :last_rendered_page, :except => [:signup, :pricing]
   
   def index
@@ -78,7 +78,7 @@ class AccountsController < ApplicationController
         League.generate_default_league(@account)
 
         flash[:message] = "Signup successful"
-        redirect_to :controller => "leagues", :action => "list"
+        redirect_to :controller => "leagues", :action => "index"
       end
     end
   end
