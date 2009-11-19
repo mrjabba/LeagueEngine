@@ -1,8 +1,0 @@
-<tr class="<%= cycle('odd', 'even')%> <%= item.team.name[0..2].downcase %>"> <%#-- item.team.tag --%> 
-  <td>
-    <%= item.team.name -%>
-  </td>
-    <% for stat in item.league.ordered_league_stats-%>
-      <td><%= item.stats[stat.name] -%></td>
-    <% end %>
-</tr>

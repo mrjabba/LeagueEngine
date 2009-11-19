@@ -49,6 +49,17 @@ class LeaguesController < ApplicationController
 	  redirect_to(:action => :list) 
   end
   
+  def league_list
+    @league = League.find(params[:id])
+    
+    respond_to do |format|
+      format.html {}
+      format.xml  { render :xml => @league }
+      format.js   {}  
+      #format.rss  # index.rss.builder
+    end
+  end
+  
   def add_team
     @leagues = active_account().leagues
     @team = Team.new(params[:team])

@@ -38,7 +38,7 @@ class GamesController < ApplicationController
       if @game.completed
         @game.update_league
         flash[:notice] = 'Game created'
-        redirect_to :action => 'list'
+        redirect_to :action => 'index'
       end
     else
       render :action => 'new'
