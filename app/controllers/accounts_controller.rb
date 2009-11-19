@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   #layout :determine_layout 
-  before_filter :require_user, :except => [:new, :create]
+  before_filter :require_user #, :except => [:new, :create]
   #after_filter :last_rendered_page, :except => [:signup, :pricing]
   
   def index

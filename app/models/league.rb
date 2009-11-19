@@ -7,9 +7,8 @@ class League < ActiveRecord::Base
   
   def ordered_league_stats
     ls = LeagueStatType.find(:all, 
-                         :conditions => ["league_id = :league", 
-                                        {:league => id}],
-                                          :order => "'order'")
+                         :conditions => { :league_id => id },
+                                          :order => '"order"')
     ls
   end
   
