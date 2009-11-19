@@ -1,5 +1,6 @@
 class PublicController < ApplicationController
   layout "blank"
+  before_filter :require_user
   
   def index
     render(:signup)

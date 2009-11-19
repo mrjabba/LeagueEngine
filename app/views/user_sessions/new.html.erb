@@ -1,16 +1,20 @@
 <!--% title "Login" %!-->
 
-<% form_for @user_session do |f| %>
+<% form_for @user_session, :html => {:id => 'login_form'} do |f| %>
   <%= f.error_messages %>
-  <p>
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
-  </p>
-  <p>
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </p>
-  <p><%= f.submit "Submit" %></p>
+  <ol>
+		<li>
+    	<%= f.label :username %>
+    	<%= f.text_field :username %>
+  	</li>
+  	<li>
+    	<%= f.label :password %>
+    	<%= f.password_field :password %>
+  	</li>
+  	<li>
+			<%= f.submit "login" %>
+		</li>
+	</ol>	
 <% end %>
 
 

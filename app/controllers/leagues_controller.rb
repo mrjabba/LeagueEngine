@@ -1,6 +1,6 @@
 class LeaguesController < ApplicationController
   layout :determine_layout
-  before_filter :require_user
+  before_filter :require_user, :except => [:league_plugin]
   #after_filter :last_rendered_page, :except => [ :league_action]
 
   def index

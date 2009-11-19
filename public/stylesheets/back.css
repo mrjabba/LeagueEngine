@@ -79,6 +79,14 @@ fieldset {border:0;}
     .rc_content_grey { margin: 0 10px; }
 
 /**********************************************************************
+********            login
+***********************************************************************/
+#login_form li { list-style-type:none; overflow:hidden;}
+#login_form label { width:80px; text-align:left; margin:5px 0 0 0;}
+#login_form input {margin: 2px 0 0 0;}
+
+
+/**********************************************************************
 *********            League Index
 ***********************************************************************/
 ul.ListOfLeagues li {display:inline-block; list-style-type:none;display: -moz-inline-stack; display: inline-block; vertical-align:top} 
