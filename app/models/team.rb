@@ -39,7 +39,7 @@ class Team < ActiveRecord::Base
   
   def generate_team_data
     stats = {}
-    self.league.league_stats.each do |stat|
+    self.league.league_stat_types.each do |stat|
       stats[stat.name] = 0
     end
     LeagueList.create({:league_id => league.id, :team_id => id, :stats => stats})
