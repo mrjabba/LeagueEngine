@@ -1,0 +1,25 @@
+var b_txt = '';
+
+// write the badge
+b_txt += '<div id="<%= @league.account.name%>_<%= @league.name.gsub(" ", "").downcase %>" class="LeagueEngine">';
+b_txt += '<div id="league_name"><%= @league.name %></div>';
+
+//league list table
+b_txt += '<table><tr><th>Team</th>';
+  <% for stat in @league.ordered_league_stats  -%>
+    b_txt += '<th><%=stat.tag.capitalize -%></th>';
+  <% end %>
+  b_txt += '</tr>';
+  
+  <% for item in @league.league_lists.sort_by {|league_list| [-league_list.sort_val, league_list.team.name]} -%>  
+    b_txt += '<tr class="<%= cycle('odd', 'even') %>">';
+    b_txt += '<td><%= item.team.name -%></td>';
+    <% for stat in item.league.ordered_league_stats-%>
+      b_txt += '<td><%= item.stats[stat.name] -%></td>';
+    <% end %>
+    b_txt += '</tr>';
+  <% end %>
+b_txt += '</table>';
+b_txt += '</div>';
+
+document.write(b_txt);
