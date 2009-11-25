@@ -161,20 +161,18 @@ class Game < ActiveRecord::Base
     end
   end
   
+  def add_result_to_league
+      league.add_result(self)
+  end
+  
   def update_league
-      llt1 = LeagueList.first(:conditions => {:league_id => self.league.id, :team_id => team1.id }) 
-      llt1.add_result(team1_stats['goals'].to_i, team2_stats['goals'].to_i)
-      
-      llt2 = LeagueList.first(:conditions => {:league_id => self.league.id, :team_id => team2.id })
-      llt2.add_result(team2_stats['goals'].to_i, team1_stats['goals'].to_i)
+      league.refresh_league!
   end
   
-  def insert_result
-    #insert this game result and update stats
-  end
-  
-  def update_result
-    
+  def score_changed(old_game)
+    return true if old_game.team1_goals != team1_goals
+    return true if old_game.team2_goals != team2_goals
+    return false
   end
   
   def players_in_number_order(team)

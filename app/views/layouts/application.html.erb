@@ -13,11 +13,10 @@
 	<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
 </head>
 <body>
+    <% if current_user%>
 		<div id="top_nav">
-			<% if current_user%>
 		  		<!--%= link_to "My Account", account_path %--> |
 				<%= link_to "Logout", user_sessions_path, :method => :destroy, :confirm => "Are you sure you want to logout?" %>
-			<% end %>
 		</div>
 		
 		<div id="menu">
@@ -37,6 +36,7 @@
 				<li><a href="/players">players</a></li>
 			</ul>
 		</div>
+		<% end %>
 		
 		<div id="content">
 	  	<%- flash.each do |name, msg| -%>

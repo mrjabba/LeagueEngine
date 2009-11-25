@@ -1,6 +1,6 @@
 class LeaguesController < ApplicationController
   layout :determine_layout
-  before_filter :require_user, :except => [:league_plugin]
+  before_filter :require_user, :except => [:league_list]
   #after_filter :last_rendered_page, :except => [ :league_action]
 
   def index
@@ -83,16 +83,6 @@ class LeaguesController < ApplicationController
       @teams << Team.find(id)
     end
   end  
-  
-  def league_plugin
-    @league = League.find(params[:id])
-  end
-  
-  def refresh_league
-    @league = League.find(params[:id])
-    @league.refresh_league
-    redirect_to(:action => :list, :id => @leauge.id)
-  end
   
   def determine_layout 
     return 'blank' if params[:action] =~ /league_plugin/ 

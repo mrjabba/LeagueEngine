@@ -46,7 +46,26 @@ class League < ActiveRecord::Base
     t4.generate_team_data()
   end
   
+  def add_result(game)
+    league_lists.find_by_team_id(game.team1.id).add_result(game.team1_stats['goals'].to_i, game.team2_stats['goals'].to_i)
+    
+    league_lists.find_by_team_id(game.team2.id).add_result(game.team2_stats['goals'].to_i, game.team1_stats['goals'].to_i)
+    #llt2 = LeagueList.first(:conditions => {:league_id => self.league.id, :team_id => team2.id })
+    #llt2.add_result(team2_stats['goals'].to_i, team1_stats['goals'].to_i)
+  end
+  
   def refresh_league!
+    league_stats = ordered_league_stats
+    league_lists.each do |ll|
+      league_stats.each do |ls|
+        ll.stats[ls.name] = 0
+        ll.save
+      end
+    end
+    
+    games.each do |g|
+      add_result(g) if g.completed?
+    end
   end
   
   def clean_delete(league)

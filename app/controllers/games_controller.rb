@@ -56,23 +56,26 @@ class GamesController < ApplicationController
     @members[@game.team1_id] = @game.players_in_number_order(@game.team1)
     @members[@game.team2_id] = @game.players_in_number_order(@game.team2)
   end
-
-  def upate
-    @game = Game.new(params[:game])
-    @game.league_id = @game.team1.league_id
-    if @game.save
-      flash[:notice] = 'Game saved'
-      if @game.completed
-        @game.update_league
-        flash[:notice] = 'Game created'
-        redirect_to :action => 'list'
-      elsif @game.update
-        @game.league.refresh!
+  
+  def update
+    @game = Game.find(params[:id])
+    old_game = @game
+    
+    if @game.update_attributes(params[:game])
+      if @game.completed? && !old_game.completed?
+        @game.add_result_to_league
+        flash[:notice] = 'Game saved, League updated'
+        redirect_to leagues_path
+      elsif @game.completed? && old_game.completed? 
         flash[:notice] = 'Game updated'
-        redirect_to :action => 'list'
+        @game.update_league if @game.score_changed?(old_game)
+        redirect_to leagues_path
+      else
+        flash[:notice] = 'Game saved'
+        render :action => "edit"
       end
     else
-      render :action => 'new'
+      render :action => "edit"
     end  
   end
   

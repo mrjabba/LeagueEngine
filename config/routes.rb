@@ -8,6 +8,7 @@ ActionController::Routing::Routes.draw do |map|
     league.resources :teams
   end
   map.resources :teams, :member => {:confirm_destroy => :get}
+  map.resources :games
   map.resources :user_sessions
   map.resources :users
   

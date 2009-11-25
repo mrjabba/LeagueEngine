@@ -1,14 +1,14 @@
-<% form_for :game, :url => { :action => :update } do |form| #, :url => { :action => :update } %>
+<% form_for @game do |form| #, :url => { :action => :update } %>
 	  <h3>Edit game</h3>
     <div>
     <%= render :partial => 'form', :object => form, :locals => {:game => @game} %> 
     </div>
     <div style="clear:both;">
-  <% if @game.completed %>
-    <%= submit_tag "Save game" %> 
-    <%= submit_tag "Game Completed", :name => 'game[completed]', :value => '1' %>
-  <% else %>
+  <% if @game.completed == 1 %>
     <%= submit_tag "Update Game", :name => 'update' %>
+  <% else %>
+    <%= submit_tag "Save game" %> 
+    <%= submit_tag "Game Completed", :name => 'game[game_completed]' %>
   <% end %>
   <%= link_to 'Back', :action => 'list' %>
   </div>
