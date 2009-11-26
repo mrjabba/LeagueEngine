@@ -36,7 +36,7 @@ class GamesController < ApplicationController
     if @game.save
       flash[:notice] = 'Game saved'
       if @game.completed
-        @game.update_league
+        @game.add_result_to_league
         flash[:notice] = 'Game created'
         redirect_to :action => 'index'
       end
@@ -58,8 +58,8 @@ class GamesController < ApplicationController
   end
   
   def update
-    @game = Game.find(params[:id])
-    old_game = @game
+    old_game = Game.find(params[:id])
+    @game = Game.find(params[:id]) #old_game.dup
     
     if @game.update_attributes(params[:game])
       if @game.completed? && !old_game.completed?
@@ -67,7 +67,7 @@ class GamesController < ApplicationController
         flash[:notice] = 'Game saved, League updated'
         redirect_to leagues_path
       elsif @game.completed? && old_game.completed? 
-        flash[:notice] = 'Game updated'
+        flash[:notice] = 'Game updated'      
         @game.update_league if @game.score_changed?(old_game)
         redirect_to leagues_path
       else
@@ -80,8 +80,11 @@ class GamesController < ApplicationController
   end
   
   def destroy
-    Game.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    game = Game.find(params[:id])
+    league = game.league
+    game.destroy
+    league.refresh_league!
+    redirect_to :action => 'index'
   end
   
   def replace_team

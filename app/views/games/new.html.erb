@@ -1,11 +1,10 @@
 <% form_for :game, :url => { :action => :create } do |form| %>
 <h3>New game</h3>
+	  <%= render :partial => 'update_buttons', :locals => {:game => @game} %> 
 <div>
 <%= render :partial => 'form', :object => form, :locals => {:game => @game} %> 
 </div>
 <div style="clear:both;">
-<%= submit_tag "Save game" %> 
-<%= submit_tag "Game Completed", :name => 'game[game_completed]' %>
-<%= link_to 'Back', :action => 'list' %>
+	  <%= render :partial => 'new_buttons', :locals => {:game => @game} %> 
 <% end %>
 </div>

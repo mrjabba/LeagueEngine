@@ -169,7 +169,7 @@ class Game < ActiveRecord::Base
       league.refresh_league!
   end
   
-  def score_changed(old_game)
+  def score_changed?(old_game)
     return true if old_game.team1_goals != team1_goals
     return true if old_game.team2_goals != team2_goals
     return false

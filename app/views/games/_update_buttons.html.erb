@@ -1,0 +1,7 @@
+<% if game.completed == 1 %>
+  <%= submit_tag "Update Game", :name => 'update' %>
+<% else %>
+  <%= submit_tag "Save game" %> 
+  <%= submit_tag "Game Completed", :name => 'game[game_completed]' %>
+<% end %>
+<%= link_to 'Back', :action => 'list' %>
