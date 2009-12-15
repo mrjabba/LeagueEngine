@@ -7,6 +7,8 @@ class Account < ActiveRecord::Base
   has_many :users, :through => :accounts_users
   has_many :leagues
   has_many :games, :through => :leagues
+  has_many :teams, :through => :leagues
+  has_many :players, :through => :teams
   belongs_to :sport
   
   attr_accessor :other

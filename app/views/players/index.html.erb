@@ -1,0 +1,14 @@
+<form type="post" action="/players/merge">
+	<input type='submit'>
+	
+  <% @teams.each do |team|%>
+  <div class="team">
+  	<h3><%= team.name %> - <%= team.league.name %></h3>
+
+  	<% if !@stat.nil? %>
+  		<%= render(:partial => "team_stats_table", :locals => {:team => team } )%>	
+  	<% end %>
+  </div>
+  <% end %>
+
+</form>

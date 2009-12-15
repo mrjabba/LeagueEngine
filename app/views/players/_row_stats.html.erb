@@ -1,0 +1,21 @@
+	<td class='name'><%=p.name %></td>
+	<td>
+		<% stats_sum = 0
+		   game_stats = []
+			 games.each do |g, i| 
+			   ps = player_stats.first(:conditions => {:game_id => game, :stat_type => @stat})
+			   if !ps.nil?
+		       games_stats[i]= ps.value
+		       stats_sum = stats_sum + ps.value
+		     else
+		       games_stats[i] = ' '
+		     end
+	     end
+	 %>
+	 <%= stats_sum %>
+	</td>
+	<% games_stats.each do |stat| %>
+		<td>
+			<%= stat %>
+		</td>
+	<% end %>

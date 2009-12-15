@@ -3,32 +3,39 @@ class PlayersController < ApplicationController
   before_filter :require_user
   
   def index
-    list
-    render :action => 'list'
+    @team_name = params[:team_name]
+    @stat  = StatType.find_by_name(params[:stat]) 
+    @stat ||= StatType.player_game_played
+    
+    @teams = active_account.teams.all(:conditions => {:name => @team_name}, :order => "'name'")  if !@team_name.nil? #Team.all_teams(active_account()).sort_by{|team| team[:name]}
+    @teams = active_account.teams.sort_by { |team| team[:name] }     if @team_name.nil? 
   end
   
-  def list
-    @teams = Team.all_teams(active_account())
+  #def new
+  #end
+  
+  #def create
+  #end
+  
+  def edit
+    @player = Player.find(params[:id])
   end
   
-  def stats
-    team = params[:team]
-    teamname = params[:id]
-    @teams = Team.all_teams(active_account()).sort_by{|team| team[:name]}
-    @stat  = StatType.find_by_name("GamePlayed")
-  end
-  
-  def merge
-    players = params[:players]
-    playername = params[:player_name]
-    if(players.count > 1)
-      Player.merge!(players, playername)
-      flash[:message] = 'Players merged'
-      redirect_to :action => 'list'
+  def update
+    @player = Player.find(params[:id])
+    
+    if @player.update_attributes(params[:player])
+      if @player.same_player.count > 0
+        @player.merge!
+        flash[:message] = 'Players merged'
+      else
+        flash[:message] = 'Player updated'
+      end
+      redirect_to :action => :index
     else
-      flash[:message] = 'No one to merge'
-      redirect_to :action => 'list'
+      render edit
     end
+    
   end
   
   def determine_layout 
