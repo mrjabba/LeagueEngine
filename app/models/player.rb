@@ -1,5 +1,6 @@
 class Player < ActiveRecord::Base
   has_many :team_members
+  has_many :teams, :through => :team_members
   has_many :player_stats
   
   attr_accessor :same_as_me
@@ -51,6 +52,8 @@ class Player < ActiveRecord::Base
           PlayerStat.update_all({:player_id => self.id}, {:player_id => p.id})
 
           Player.delete(p.id)
+        else
+          same_as_me.delete[self.id]
         end
       end
     end

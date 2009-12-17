@@ -57,6 +57,16 @@ table.greentable a:hover { color: #718ABE; text-decoration: underline !important
 
 table.greentable tfoot th, table.greentabletfoot td { font-size: 85%;}
 
+
+table.greentable td div.row_left_options { position: absolute; width: 65px; right: 26px; top:2px; overflow: hidden; display:none;}
+  table.greentable div.row_left_options a { height: 16px; width:16px; display:block; overflow: hidden; float:left; text-indent: -9999px;}
+	table.greentable div.row_left_options a.edit { margin-right: 5px;
+		                                           background: transparent url(/images/btns/edit.png) no-repeat top left;}
+	table.greentable div.row_left_options a.delete { margin-right: 5px;
+		                                             background: transparent url(/images/btns/delete.png) no-repeat top left;}
+	table.greentable div.row_left_options a.merge {  margin-top: 2px;
+		                                             background: transparent url(/images/btns/merge.png) no-repeat top left; width:20px;}		
+
 /**********************************************************************
 *********            form
 ***********************************************************************/
@@ -127,4 +137,7 @@ span.team_header        {display:block;margin-bottom:5px;}
 
 div.team h3 {margin: 30px 0 20px;}
 div.team:first-child h3 {margin-top: 20px;}
+
+
+
 

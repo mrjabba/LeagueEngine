@@ -1,0 +1,16 @@
+<% @player.same_as_me.each do |id| %>
+  $("#<%=id%>").attr('id', "<%= @player.id %>");
+<% end %>
+
+<% @teams.each do |team| %>
+var keptRow
+$('#<%= team.id %> input[checked=checked]').each(function(i){
+	if(i == 0){
+		keptRow = this
+  }  
+  else{
+		this.remove()
+	}
+});
+keptRow.html("<%= escape_javascript(render(:partial=>'row_games_played', :locals => {:player => p, :games => games })) %>");
+<% end %>

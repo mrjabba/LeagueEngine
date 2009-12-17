@@ -12,6 +12,7 @@ jQuery.ajaxSetup({
 $(document).ready(function() {
   LeaguesEditInit();
   GameInit();
+  PlayerInit();
 });
 
 function LeaguesEditInit()
@@ -46,5 +47,32 @@ function GameInit () {
 	$('table.teamlist input').change(function(){
 	  $('table.teamlist')
 	  $(this).parents('table').find('input').each('')
+	});
+}
+
+function PlayerInit() {
+	$('table.left_menu tr').hover(
+		function(){
+			$(this).find('div.row_left_options').show();
+		},
+		function(){
+			$(this).find('div.row_left_options').hide();
+		}
+	);
+	
+	$('.row_left_options .merge').click(function(){
+   var form = $(this).parents('form');
+   var player_id = $(this).attr('id')
+   $.post($(this).attr('href'), form.serialize(), 
+	   function(data_back){
+		   if(data_back == 'completed'){
+			 	 $('input[checked:checked]').each(function(){
+				   if(this.attr('value') == player_id){
+					   this.parents('tr').remove();
+					 }
+				 });
+			 }
+	 }); 
+   return false;
 	});
 }

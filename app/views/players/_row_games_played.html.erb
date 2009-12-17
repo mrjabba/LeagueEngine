@@ -1,5 +1,14 @@
-<td><input type="checkbox" value="<%= player.id%>"></td>
-<td class='name'><%=player.name %></td>
+<td>
+ <div style="position:relative;"> 
+ <div class="row_left_options">
+			<a href="/players/edit/<%= player.id%>" class="edit" title="Edit Player">edit</a>
+			<a href="/players/destroy/<%= player.id%>" class="delete" title="Delete Player">delete</a>			 
+			<a href="/players/merge/<%= player.id%>" id="<%= player.id%>" class="merge" title="Merge Players">merge</a>
+  </div>
+</div>  
+<input type="checkbox" name="same_as_me[]" value="<%= player.id%>">
+</td>
+<td class='left'><%=player.name %></td>
 <td>
 	<% games_count = 0
 	   games_played = []

@@ -25,17 +25,34 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
     
     if @player.update_attributes(params[:player])
-      if @player.same_player.count > 0
-        @player.merge!
-        flash[:message] = 'Players merged'
-      else
-        flash[:message] = 'Player updated'
-      end
       redirect_to :action => :index
     else
       render edit
     end
+  end
+  
+  def merge
+    @player = Player.find(params[:id])
+    @player.same_as_me = params[:same_as_me]
+    @teams = []
     
+    #get all teams for the merged players
+    @player.same_as_me.each do |id|
+      p = Player.find(id)
+      p.teams.each do |t|
+        @teams << t.id
+      end
+    end
+    
+    #removes duplicates
+    @teams = @team & @teams
+    
+    if !@player.same_as_me.nil? && @player.same_as_me.count > 0
+      @player.merge!
+      flash[:notice] = 'Players Merged'
+    else
+      flash[:error] = 'You need to choose atleast two players to do a merge.'
+    end
   end
   
   def determine_layout 
