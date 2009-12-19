@@ -60,19 +60,33 @@ function PlayerInit() {
 		}
 	);
 	
+	// $('.row_left_options .merge').click(function(){
+	//    var form = $(this).parents('form');
+	//    var player_id = $(this).attr('id')
+	//    $.post($(this).attr('href'), form.serialize(), null, "script"); 
+	//    return false;
+	// });
+	
 	$('.row_left_options .merge').click(function(){
-   var form = $(this).parents('form');
-   var player_id = $(this).attr('id')
-   $.post($(this).attr('href'), form.serialize(), 
-	   function(data_back){
-		   if(data_back == 'completed'){
-			 	 $('input[checked:checked]').each(function(){
-				   if(this.attr('value') == player_id){
-					   this.parents('tr').remove();
-					 }
-				 });
-			 }
-	 }); 
-   return false;
+	  merge('t17', '333', '157');
+	  return false;
 	});
+}
+
+function merge(team, p1, p2){
+	var keptRow;
+	var l = $('input:checked').length;
+	alert("checked="+l);
+	$('input:checked').each(function(i){
+		if(i == 0){
+			keptRow = this;
+	  }  
+	  else{
+		  row = this.parents('tr');
+		  row.css('background-color', '#cccccc');
+			row.fadeOut('slow');
+		}
+	});
+
+	keptRow.html("<tr><td>\n <div style=\"position:relative;\"> \n <div class=\"row_left_options\">\n			<a href=\"/players/edit/233\" class=\"edit\" title=\"Edit Player\">edit<\/a>\n			<a href=\"/players/destroy/233\" class=\"delete\" title=\"Delete Player\">delete<\/a>			 \n			<a href=\"/players/merge/233\" id=\"233\" class=\"merge\" title=\"Merge Players\">merge<\/a>\n  <\/div>\n<\/div>  \n<input type=\"checkbox\" name=\"same_as_me[]\" value=\"233\">\n<\/td>\n<td class=\'left\'>Jacqui Barlow<\/td>\n<td>\n	\n 2\n<\/td>\n\n	<td>\n		\n	<\/td>\n\n	<td>\n		x\n	<\/td>\n\n	<td>\n		x\n	<\/td>\n\n	<td>\n		\n	<\/td>\n\n	<td>\n		\n	<\/td>\n\n</tr>");
 }

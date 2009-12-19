@@ -43,9 +43,8 @@ class PlayersController < ApplicationController
         @teams << t.id
       end
     end
-    
     #removes duplicates
-    @teams = @team & @teams
+    @teams = @teams & @teams
     
     if !@player.same_as_me.nil? && @player.same_as_me.count > 0
       @player.merge!

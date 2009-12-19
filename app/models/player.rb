@@ -34,27 +34,24 @@ class Player < ActiveRecord::Base
   end
   
   def merge!
-    if !same_as_me.empty?
-      same_as_me.each do |p|
-        if p.id != self.id
-          
-          TeamMember.all(:conditions=>{:player_id => p.id}).each do |tm|
-            if(TeamMember.exists?({:player_id => self.id, :team_id => tm.team_id}))
-              tm.delete
-            else
-              tm.player_id = self.id
-              tm.save
-            end
+    if !self.same_as_me.empty?
+      same_as_me.delete(self.id.to_s) #remove the players id that we want to keep, 
+                                      #its a string because its passed as an string array from the browser
+      self.same_as_me.each do |p|
+        TeamMember.all(:conditions=>{:player_id => p}).each do |tm|
+          if(TeamMember.exists?({:player_id => self.id, :team_id => tm.team_id}))
+            tm.delete
+          else
+            tm.player_id = self.id
+            tm.save
           end
-          
-          
-          #can update all here because it is less likely that they will have played or been on the same card.
-          PlayerStat.update_all({:player_id => self.id}, {:player_id => p.id})
-
-          Player.delete(p.id)
-        else
-          same_as_me.delete[self.id]
         end
+        
+        
+        #can update all here because it is less likely that they will have played or been on the same card.
+        PlayerStat.update_all({:player_id => self.id}, {:player_id => p})
+
+        Player.delete(p)
       end
     end
   end

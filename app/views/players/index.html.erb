@@ -1,6 +1,4 @@
 <form type="post" action="/player/update">
-	<input type='submit' value="merge players">
-	
   <% @teams.each do |team|%>
   <div class="team">
   	<h3><%= team.name %> - <%= team.league.name %></h3>
