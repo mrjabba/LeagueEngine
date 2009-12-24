@@ -8,8 +8,8 @@
 	<link rel="stylesheet" href="/javascripts/plugins/jquery-ui/smoothness/jquery-ui-1.7.2.custom.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	
 	<%= stylesheet_link_tag 'back' %>
-	<%= javascript_include_tag  'back' %>
-	
+	<%= javascript_include_tag  'application' %>
+	<%= yield :javascript%>
 	<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
 </head>
 <body>
@@ -33,7 +33,13 @@
 					</ul>
 				</li>
 				<li><a href="/teams">teams</a></li>
-				<li><a href="/players">players</a></li>
+				<li>
+					<a href="/players">players</a>
+			    <ul>
+			    	<li><a href="/players/GamesPlayed">Games Played</a></li>
+						<li><a href="/players/Stats">Player Stats</a></li>
+			    </ul>
+			  </li>
 			</ul>
 		</div>
 		<% end %>
@@ -45,6 +51,8 @@
 	
 			<%= yield %>
 		</div>
+		
+		<% if ! request.request_uri.include? 'localhost' %>
 		<script type="text/javascript">
 		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -54,5 +62,6 @@
 		var pageTracker = _gat._getTracker("UA-2083028-6");
 		pageTracker._trackPageview();
 		} catch(err) {}</script>
+		<% end %>
 </body>
 </html>

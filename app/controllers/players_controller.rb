@@ -34,23 +34,24 @@ class PlayersController < ApplicationController
   def merge
     @player = Player.find(params[:id])
     @player.same_as_me = params[:same_as_me]
-    @teams = []
     
-    #get all teams for the merged players
-    @player.same_as_me.each do |id|
-      p = Player.find(id)
-      p.teams.each do |t|
-        @teams << t.id
+    if !@player.same_as_me.nil? && @player.same_as_me.count > 1
+      @teams = []
+    
+      #get all teams for the merged players
+      @player.same_as_me.each do |id|
+        p = Player.find(id)
+        p.teams.each do |t|
+          @teams << t.id
+        end
       end
-    end
-    #removes duplicates
-    @teams = @teams & @teams
+      #removes duplicates
+      @teams = @teams & @teams
     
-    if !@player.same_as_me.nil? && @player.same_as_me.count > 0
       @player.merge!
-      flash[:notice] = 'Players Merged'
+      @notice = 'Players Merged'
     else
-      flash[:error] = 'You need to choose atleast two players to do a merge.'
+      @error = 'You need to choose atleast two players to do a merge.'
     end
   end
   

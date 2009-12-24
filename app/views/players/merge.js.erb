@@ -1,20 +1,27 @@
-<% @player.same_as_me.each do |id| %>
-  $("#<%=id%>").attr('id', "<%= @player.id %>");
+<% if @error.nil? %>
+	<% @teams.each do |t| 
+			team = Team.find(t) %>
+		var keptRow
+		$('#t<%= team.id %> input:checked').each(function(i){
+			if(i == 0){
+				keptRow = $(this).parents('tr');
+		  }  
+		  else{
+		    var row = $(this).parents('tr');
+		    row.css('background-color', '#fffeb3');
+			  row.fadeOut('slow');
+			}
+		});
+		<% games = team.games.sort_by { |game| game[:date] } %>
+		if(keptRow){
+		  keptRow.css('background-color', '#fffeb3');
+		  keptRow.replaceWith("<tr><%= escape_javascript(render(:partial=>'row_games_played', :locals => {:player => @player, :games => games })) %></tr>");
+		}
+		$('input:checked').attr('checked', false);
+	<% end %>
+	flash_notice('<%= @notice %>');  
+<% else %>
+  flash_error('<%= @error %>');
 <% end %>
 
-<% @teams.each do |t| 
-		team = Team.find(t) %>
-var keptRow
-$('#t<%= team.id %> input[checked=checked]').each(function(i){
-	if(i == 0){
-		keptRow = this;
-  }  
-  else{
-	  row = this.parents('tr');
-	  row.css('background-color', '#cccccc');
-		row.fadeOut('slow');
-	}
-});
-<% games = team.games.sort_by { |game| game[:date] } %>
-keptRow.html("<tr><%= escape_javascript(render(:partial=>'row_games_played', :locals => {:player => @player, :games => games })) %></tr>");
-<% end %>
+PlayersBind();

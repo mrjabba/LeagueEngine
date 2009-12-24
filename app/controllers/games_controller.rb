@@ -92,6 +92,7 @@ class GamesController < ApplicationController
     @team = Team.find(params[:teamid])
     @whichteam = params[:team]
     @members = {@team.id => @team.members_in_number_order}
+    @all_members = @team.players
     respond_to do |format|
       format.html { redirect_to :new}
       format.js {}
