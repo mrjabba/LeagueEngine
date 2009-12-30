@@ -1,1 +1,3 @@
 $("#<%=@whichteam%>").html("<%= escape_javascript(render(:partial=>'form_teamlist', :locals => {:team=>@team, :game=> nil})) %>");
+<%=@whichteam%> = [ <% @team.players.each_with_index { |p, i| %> <%=  i ==  @team.players.length-1 ?  "'"+p.name+"'" : "'"+p.name+"'," %> <% } %> ];
+GamesBind();

@@ -1,3 +1,15 @@
+<% content_for :javascript do %>
+	<script src="/javascripts/plugins/jquery-autocomplete/jquery.autocomplete.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="/javascripts/plugins/jquery-autocomplete/jquery.autocomplete.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	
+	<%= javascript_include_tag 'games' %>
+  <script type="text/javascript">
+    var team1 = [ <% @game.team1.players.each_with_index { |p, i| %> <%=  i ==  @game.team1.players.length-1 ?  "'"+p.name+"'" : "'"+p.name+"'," %> <% } %> ];
+    var team2 = [ <% @game.team2.players.each_with_index { |p, i| %> <%=  i ==  @game.team2.players.length-1 ?  "'"+p.name+"'" : "'"+p.name+"'," %> <% } %> ];
+	</script>
+	<%# .sort_by {|p| p.name} %>
+<% end %>
+
 <% form_for :game, :url => { :action => :create } do |form| %>
 <h3>New game</h3>
 	  <%= render :partial => 'update_buttons', :locals => {:game => @game} %> 
