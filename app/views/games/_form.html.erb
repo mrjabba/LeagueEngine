@@ -4,14 +4,22 @@
     <div class="rc_content_grey">
 	      <div style="text-align:center;float:left;min-width:250px;">
 		      <span class="team_header">Team 1</span>
-			    <%=  form.collection_select :team1_id, @teams, :id, :name_for_select,{},  {:class => 'teamSelect'} %><br /> 
+			    <% if request.request_uri.include? 'new' %>
+			      <%=  form.collection_select :team1_id, @teams, :id, :name_for_select,{},  {:class => 'teamSelect'} %><br /> 
+			    <% else %>
+			      <%= @game.team1.name_for_select %>
+			    <% end %>
 			    <%= form.text_field :team1_goals, :class=>"team_goals" %> 		  
 	      </div>
 	      <div style="text-align:center;float:left;">v</div>
 	      <div style="text-align:center;float:left;min-width:250px;">
 		      <span class="team_header">Team 2</span>
-		      <%=  form.collection_select :team2_id, @teams, :id, :name_for_select,{}, {:class => 'teamSelect'} %><br /> 
-		      <%= form.text_field :team2_goals, :class=>"team_goals" %>
+					<% if request.request_uri.include? 'new' %>
+		        <%=  form.collection_select :team2_id, @teams, :id, :name_for_select,{}, {:class => 'teamSelect'} %><br /> 
+				  <% else %>
+				    <%= @game.team2.name_for_select %>
+				  <% end %>		     
+		    <%= form.text_field :team2_goals, :class=>"team_goals" %>
 	      </div>
         <div style="clear:both;"></div>
     </div>
@@ -55,10 +63,12 @@
     </div>
   <div class="rc_bottom_grey"><div></div></div>
 </div>
+<%#
 <div id='games_polo_player_stats' class="rc_box_grey">
   <div class="rc_top_grey"><div></div></div>
     <div class="rc_content_grey">
-      <%= render :partial => 'player_stats', :locals => {:player_stats => game.player_stats} %>
+      <%= render :partial => 'player_stats', :locals => {:player_stats => game.player_stats} %->
     </div>
   <div class="rc_bottom_grey"><div></div></div>
 </div>
+%>

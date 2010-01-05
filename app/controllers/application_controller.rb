@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
   end
   
   def redirect_to_referrer_or_default(default)
-    redirect_to(session[:referrer] || defailt)
+    redirect_to(session[:referrer] || default)
     session[:referrer] = nil
   end
 end
