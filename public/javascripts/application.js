@@ -11,6 +11,8 @@ jQuery.ajaxSetup({
 
 $(document).ready(function() {
   LeaguesEditInit();
+
+  $('.datePicker').datepicker({ dateFormat: 'dd MM yy'});
 });
 
 function LeaguesEditInit()

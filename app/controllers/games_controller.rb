@@ -41,7 +41,7 @@ class GamesController < ApplicationController
         redirect_to :action => 'index'
       end
     else
-      render :action => 'new'
+      render :action => 'edit', :id => @game.id
     end      
   end
     
@@ -65,11 +65,11 @@ class GamesController < ApplicationController
       if @game.completed? && !old_game.completed?
         @game.add_result_to_league
         flash[:notice] = 'Game saved, League updated'
-        redirect_to leagues_path
+        redirect_to :action => 'index'
       elsif @game.completed? && old_game.completed? 
         flash[:notice] = 'Game updated'      
         @game.update_league if @game.score_changed?(old_game)
-        redirect_to leagues_path
+        redirect_to :action => 'index'
       else
         flash[:notice] = 'Game saved'
         render :action => "edit"

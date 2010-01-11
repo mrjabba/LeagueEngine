@@ -11,6 +11,15 @@ class PlayersController < ApplicationController
     @teams = active_account.teams.sort_by { |team| team[:name] }     if @team_name.nil? 
   end
   
+  def stats
+    @team_name = params[:team_name]
+    @stat  = StatType.find_by_name(params[:stat]) 
+    @stat ||= StatType.player_game_played
+    
+    @teams = active_account.teams.all(:conditions => {:name => @team_name}, :order => "'name'")  if !@team_name.nil? #Team.all_teams(active_account()).sort_by{|team| team[:name]}
+    @teams = active_account.teams.sort_by { |team| team[:name] }     if @team_name.nil? 
+  end
+  
   #def new
   #end
   
@@ -56,7 +65,7 @@ class PlayersController < ApplicationController
   end
   
   def determine_layout 
-    return 'print' if params[:action] == 'stats'
+    #return 'print' if params[:action] == 'stats'
     'application'  
   end
 end
