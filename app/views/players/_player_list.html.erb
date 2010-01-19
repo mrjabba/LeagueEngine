@@ -1,0 +1,10 @@
+<table>
+  <tr>
+    <td>name</td><td>dob</td><td>sex</td><td>junior</td>
+  </tr>
+<% player_list.each do |p| %>
+  <tr>
+    <td><%= p.name%></td><td><%= p.dob %></td><td><%= p.sex %></td><td><%= p.junior ? 'Junior': 'Senior' %></td>
+  </tr>
+<% end %>
+</table>
