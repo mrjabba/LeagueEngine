@@ -32,7 +32,7 @@ function LeaguesEditInit()
 
 
 function flash_notice(msg){
-	alert("Notice: "+msg);
+	//alert("Notice: "+msg);
 	//$('#content').prepend('<div id="flash_notice">'+<%= @notice %>+'</div>')
 	  //$('#flash_notice').fadeOut('slow');
 }

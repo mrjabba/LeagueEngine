@@ -2,8 +2,7 @@ class GamesController < ApplicationController
   before_filter :require_user
 
   def index
-    @games = active_account.games
-    @games.sort_by { |game| game[:date] }.reverse! if !@games.empty?
+    @games = active_account.games.all(:order => 'date desc')
   end
 
   def show

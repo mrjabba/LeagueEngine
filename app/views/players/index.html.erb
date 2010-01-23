@@ -3,18 +3,18 @@
 <% end %>
 
 <form type="post" action="/player/update">
-  <% @teams.each do |team|%>
+  <% @player_lists.sort_by {|t| t[0]}.each do |team|%>
   <div class="team">
-  	<h3><%= team.key %></h3>
+  	<h3><%= team[0] %></h3>
 
-    <% if team[:seniors].length > 0 %>
+    <% if team[1][:seniors].length > 0 %>
   		<h4>Seniors</h4>
-  		<%= render(:partial => "player_list", :locals => {:players_list => team[:seniors] } )%>	
+  		<%= render(:partial => "player_list", :locals => {:players_list => team[1][:seniors] } )%>	
   	<% end %>
   	
-  	<% if team[:juniors].length > 0 %>
+  	<% if team[1][:juniors].length > 0 %>
   		<h4>Juniors</h4>
-  		<%= render(:partial => "player_list", :locals => {:players_list => team[:juniors] } )%>	
+  		<%= render(:partial => "player_list", :locals => {:players_list => team[1][:juniors] } )%>	
   	<% end %>
   </div>
   <% end %>

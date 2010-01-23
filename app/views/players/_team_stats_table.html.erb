@@ -9,7 +9,7 @@
 			<th><%= g.date.strftime("%d <br/> %b") %></th>
 		<% end%>
 	</tr>
-	<% team.players.all(:order => "name").each do |p| %>
+	<% team.players.all(:order => "last_name, first_name").each do |p| %>
   <tr class="<%= cycle('odd', 'even') %>">
 	  <% if @stat.id == StatType.player_game_played.id %>
       <%= render(:partial => "row_games_played", :locals => {:player => p, :games => games } ) %>

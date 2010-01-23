@@ -96,8 +96,11 @@ ActiveRecord::Schema.define(:version => 20091222053850) do
   end
 
   create_table "players", :force => true do |t|
-    t.string   "name",   :limit => 100, :default => "", :null => false
+    t.string   "full_name",   :limit => 100, :default => "", :null => false
     t.datetime "dob"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
     t.integer  "junior"
     t.text     "sex"
   end

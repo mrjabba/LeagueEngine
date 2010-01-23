@@ -134,7 +134,7 @@ class Game < ActiveRecord::Base
   
   def process_team_lists
     if !teams.nil?
-      player_stats.not_game_played.delete_all
+      player_stats.game_played.delete_all
     
       teams.keys.each do |team_id|
         t = Team.find(team_id)
@@ -142,7 +142,7 @@ class Game < ActiveRecord::Base
       
         teams[team_id]["players"].each_with_index do |player_name, i|
           if player_name != ""
-            p = t.players.find_by_name(player_name)
+            p = t.players.find_by_full_name(player_name)
             if p.nil?
               p = Player.create(:name => player_name)
               tm = TeamMember.create(:player_id => p.id, :team_id => t.id)

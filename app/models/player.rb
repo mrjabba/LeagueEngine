@@ -5,18 +5,33 @@ class Player < ActiveRecord::Base
   
   attr_accessor :same_as_me
   
-  #def name=(name)
-   # store_name(name.split(''))
-  #end
+  def name
+    full_name
+    #return full_name if middle_name.nil? && first_name.nil?  && last_name.nil? #mainly used when going from old naming system.
+    #return first_name << " " << middle_name << " " << last_name if !middle_name.nil?   
+    #return first_name << " " << last_name if middle_name.nil? && !first_name.nil?
+    #return last_name  if middle_name.nil? && first_name.nil? # for people with one name.
+  end
   
-  #def name
-   # return first_name << " " << middle_name << " " << last_name if !middle_name.empty? && !first_name.empty? > 0    
-    #return first_name << " " << last_name if middle_name.empty?    
-  #end
+  def name=(name)
+    self.full_name = name 
+    name_arr = name.split
+    split_name(name_arr) if !name.empty?
+  end
   
-  #def store_name(name)
-   # 
-  #end
+  def split_name(name)
+    case name.length
+      when 1
+        self.last_name = name[0]
+      when 2
+        self.first_name = name[0]
+        self.last_name = name[1]
+      when 3
+        self.first_name = name[0]
+        self.middle_name  = name[1]
+        self.last_name = name[2]
+    end  
+  end
   
   def played_game?(game)
     ps = player_stats.first(:conditions => {:game_id => game})

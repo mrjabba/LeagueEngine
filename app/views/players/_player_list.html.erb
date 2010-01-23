@@ -1,10 +1,26 @@
-<table>
+<table class="greentable left_menu">
   <tr>
-    <td>name</td><td>dob</td><td>sex</td><td>junior</td>
+    <th></th><th>name</th><th>games played</th>
   </tr>
-<% player_list.each do |p| %>
+<% players_list.each do |p| %>
   <tr>
-    <td><%= p.name%></td><td><%= p.dob %></td><td><%= p.sex %></td><td><%= p.junior ? 'Junior': 'Senior' %></td>
-  </tr>
+		<td>
+		 <div style="position:relative;"> 
+		 <div class="row_left_options">
+					<a href="/players/edit/<%= p.id%>" class="edit" title="Edit Player">edit</a>
+					<a href="/players/destroy/<%= p.id%>" class="delete" title="Delete Player">delete</a>			 
+					<a href="/players/merge/<%= p.id%>" id="<%= p.id%>" class="merge" title="Merge Players">merge</a>
+		  </div>
+		</div>  
+		<input type="checkbox" name="same_as_me[]" value="<%= p.id%>">
+		</td>
+    <td class='left'><%= p.last_name %>, <%= p.first_name%></td>
+		<td class='left'>
+		<% p.teams.each do |t| %>
+			<%= t.league.name + '(' + p.player_stats.all(:conditions => {:game_id => t.games.map(&:id)} ).count.to_s + ')' %>
+			&nbsp;
+		<% end %>
+  	</td>
+	</tr>
 <% end %>
 </table>
