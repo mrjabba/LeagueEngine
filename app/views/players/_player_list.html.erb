@@ -17,7 +17,7 @@
     <td class='left'><%= p.last_name %>, <%= p.first_name%></td>
 		<td class='left'>
 		<% p.teams.each do |t| %>
-			<%= t.league.name + '(' + p.player_stats.all(:conditions => {:game_id => t.games.map(&:id)} ).count.to_s + ')' %>
+			<%= t.league.name + '(' + p.player_stats.all(:conditions => {:game_id => t.games.map(&:id)} ).length.to_s + ')' %>
 			&nbsp;
 		<% end %>
   	</td>
