@@ -4,8 +4,8 @@ class PlayersController < ApplicationController
   
   def index
     @team_name = params[:team_name]
-    @teams = active_account.teams.all(:conditions => {:name => @team_name}, :order => "'name'")  if !@team_name.nil? #Team.all_teams(active_account()).sort_by{|team| team[:name]}
-    @teams = active_account.teams.all(:order => "'name'")      if @team_name.nil? 
+    @teams = active_account.teams.all(:conditions => {:name => @team_name}, :order => 'teams.name')  if !@team_name.nil? #Team.all_teams(active_account()).sort_by{|team| team[:name]}
+    @teams = active_account.teams.all(:order => 'teams.name')      if @team_name.nil? 
     
     @player_lists = {}
     # {'gosford' => {'seniors' => [], 'juniors' => []}}
