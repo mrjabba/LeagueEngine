@@ -63,12 +63,5 @@
     </div>
   <div class="rc_bottom_grey"><div></div></div>
 </div>
-<%#
-<div id='games_polo_player_stats' class="rc_box_grey">
-  <div class="rc_top_grey"><div></div></div>
-    <div class="rc_content_grey">
-      <%= render :partial => 'player_stats', :locals => {:player_stats => game.player_stats} %->
-    </div>
-  <div class="rc_bottom_grey"><div></div></div>
-</div>
-%>
+
+<%= render :partial => 'player_stats', :locals => {:player_stats => game.player_stats} %>

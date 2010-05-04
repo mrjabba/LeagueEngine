@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091222053850) do
+ActiveRecord::Schema.define(:version => 20100429073657) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",       :limit => 100, :default => "", :null => false
@@ -31,6 +31,12 @@ ActiveRecord::Schema.define(:version => 20091222053850) do
     t.string "name"
     t.string "src"
     t.string "folder"
+  end
+
+  create_table "game_players", :force => true do |t|
+    t.integer "game_id"
+    t.integer "player_id"
+    t.integer "number"
   end
 
   create_table "game_stats", :force => true do |t|
@@ -149,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20091222053850) do
     t.integer "league_id",                                :null => false
     t.string  "name",      :limit => 100, :default => "", :null => false
     t.string  "captain",   :limit => 100
+    t.text    "team_tag"
   end
 
   create_table "users", :force => true do |t|

@@ -1,6 +1,6 @@
 <table id='player_stats'>
   <tr>
-    <th>Time</th><th>Team</th><th>Cap Number</th><th>Stat</th>
+    <th>Time</th><th>Team</th><th>Player Number</th><th>Stat Type</th><th>Value</th>
   </tr>
   <% for pStat in player_stats %>
     <% if pStat.stat_type_id != @player_game_played.id # don't render game_played stats here %> 
@@ -10,8 +10,10 @@
 			<td class='teams'><%= ps_form.collection_select :team_id, @teams_on_card, :id, :name  %></td>
 			<td class='number'> <%= ps_form.text_field :number %> </td>
 			<td class='stat_type'>
-			  <%= ps_form.collection_select :stat_type_id, @player_stat_types, :id, :name, :include_blank => true  %>
-			  <%= ps_form.text_field :value, :style=>"display:none;" %>  
+			  <input type='text'></input>
+		  </td>
+		  <td>
+		    <%= ps_form.text_field :value %>  
 		  </td>
     </tr>
     <% end %>
