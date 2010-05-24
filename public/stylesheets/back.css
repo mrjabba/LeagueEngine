@@ -12,6 +12,7 @@ table.center {margin-left:auto; margin-right:auto;}
 
 hr { border: 0; clear:both; color:#EEEEEE; height:0; margin:10px; width:60%;}
 
+.hidden { display: none; }
 /**********************************************************************
 *********            Menu
 ***********************************************************************/
@@ -125,11 +126,25 @@ input.team_goals { float:none;font-size: 30px; width:60px; text-align:center; ma
 
 span.team_header        {display:block;margin-bottom:5px;}
 
+#player_stats{
+  float: left;
+  margin: 10px;
+  padding: 10px;
+  background-color: #cccccc;
+  -webkit-border-radius: .5em;
+  -moz-border-radius: .5em;
+  border-radius: .5em;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+
 #player_stats td input {text-align: center;}
 #player_stats td.time input {width:50px;} 
 #player_stats td.number input {width:30px;}
 #player_stats td.stat_type {overflow:none;}
 #player_stats td.stat_type input {width:30px; float:left;}  
+#player_stats td.value input {width:30px;}  
 
 /**********************************************************************
 *********            Players

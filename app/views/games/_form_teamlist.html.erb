@@ -3,7 +3,8 @@
 
 <% (1..14).each do |i| %>
 	<tr>
-		<td><%= i %></td><td><%= text_field_tag "game[teams][#{team.id}][players][]", @members[team.id][i], :size=>20 %> </td>
+		<td><%= i %></td><td><%= text_field_tag "game[teams][#{team.id}][players][]", @members[team.id][i], :id => "t#{team.id}_p#{i}",:size=>20 %> 
+		</td>
 	</tr>
 <% end %>
 </table>

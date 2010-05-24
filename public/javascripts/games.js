@@ -16,7 +16,23 @@ function GamesBind () {
 	  //alert("tagid="+tagid);
 	  var teamid = $(this).val();
 	  //alert("teamid="+teamid);
+	  $('#'+tagid).html("Loading....");
 	  $.post("/games/replace_team", {teamid: teamid, team: tagid}, null, "script"); 
 	 	//$("#team1").html("ok the replace works");
 	}); 
+	
+	//adds players to js array so I can use it for js validation
+	// of player stats
+	/*$('#team2 input[type=text]').leave(funciton(){
+	  id = $(this).attr('id')
+	  team, player_no = id.split('_')
+	  name = $(this).value
+	});*/
+	
+	//add player blank stat
+	$('.add_player_stat').click(function(){
+	  var blank_row = $(this).next().find('.blank_player_stat tbody').html();
+	  $('table.player_stats tbody').append(blank_row);
+    return false;
+	});
 }

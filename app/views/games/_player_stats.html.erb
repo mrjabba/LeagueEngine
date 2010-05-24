@@ -1,22 +1,17 @@
-<table id='player_stats'>
+<div id='player_stats'>
+<table class='stat_list'>
   <tr>
-    <th>Time</th><th>Team</th><th>Player Number</th><th>Stat Type</th><th>Value</th>
+    <th>Time</th><th>Team</th><th>No.</th><th>Stat</th><th>Value</th>
   </tr>
-  <% for pStat in player_stats %>
-    <% if pStat.stat_type_id != @player_game_played.id # don't render game_played stats here %> 
-    <% fields_for_player_stat(pStat) do |ps_form| %>
-    <tr>
-      <td class='time'><%= ps_form.text_field :time %></td>
-			<td class='teams'><%= ps_form.collection_select :team_id, @teams_on_card, :id, :name  %></td>
-			<td class='number'> <%= ps_form.text_field :number %> </td>
-			<td class='stat_type'>
-			  <input type='text'></input>
-		  </td>
-		  <td>
-		    <%= ps_form.text_field :value %>  
-		  </td>
-    </tr>
-    <% end %>
-    <% end %>
-  <% end%>
+  <%= render :partial => 'player_stat', :collection => player_stats %>
 </table>
+<a class="add_player_stat" href="blank">add player stat</a>
+<div class="hidden">
+  <!-- blank player stat row for js addition -->
+  <table>
+    <tbody class='blank_player_stat'>
+      <%= render :partial => 'player_stat', :locals => { :player_stat => PlayerStat.new } %>
+    <tbody>
+  </table>
+</div>
+</div>

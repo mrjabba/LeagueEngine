@@ -9,35 +9,37 @@ class Game < ActiveRecord::Base
              :foreign_key => "team1_id" 
   belongs_to :team2,
              :class_name => "Team", 
-             :foreign_key => "team2_id"
+             :foreign_key => "team2_id"       
              
-             
+  validates_associated :player_stats
+  
   attr_accessor :teams, :team1_stats, :team2_stats, :new_player_stats, :completed_before_save
   
   def game_completed=(game_completed)
     self.completed = 1 if game_completed
   end
-  #def new_player_stats=(player_stat_attributes)
-   # player_stats_attributes.each do |stat|
-    #  if stat[:stat_type_id] > 0 
-     #   ps = player_stats.build(stat)
-      #  ps.player_id = get_player(ps.team_id, ps.number)
-      #end
-    #end
-  #end
   
-  #def existing_player_stats=(player_stat_attributes)
-   # player_stats.not_game_played.reject(&:new_record?).each do |stat|
-    #  if stat[:stat_type_id] > 0
-     #   attributes = player_stat_attributes[task.id.to_s]
-      #  if attributes
-       #   task.attributes = attributes
-       # else 
-        #  tasks.delete(task)
-        #end
-      #end
-   # end
-  #end
+  def new_player_stats=(stats_attributes)
+    player_stats_attributes.each do |stat_att|
+      player_stats.build(stat_att)
+    end
+  end
+  
+  def existing_player_stats=(stats_attributes)
+    player_stats.reject(&:new_record?).each do |stat|
+      attributes = stats_attributes[stat.id.to_s]   
+      if attributes
+        stat.attributes = attributes      
+      else 
+        player_stats.delete(stat)
+      end
+  end
+  
+  def save_player_stats
+   player_stats.each do |stat|
+     stat.save(false)
+   end     
+  end
   
   def before_save
     g = Game.find(id) if !id.nil?
@@ -47,12 +49,12 @@ class Game < ActiveRecord::Base
   def after_create
     process_team_lists
     save_game_stats
-    #save_player_stats
   end
   
   def after_update
     process_team_lists
     save_game_stats
+    save_player_stats
   end
   
   def completed_changed?
@@ -99,10 +101,6 @@ class Game < ActiveRecord::Base
     t2gs.stats =  team2_stats
     t2gs.save    
   end
-  
-  #def save_player_stats
-   #player_stats.     
-  #end
   
   def date_dmy
     date.strftime('%d %B %Y')
