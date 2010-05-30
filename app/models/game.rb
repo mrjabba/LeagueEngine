@@ -33,6 +33,7 @@ class Game < ActiveRecord::Base
       else 
         player_stats.delete(stat)
       end
+    end  
   end
   
   def save_player_stats

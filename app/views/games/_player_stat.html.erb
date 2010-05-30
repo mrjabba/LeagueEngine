@@ -1,17 +1,18 @@
 <% if player_stat.stat_type_id != @player_game_played.id # don't see game_played stats here  
-  new_or_existing = player_stat.new_record? ? 'new' : 'existing'  
+  new_or_existing = player_stat.new_record? ? "new" : "existing"  
   prefix = "game[#{new_or_existing}_player_stat_attributes][]" 
 %>
   <% fields_for prefix, player_stat do |ps| %>
   <tr>
-    <td class='time'><%= ps.text_field :time %></td>
-  	<td class='teams'><%= ps.collection_select :team_id, @teams_on_card, :id, :team_tag  %></td>
-  	<td class='number'> <%= ps.text_field :number %> </td>
-  	<td class='stat_type'>
-  	  <input type='text' />
-    </td>
+    <td class="time"><%= ps.text_field :time %></td>
+  	<td class="teams"><%= ps.collection_select :team_id, @teams_on_card, :id, :team_tag  %></td>
+  	<td class="number"> <%= ps.collection_select :number, (1..14), :to_s, :to_s  %></td> </td>
+  	<td class="stat_type">
+  	  <%= ps.collection_select :stat_type_id, @player_stat_types, :id, :name  %></td>
+      <%= ps.text_field :value, :style => "display:none;" %>  
+  	</td>
     <td class="value">
-      <%= ps.text_field :value %>  
+      <a class="x_del_stat red btn delete" href="blank" title="Delete Stat">x</a>
     </td>
   </tr>
   <% end %>

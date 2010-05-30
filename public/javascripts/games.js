@@ -31,8 +31,7 @@ function GamesBind () {
 	
 	//add player blank stat
 	$('.add_player_stat').click(function(){
-	  var blank_row = $(this).next().find('.blank_player_stat tbody').html();
-	  $('table.player_stats tbody').append(blank_row);
+	  $('table.stat_list tbody').append(blank_player_stat);
     return false;
 	});
 }

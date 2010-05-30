@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100513220406) do
+ActiveRecord::Schema.define(:version => 20100526080340) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",       :limit => 100, :default => "", :null => false
@@ -133,8 +133,9 @@ ActiveRecord::Schema.define(:version => 20100513220406) do
   end
 
   create_table "stat_types", :force => true do |t|
-    t.string "name"
-    t.string "entity"
+    t.string  "name"
+    t.string  "entity"
+    t.integer "account_id"
   end
 
   create_table "table_buttons", :force => true do |t|

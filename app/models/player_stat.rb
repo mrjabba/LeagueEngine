@@ -7,6 +7,4 @@ class PlayerStat < ActiveRecord::Base
   named_scope :not_game_played, :conditions => ["stat_type_id > ?", StatType.player_game_played]
   
   attr_accessor :time, :team_id
-  
-  
 end

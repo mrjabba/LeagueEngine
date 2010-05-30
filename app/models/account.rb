@@ -10,6 +10,7 @@ class Account < ActiveRecord::Base
   has_many :teams, :through => :leagues
   has_many :players, :through => :teams
   belongs_to :sport
+  has_many :stat_types
   
   attr_accessor :other
   
