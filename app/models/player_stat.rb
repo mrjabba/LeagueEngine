@@ -1,10 +1,11 @@
 class PlayerStat < ActiveRecord::Base
   belongs_to :player
+  belongs_to :team
   belongs_to :game
   belongs_to :stat_type
   
   named_scope :game_played, :conditions => {:stat_type_id => StatType.player_game_played}
   named_scope :not_game_played, :conditions => ["stat_type_id > ?", StatType.player_game_played]
   
-  attr_accessor :time, :team_id
+  attr_accessor :time
 end
