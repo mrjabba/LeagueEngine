@@ -4,7 +4,7 @@
 body {
   font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
   font-size: 13px;
-  /*background-image: url(../images/grass_bg.jpg);*/
+  background-image: url(../images/grass_bg.jpg);
 }
 ul {margin:0;padding:0;}
 #content{width: 80%; margin: 0 200px;}
@@ -43,16 +43,36 @@ hr { border: 0; clear:both; color:#EEEEEE; height:0; margin:10px; width:60%;}
 	top: 1px;
 }
 
-.delete {
+.delete_sml {
   padding: 0;
 	width: 15px;
 	height: 15px;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
   font-size: 13px;
+  color: #606060;
+  border: solid 1px #b7b7b7;
+  background: #fff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+  background: -moz-linear-gradient(top,  #fff,  #ededed);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
 }
 
+.delete_sml:hover{
+  color: #faddde;
+  border: solid 1px #980c10;
+  background: #d81b21;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ed1c24), to(#aa1317));
+  background: -moz-linear-gradient(top,  #ed1c24,  #aa1317);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ed1c24', endColorstr='#aa1317');
+}
 
+.delete_sml:active{
+  color: #de898c;
+  background: -webkit-gradient(linear, left top, left bottom, from(#aa1317), to(#ed1c24));
+  background: -moz-linear-gradient(top,  #aa1317,  #ed1c24);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#aa1317', endColorstr='#ed1c24');  
+}
 /* color styles 
 ---------------------------------------------- */
 
