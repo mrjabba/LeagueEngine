@@ -34,4 +34,12 @@ function GamesBind () {
 	  $('table.stat_list tbody').append(blank_player_stat);
     return false;
 	});
+  
+  $('.x_del_stat').live('click', function() {
+    var tr = $(this).parents('tr');
+    //var del_field = tr.find("input.delete_stat");
+    //del_field.attr('value', 'true');
+    tr.remove();
+    return false;
+  });
 }

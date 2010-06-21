@@ -4,8 +4,8 @@
 body {
   font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
   font-size: 13px;
-  background-image: url(../images/grass_bg.jpg);
 }
+/*  background-image: url(../images/grass_bg.jpg); */
 ul {margin:0;padding:0;}
 #content{width: 80%; margin: 0 200px;}
 
