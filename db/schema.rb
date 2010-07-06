@@ -12,19 +12,18 @@
 ActiveRecord::Schema.define(:version => 20100526080340) do
 
   create_table "accounts", :force => true do |t|
-    t.string   "name",       :limit => 100, :default => "", :null => false
-    t.integer  "owner_id"
-    t.datetime "created_on",                                :null => false
-    t.datetime "updated_on"
-    t.string   "url",        :limit => 100, :default => "", :null => false
-    t.integer  "sport_id"
+    t.string  "name",     :limit => 100, :default => ""
+    t.integer "owner_id"
+    t.string  "url",      :limit => 100, :default => ""
+    t.integer "sport_id"
   end
 
-  create_table "accounts_users", :force => true do |t|
-    t.integer "account_id", :null => false
-    t.integer "user_id",    :null => false
+  create_table "accounts_users", :id => false, :force => true do |t|
+    t.integer "account_id"
+    t.integer "user_id"
     t.integer "role_id"
     t.integer "active"
+    t.integer "id"
   end
 
   create_table "buttons", :force => true do |t|
@@ -33,23 +32,17 @@ ActiveRecord::Schema.define(:version => 20100526080340) do
     t.string "folder"
   end
 
-  create_table "game_players", :force => true do |t|
-    t.integer "game_id"
-    t.integer "player_id"
-    t.integer "number"
-  end
-
   create_table "game_stats", :force => true do |t|
-    t.integer "game_id",     :null => false
-    t.integer "team_id",     :null => false
+    t.integer "game_id"
+    t.integer "team_id"
     t.text    "stats"
     t.integer "team_number"
   end
 
   create_table "games", :force => true do |t|
-    t.integer  "league_id", :null => false
-    t.integer  "team1_id",  :null => false
-    t.integer  "team2_id",  :null => false
+    t.integer  "league_id"
+    t.integer  "team1_id"
+    t.integer  "team2_id"
     t.datetime "date"
     t.integer  "completed"
     t.string   "where"
@@ -57,8 +50,8 @@ ActiveRecord::Schema.define(:version => 20100526080340) do
   end
 
   create_table "league_lists", :force => true do |t|
-    t.integer "league_id", :null => false
-    t.integer "team_id",   :null => false
+    t.integer "league_id"
+    t.integer "team_id"
     t.text    "stats"
   end
 
@@ -70,32 +63,25 @@ ActiveRecord::Schema.define(:version => 20100526080340) do
     t.text    "formula"
   end
 
-  create_table "league_stats", :force => true do |t|
-    t.integer "league_id"
-    t.string  "name"
-    t.string  "tag"
-    t.integer "order"
-  end
-
   create_table "leagues", :force => true do |t|
-    t.integer  "account_id",                                :null => false
-    t.string   "name",       :limit => 100, :default => "", :null => false
+    t.integer  "account_id"
+    t.string   "name",       :limit => 100, :default => ""
     t.datetime "created_at"
   end
 
   create_table "menu_items", :force => true do |t|
-    t.string "name",     :limit => 20, :default => "", :null => false
+    t.string "name",     :limit => 20, :default => ""
     t.text   "sub_menu"
   end
 
   create_table "menu_items_roles", :id => false, :force => true do |t|
-    t.integer "menu_item_id", :null => false
-    t.integer "role_id",      :null => false
+    t.integer "menu_item_id"
+    t.integer "role_id"
   end
 
   create_table "player_stats", :force => true do |t|
-    t.integer "game_id",                     :null => false
-    t.integer "player_id",                   :null => false
+    t.integer "game_id"
+    t.integer "player_id"
     t.integer "number",       :default => 0
     t.integer "stat_type_id"
     t.integer "value"
@@ -103,7 +89,7 @@ ActiveRecord::Schema.define(:version => 20100526080340) do
   end
 
   create_table "players", :force => true do |t|
-    t.string   "full_name",   :limit => 100, :default => "", :null => false
+    t.string   "full_name",   :limit => 100, :default => ""
     t.datetime "dob"
     t.string   "first_name"
     t.string   "middle_name"
@@ -113,7 +99,7 @@ ActiveRecord::Schema.define(:version => 20100526080340) do
   end
 
   create_table "roles", :force => true do |t|
-    t.string "name", :limit => 20, :default => "", :null => false
+    t.string "name", :limit => 20, :default => ""
   end
 
   create_table "sessions", :force => true do |t|
@@ -148,14 +134,14 @@ ActiveRecord::Schema.define(:version => 20100526080340) do
   end
 
   create_table "team_members", :force => true do |t|
-    t.integer "team_id",   :null => false
-    t.integer "player_id", :null => false
+    t.integer "team_id"
+    t.integer "player_id"
     t.integer "number"
   end
 
   create_table "teams", :force => true do |t|
-    t.integer "league_id",                                :null => false
-    t.string  "name",      :limit => 100, :default => "", :null => false
+    t.integer "league_id"
+    t.string  "name",      :limit => 100, :default => ""
     t.string  "captain",   :limit => 100
     t.text    "team_tag"
   end

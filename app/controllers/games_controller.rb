@@ -39,7 +39,7 @@ class GamesController < ApplicationController
         flash[:notice] = 'Game created'
         redirect_to :action => 'index'
       end
-     render :action => 'edit', :id => @game.id
+      render :action => 'edit', :id => @game.id
     else
       render :action => 'edit'
     end
