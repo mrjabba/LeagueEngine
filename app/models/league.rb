@@ -13,7 +13,7 @@ class League < ActiveRecord::Base
   end
   
   def self.generate_default_league(account)
-    l = League.create(:name => "League 1", :account_id => account.id, :default_stats => 1)
+    l = League.create(:name => "League 1", :account_id => account.id)
     l.generate_league_data
   end
   

@@ -19,15 +19,16 @@ class Game < ActiveRecord::Base
     self.completed = 1 if game_completed
   end
   
-  def new_player_stats=(stats_attributes)
-    player_stats_attributes.each do |stat_att|
+  def new_player_stats=(stat_attributes)
+    debugger
+    stat_attributes.each do |stat_att|
       player_stats.build(stat_att)
     end
   end
   
-  def existing_player_stats=(stats_attributes)
+  def existing_player_stats=(stat_attributes)
     player_stats.reject(&:new_record?).each do |stat|
-      attributes = stats_attributes[stat.id.to_s]   
+      attributes = stat_attributes[stat.id.to_s]   
       if attributes
         stat.attributes = attributes      
       else 

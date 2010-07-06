@@ -5,23 +5,21 @@ class MergeZaustedDb < ActiveRecord::Migration
     # then regenerate this schema definition.
 
       create_table "accounts", :force => true do |t|
-        t.column "name",        :string,   :limit => 100, :default => "", :null => false
+        t.column "name",        :string,   :limit => 100, :default => ""
         t.column "owner_id",    :integer
-        t.column "created_on",  :datetime,                                :null => false
-        t.column "updated_on",  :datetime
-        t.column "web_address", :string,   :limit => 100, :default => "", :null => false
+        t.column "web_address", :string,   :limit => 100, :default => ""
       end
 
       create_table "accounts_users", :id => false, :force => true do |t|
-        t.column "account_id", :integer, :null => false
-        t.column "user_id",    :integer, :null => false
+        t.column "account_id", :integer
+        t.column "user_id",    :integer
         t.column "role_id",    :integer
         t.column "active",     :integer
       end
 
       create_table "game_stats", :force => true do |t|
-        t.column "game_id",      :integer,                :null => false
-        t.column "team_id",      :integer,                :null => false
+        t.column "game_id",      :integer
+        t.column "team_id",      :integer
         t.column "goals",        :integer, :default => 0
         t.column "exclusions",   :integer, :default => 0
         t.column "converstions", :integer, :default => 0
@@ -31,9 +29,9 @@ class MergeZaustedDb < ActiveRecord::Migration
       #add_index "game_stats", ["team_id"], :name => "team_id"
 
       create_table "games", :force => true do |t|
-        t.column "league_id", :integer,  :null => false
-        t.column "team1_id",  :integer,  :null => false
-        t.column "team2_id",  :integer,  :null => false
+        t.column "league_id", :integer
+        t.column "team1_id",  :integer
+        t.column "team2_id",  :integer
         t.column "date",      :datetime
       end
 
@@ -43,12 +41,12 @@ class MergeZaustedDb < ActiveRecord::Migration
 
       create_table "league_list_headers", :force => true do |t|
         t.column "headings",  :text
-        t.column "league_id", :integer, :null => false
+        t.column "league_id", :integer
       end
 
       create_table "league_lists", :force => true do |t|
-        t.column "league_id", :integer, :null => false
-        t.column "team_id",   :integer, :null => false
+        t.column "league_id", :integer
+        t.column "team_id",   :integer
         t.column "stats",     :text
       end
 
@@ -56,8 +54,8 @@ class MergeZaustedDb < ActiveRecord::Migration
       #add_index "league_lists", ["team_id"], :name => "team_id"
 
       create_table "leagues", :force => true do |t|
-        t.column "account_id",  :integer,                                 :null => false
-        t.column "name",        :string,   :limit => 100, :default => "", :null => false
+        t.column "account_id",  :integer
+        t.column "name",        :string,   :limit => 100, :default => ""
         t.column "description", :text
         t.column "closed",      :datetime
       end
@@ -65,17 +63,17 @@ class MergeZaustedDb < ActiveRecord::Migration
       #add_index "leagues", ["account_id"], :name => "account_id"
 
       create_table "menu_items", :force => true do |t|
-        t.column "name", :string, :limit => 20, :default => "", :null => false
+        t.column "name", :string, :limit => 20, :default => ""
       end
 
       create_table "menu_items_roles", :id => false, :force => true do |t|
-        t.column "menu_item_id", :integer, :null => false
-        t.column "role_id",      :integer, :null => false
+        t.column "menu_item_id", :integer
+        t.column "role_id",      :integer
       end
 
       create_table "player_stats", :force => true do |t|
-        t.column "game_id",    :integer,                :null => false
-        t.column "player_id",  :integer,                :null => false
+        t.column "game_id",    :integer 
+        t.column "player_id",  :integer  
         t.column "number",     :integer, :default => 0
         t.column "goals",      :integer, :default => 0
         t.column "exclusions", :integer, :default => 0
@@ -85,27 +83,27 @@ class MergeZaustedDb < ActiveRecord::Migration
       #add_index "player_stats", ["player_id"], :name => "player_id"
 
       create_table "players", :force => true do |t|
-        t.column "account_id", :integer,                                 :null => false
-        t.column "name",       :string,   :limit => 100, :default => "", :null => false
+        t.column "account_id", :integer 
+        t.column "name",       :string,   :limit => 100, :default => ""
         t.column "dob",        :datetime
       end
 
       #add_index "players", ["account_id"], :name => "account_id"
 
       create_table "players_teams", :force => true do |t|
-        t.column "player_id",    :integer,  :null => false
-        t.column "team_id",      :integer,  :null => false
+        t.column "player_id",    :integer
+        t.column "team_id",      :integer
         t.column "shirt_number", :integer
         t.column "created_at",   :datetime
       end
 
       create_table "roles", :force => true do |t|
-        t.column "name", :string, :limit => 20, :default => "", :null => false
+        t.column "name", :string, :limit => 20, :default => ""
       end
 
       create_table "team_members", :force => true do |t|
-        t.column "team_id",   :integer, :null => false
-        t.column "player_id", :integer, :null => false
+        t.column "team_id",   :integer
+        t.column "player_id", :integer
         t.column "number",    :integer
       end
 
@@ -113,10 +111,10 @@ class MergeZaustedDb < ActiveRecord::Migration
       #add_index "team_members", ["player_id"], :name => "player_id"
 
       create_table "teams", :force => true do |t|
-        t.column "league_id",    :integer,                                :null => false
-        t.column "display_name", :string,  :limit => 100, :default => "", :null => false
+        t.column "league_id",    :integer
+        t.column "display_name", :string,  :limit => 100, :default => ""
         t.column "captain",      :string,  :limit => 100
-        t.column "desc_name",    :string,  :limit => 100, :default => "", :null => false
+        t.column "desc_name",    :string,  :limit => 100, :default => ""
       end
 
   end
