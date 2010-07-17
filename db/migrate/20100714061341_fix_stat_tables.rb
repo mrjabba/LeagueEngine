@@ -25,6 +25,7 @@ class FixStatTables < ActiveRecord::Migration
     drop_table :menu_items_roles
     drop_table :table_buttons
     drop_table :buttons
+    drop_table :signupmails
   end
 
   def self.down
