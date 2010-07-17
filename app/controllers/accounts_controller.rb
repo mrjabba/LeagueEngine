@@ -53,6 +53,7 @@ class AccountsController < ApplicationController
   end
   
   def create
+    debugger
     @account = Account.new(params[:account])
     @user = User.new(params[:user])
     if request.post?
@@ -67,6 +68,7 @@ class AccountsController < ApplicationController
           au.account_id = @account.id
           au.user_id = @user.id
           au.save!
+          @account.create_default_data
         end
       rescue ActiveRecord::RecordInvalid => e 
         @account.valid?
@@ -74,8 +76,6 @@ class AccountsController < ApplicationController
         #render :action => :signup
       else
         #session[:user] = User.authenticate(@user.login, @user.password)
-        #generates default league, teams and games as a demo to new users
-        League.generate_default_league(@account)
 
         flash[:message] = "Signup successful"
         redirect_to :controller => "leagues", :action => "index"

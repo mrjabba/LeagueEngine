@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100526080340) do
+ActiveRecord::Schema.define(:version => 20100714061341) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",     :limit => 100, :default => ""
@@ -26,19 +26,6 @@ ActiveRecord::Schema.define(:version => 20100526080340) do
     t.integer "id"
   end
 
-  create_table "buttons", :force => true do |t|
-    t.string "name"
-    t.string "src"
-    t.string "folder"
-  end
-
-  create_table "game_stats", :force => true do |t|
-    t.integer "game_id"
-    t.integer "team_id"
-    t.text    "stats"
-    t.integer "team_number"
-  end
-
   create_table "games", :force => true do |t|
     t.integer  "league_id"
     t.integer  "team1_id"
@@ -49,34 +36,17 @@ ActiveRecord::Schema.define(:version => 20100526080340) do
     t.integer  "recorded"
   end
 
-  create_table "league_lists", :force => true do |t|
+  create_table "league_stats", :force => true do |t|
     t.integer "league_id"
     t.integer "team_id"
-    t.text    "stats"
-  end
-
-  create_table "league_stat_types", :force => true do |t|
-    t.integer "league_id"
-    t.string  "name"
-    t.string  "tag"
-    t.integer "order"
-    t.text    "formula"
+    t.integer "stat_type_id"
+    t.integer "value"
   end
 
   create_table "leagues", :force => true do |t|
     t.integer  "account_id"
     t.string   "name",       :limit => 100, :default => ""
     t.datetime "created_at"
-  end
-
-  create_table "menu_items", :force => true do |t|
-    t.string "name",     :limit => 20, :default => ""
-    t.text   "sub_menu"
-  end
-
-  create_table "menu_items_roles", :id => false, :force => true do |t|
-    t.integer "menu_item_id"
-    t.integer "role_id"
   end
 
   create_table "player_stats", :force => true do |t|
@@ -86,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20100526080340) do
     t.integer "stat_type_id"
     t.integer "value"
     t.integer "team_id"
+    t.string  "period"
   end
 
   create_table "players", :force => true do |t|
@@ -122,21 +93,21 @@ ActiveRecord::Schema.define(:version => 20100526080340) do
     t.string  "name"
     t.string  "entity"
     t.integer "account_id"
-  end
-
-  create_table "table_buttons", :force => true do |t|
-    t.string  "table_name"
-    t.integer "button_id"
-    t.string  "link_to_controller"
-    t.string  "link_to_action"
-    t.string  "alt_text"
-    t.integer "order"
+    t.string  "short_desc"
+    t.string  "display"
   end
 
   create_table "team_members", :force => true do |t|
     t.integer "team_id"
     t.integer "player_id"
     t.integer "number"
+  end
+
+  create_table "team_stats", :force => true do |t|
+    t.integer "team_id"
+    t.integer "game_id"
+    t.integer "stat_type_id"
+    t.integer "value"
   end
 
   create_table "teams", :force => true do |t|

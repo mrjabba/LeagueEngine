@@ -13,14 +13,13 @@ class Game < ActiveRecord::Base
              
   validates_associated :player_stats
   
-  attr_accessor :teams, :team1_stats, :team2_stats, :new_player_stats, :completed_before_save
+  attr_accessor :team1_stats, :team2_stats, :new_player_stats, :completed_before_save
   
   def game_completed=(game_completed)
     self.completed = 1 if game_completed
   end
   
   def new_player_stats=(stat_attributes)
-    debugger
     stat_attributes.each do |stat_att|
       player_stats.build(stat_att)
     end
@@ -35,73 +34,6 @@ class Game < ActiveRecord::Base
         player_stats.delete(stat)
       end
     end  
-  end
-  
-  def save_player_stats
-   player_stats.each do |stat|
-     stat.save(false)
-   end     
-  end
-  
-  def before_save
-    g = Game.find(id) if !id.nil?
-    self.completed_before_save = g.completed if !g.nil? 
-  end
-  
-  def after_create
-    process_team_lists
-    save_game_stats
-  end
-  
-  def after_update
-    process_team_lists
-    save_game_stats
-    save_player_stats
-  end
-  
-  def completed_changed?
-    completed_before_save != completed
-  end
-  
-  def team1_goals
-    return self.team1_stats['goals'] if !team1_stats.nil?
-    return 0
-  end
-  
-  def team1_goals=(g)
-    self.team1_stats = {} if team1_stats.nil?
-    self.team1_stats['goals'] = g
-  end
-  
-  def team2_goals
-    return self.team2_stats['goals'] if !team2_stats.nil?
-    return 0
-  end
-  
-  def team2_goals=(g)
-    self.team2_stats = {} if team2_stats.nil?
-    self.team2_stats['goals'] = g
-  end
-  
-  def after_find
-    t1gs = GameStat.first(:conditions => {:game_id => id, :team_id => team1.id})
-    !t1gs.nil? ? self.team1_stats = t1gs.stats : self.team1_stats = {}
-       
-    t2gs = GameStat.first(:conditions => {:game_id => id, :team_id => team2.id})
-    !t2gs.nil? ? self.team2_stats = t2gs.stats : self.team2_stats = {}
-  end
-  
-  def save_game_stats
-    t1gs = GameStat.first(:conditions => {:game_id => id, :team_id => team1.id})
-    t1gs = GameStat.create(:game_id=> id, :team_id => team1.id)  if t1gs.nil?
-    t1gs.stats =  team1_stats
-    t1gs.save
-  
-    gst2_hash = {:game_id=> id, :team_id => team2.id}
-    t2gs = GameStat.first(:conditions => gst2_hash)
-    t2gs = GameStat.create(gst2_hash) if t2gs.nil?
-    t2gs.stats =  team2_stats
-    t2gs.save    
   end
   
   def date_dmy
@@ -124,6 +56,35 @@ class Game < ActiveRecord::Base
     self.date = DateTime.new(date.year, date.mon, date.day, t.hour, t.min, 0)
   end
   
+  def before_save
+    g = Game.find(id) if !id.nil?
+    self.completed_before_save = g.completed if !g.nil? 
+  end
+  
+  def after_create
+    #process_team_lists
+    save_game_stats
+  end
+  
+  def after_update
+    #process_team_lists
+    save_game_stats
+    save_player_stats
+  end
+  
+  def completed_changed?
+    completed_before_save != completed
+  end
+  
+  def after_find
+    self.team1_score = team1.score
+    self.team1_score ||= 0
+    
+    self.team2_score = team2.score
+    self.team2_score ||= 0
+  end
+  
+  
   def self.get_games(games, params)
     for league in account.leagues
       for game in Game.all(:conditions => {:league_id => league, :completed => completed})
@@ -132,34 +93,28 @@ class Game < ActiveRecord::Base
     end
   end 
   
-  def process_team_lists
-    if !teams.nil?
-      player_stats.game_played.delete_all
+  def teams=(teams)
+    PlayerStat.game_played.delete_all(:game_id => self.id) #don't worry about update just delete and start again
     
-      teams.keys.each do |team_id|
-        t = Team.find(team_id)
-        t.clear_players_numbers if !teams[team_id]["forget_team"]
-      
-        teams[team_id]["players"].each_with_index do |player_name, i|
-          if player_name != ""
-            p = t.players.find_by_full_name(player_name)
-            if p.nil?
-              p = Player.create(:name => player_name)
-              tm = TeamMember.create(:player_id => p.id, :team_id => t.id)
-            end
-            PlayerStat.create(:game_id => id, :player_id => p.id, 
-                              :stat_type_id => StatType.player_game_played, 
-                              :value => 1, :number => i+1)
-            if !teams[team_id]["forget_team"]
-              tm = t.team_members.first(:conditions=> {:player_id => p})
-              tm.number = i+1
-              tm.save 
-            end
-          end
-        end
-      end
-    end
-  end
+    teams.each do |team_id, team|
+      t = Team.find(team_id)
+      t.clear_players_numbers unless team["forget_team"]
+    
+      team['players'].each_with_index do |player, i|
+        unless player.empty?
+          p = t.players.find_by_full_name(player)
+          if p.nil?
+            p = t.players.create(:name => player)
+            t.team_members(:conditions => {:pid => p.id}).first.update_attribute(:number, i+1) unless team["forget_team"]
+          end #p.nil?
+          
+          player_stats.build(:team_id => t.id, :player_id => p.id, 
+                            :stat_type_id => StatType.player_game_played, 
+                            :value => 1, :number => i+1)
+        end #unless player.empty?
+      end #team['players'].each_with_index do |player, i|
+    end #teams.each do |team_id, team|
+  end # def teams
   
   def add_result_to_league
       league.add_result(self)
@@ -181,6 +136,5 @@ class Game < ActiveRecord::Base
       members[ps.number] = ps.player.name if ps.player.team_members.exists?(:team_id => team)       
     end
     return members
-  end
-  
+  end  
 end
