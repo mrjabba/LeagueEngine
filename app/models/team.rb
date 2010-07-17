@@ -1,10 +1,16 @@
 class Team < ActiveRecord::Base
-  has_one :league_list
+  belongs_to :league
+  has_many :league_stats
+  has_many :stats, :class_name => 'TeamStat'
+  has_many :games, :through => :stats
   has_many :team_members
   has_many :players, :through => :team_members
-  belongs_to :league
-  has_many :game_stats
-  has_many :games, :through => :game_stats
+  
+  after_validation :create_tag
+  
+  def create_tag
+    self.team_tag = name[0..2]
+  end
   
   def self.all_teams(account)
     teams = []
@@ -46,15 +52,5 @@ class Team < ActiveRecord::Base
     #LeagueList.create(:league_id => league.id, 
      #                 :team_id => id, 
       #                :stats => { "played"=>0, "wins"=>0, "draws"=>0, "losses"=>0, "for"=>0, "against"=>0, "difference"=>0, "points"=>0})
-  end
-  
-  def destroy_team_data
-    league_list.delete()
-    games.delete_all()
-    game_stats.delete_all()
-    #team_stats.delete_all()
-    players.delete_all()
-    team_members.delete_all()
-    Team.delete(id)
   end
 end
