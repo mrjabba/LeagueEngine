@@ -16,12 +16,12 @@ class League < ActiveRecord::Base
   def clone
     new_league = League.new({:name => self.name, :account_id => self.account_id})
     
-    stats.each do |stat|
-      new_league.stats.build(stat.attributes)  
-    end
-    
     teams.each do |team|
-      new_league.teams.build(team.attributes)  
+      new_team = new_league.teams.build(team.attributes)  
+      
+      team.league_stats.each do |stat|
+        new_team.league_stats.build(stat.attributes)  
+      end
     end
     new_league
   end

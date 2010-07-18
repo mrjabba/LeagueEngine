@@ -333,7 +333,7 @@ table.greentable td div.row_left_options { position: absolute; width: 65px; righ
 ***********************************************************************/
 fieldset {border:0;}
   legend {display:none;}
-  fieldset ul li {display:block; list-style-type:none; overflow:none;}
+  fieldset ul li {display:block; list-style-type:none; overflow:none; clear:both;}
   label {float:left;display:block; width:100px; text-align:right; margin-top:9px;}
   input[type="text"] {float:left;display:block; margin: 5px 0 0 10px;}
 
