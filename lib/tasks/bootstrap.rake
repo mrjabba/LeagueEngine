@@ -1,4 +1,4 @@
-namespace :site do
+namespace :db do
   desc 'load an data needed as a base in the dev db'
   task :bootstrap => :environment do
     puts "Creating dafault data..."
@@ -43,7 +43,7 @@ namespace :site do
     l = League.create(:account_id => a.id, :name => 'DefaultLeague')
     
     %w|Australia Brazil China Denmark|.each do |team|
-      t = Team.create(:name => team)
+      t = l.teams.create(:name => team)
       
       %w|played wins draws loses for against difference points|.each do |stat|
         LeagueStat.create(:league_id => l.id, :team_id => t.id, :stat_type_id => StatType.find_by_name(stat).id, :value => 0)

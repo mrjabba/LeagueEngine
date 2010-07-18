@@ -1,0 +1,32 @@
+- form_for @account do |f|
+  %fieldset
+    %ul
+      %li
+        %label{:for => 'account_name' }
+          name
+        = f.text_field :name, :size => 20
+      %li
+        %label{:for=>'account_sport_id'}
+          sport
+        = f.collection_select(:sport_id, @sports, :id, :name) 
+      %li{:id =>'sport_other', :style => 'display: none;'}
+        %label{:for=>'account_other'}
+          other
+        = f.text_field :other
+    %h3
+      Account Administrator
+    -fields_for @user do |user| 
+      %ul
+        %li
+          %label{ :for => 'user_username'}
+            username
+          = user.text_field :username
+        %li  
+          %label{ :for => 'user_password' }
+            password
+          = user.password_field :password
+        %li
+          %label{ :for => 'user_email'}
+            email
+          = user.text_field :email
+  = submit_tag 'Sign me up'
