@@ -49,11 +49,11 @@ class AccountsController < ApplicationController
 
   def new
     @account = Account.new()
-    @user = User.new()     
+    @user = User.new()
+    @sports = Sport.find(:all, :order => "name")      
   end
   
   def create
-    debugger
     @account = Account.new(params[:account])
     @user = User.new(params[:user])
     if request.post?

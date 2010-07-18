@@ -1,7 +1,6 @@
 class ModifyLeagueTabel < ActiveRecord::Migration
   def self.up
-    remove_column :leagues, :default_stats
-    add_column :leagues, :created_at, :datetime 
+    remove_column :leagues, :default_stats 
   end
 
   def self.down

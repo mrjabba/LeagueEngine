@@ -1,0 +1,49 @@
+- form_for @account do |f|
+  %fieldset
+	  %h3 Create your LeagueStreet Account
+	  %ul
+	    %li
+	      %label{:for => "account_name" }
+	        Account Name
+	      = f.text_field :name, :size => 20
+	    %li
+        %label{:for => 'account_url'}
+          Web address
+        = f.text_field :url
+	    %li
+	      %label{:for=>'account_sport_id'>
+	        Sport
+	      = f.collection_select(:sport_id, @sports, :id, :name) 
+	    %li{:id =>'sport_other', :style => 'display: none;'}
+	      %label{:for=>'account_other'
+	        Other
+	      = f.text_field :other, :size => '15'
+	  %h3
+	    Account Administrator
+	  -fields_for @user do |user| %>
+	    %ul
+	      %li
+	        %label{ :for => "user_username"
+	          Username
+	        = user.text_field :username
+	      %li  
+	        %label{ :for => "user_password" }
+	          Password
+	        = user.password_field :password
+	      %li  
+	        %label{ :for => "user_password_confirmation"
+	          Confirm Password
+	        = user.password_field :password_confirmation
+	      %li
+	        %label{ :for => "user_name" }
+	          Name
+	        = user.text_field :name
+	      %li
+	        %label{ :for => "user_surname" }
+	          Surname
+	        = user.text_field :surname
+        %li
+          %label{ :for => 'user_email'
+            email
+          = user.text_field :email
+= submit_tag "Sign me up"
