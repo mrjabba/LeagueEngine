@@ -12,18 +12,19 @@
 ActiveRecord::Schema.define(:version => 20100714061341) do
 
   create_table "accounts", :force => true do |t|
-    t.string  "name",     :limit => 100, :default => ""
-    t.integer "owner_id"
-    t.string  "url",      :limit => 100, :default => ""
-    t.integer "sport_id"
+    t.string   "name",       :default => ""
+    t.integer  "owner_id"
+    t.string   "url",        :default => ""
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "sport_id"
   end
 
-  create_table "accounts_users", :id => false, :force => true do |t|
+  create_table "accounts_users", :force => true do |t|
     t.integer "account_id"
     t.integer "user_id"
     t.integer "role_id"
     t.integer "active"
-    t.integer "id"
   end
 
   create_table "games", :force => true do |t|
@@ -45,8 +46,9 @@ ActiveRecord::Schema.define(:version => 20100714061341) do
 
   create_table "leagues", :force => true do |t|
     t.integer  "account_id"
-    t.string   "name",       :limit => 100, :default => ""
+    t.string   "name"
     t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "player_stats", :force => true do |t|
@@ -81,9 +83,6 @@ ActiveRecord::Schema.define(:version => 20100714061341) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
-
-  create_table "signupmails", :force => true do |t|
-  end
 
   create_table "sports", :force => true do |t|
     t.string "name"

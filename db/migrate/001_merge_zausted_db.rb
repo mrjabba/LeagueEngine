@@ -53,7 +53,7 @@ class MergeZaustedDb < ActiveRecord::Migration
 
       create_table "leagues", :force => true do |t|
         t.column "account_id",  :integer
-        t.column "name",        :string,   :limit => 100, :default => ""
+        t.column "name",        :string
         t.column "description", :text
         t.column "closed",      :datetime
         
@@ -94,7 +94,6 @@ class MergeZaustedDb < ActiveRecord::Migration
         t.column "player_id",    :integer
         t.column "team_id",      :integer
         t.column "shirt_number", :integer
-        t.column "created_at",   :datetime
       end
 
       create_table "roles", :force => true do |t|
