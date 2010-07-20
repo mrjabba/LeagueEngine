@@ -14,9 +14,10 @@ class UserSessionsController < ApplicationController
   end
   
   def destroy
-    debugger
-    @user_session = UserSession.find
-    @user_session.destroy
+    #debugger
+    #@user_session = UserSession.find
+    #@user_session.destroy
+    session.destroy
     flash[:notice] = "Successfully logged out."
     redirect_to :new
   end
