@@ -1,5 +1,0 @@
-<p class="error"><%= error_messages_for :team %></p>
-<label for="team_name">League</label>
-<%=  form.collection_select(:league_id, @leagues, :id, :name) %><br />
-<label for="team_name">Team name</label>
-<%=form.text_field :name, :size=>35 %>
