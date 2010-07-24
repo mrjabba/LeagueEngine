@@ -4,7 +4,7 @@ class StatType < ActiveRecord::Base
   has_many :team_stats
   has_many :player_stats
   
-  
+  named_scope :ordered, :group => 'name', :order => 'display_order'
   named_scope :player, :conditions =>{:entity => 'player'}
   named_scope :player_game_played, :conditions =>{:name => 'GamePlayed', :entity => 'player'}
   named_scope :player_without_gameplayed, :conditions => "entity = 'player' AND name <> 'GamePlayed'"
