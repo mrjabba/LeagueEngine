@@ -1,0 +1,8 @@
+%ul.ListOfLeagues
+  - @leagues.each do |league|
+    %li
+      .listblock
+	      %h3
+	        = league.name
+	      = render(:partial => 'league', :locals => { :league => league }
+	      = link_to 'edit', edit_league_path(league)

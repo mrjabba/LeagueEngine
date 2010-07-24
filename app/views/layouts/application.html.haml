@@ -14,20 +14,20 @@
       
       #menu
         %ul
-      	  %li
-      	    %a{:href=>"/leagues"}
-      	      leagues
-      			%ul
-      			  %li
-      			    %a{:href=>'/leagues/new'}
-      			      new league
-      		%li
-      		  %a{:href=>"/games"}
-      		    games
-      		  %ul
-      		    %li
-      		      %a{:href=>'/games/new'}
-      		        new game
+          %li
+            %a{:href=>"/leagues"}
+              leagues
+            %ul
+              %li
+                %a{:href=>'/leagues/new'}
+                  new league
+          %li
+            %a{:href=>"/games"}
+              games
+            %ul
+              %li
+                %a{:href=>'/games/new'}
+                  new game
           %li
             %a{:href=>"/players"}
               players
@@ -35,32 +35,32 @@
               %li
                 %a{:href=>'/players/stats'}
                   player stats
-		
-		#content
+    
+    #content
       - flash.each do |name, msg|
-        = content_tag :div, msg, :id => "flash_#{name}" %>
-	
-			= yield
-		
-		
+        = content_tag :div, msg, :id => "flash_#{name}"
+  
+      = yield
+    
+    
     -# --------------------
     -# Google Analytics
-    -# --------------------		
-		= javascript_include_tag  'jquery-1.4.2'
-		= javascript_include_tag  'plugins/jquery-ui/jquery-ui-1.7.2.custom.min.js'
-		= javascript_include_tag  'application'
-		- yield :javascript%> 
-		= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
-		
-	  -# --------------------
-	  -# Google Analytics
-	  -# --------------------
-	  - if ! request.request_uri.include? 'localhost'
-  		:javascript
-    		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    -# --------------------    
+    = javascript_include_tag  'jquery-1.4.2'
+    = javascript_include_tag  'plugins/jquery-ui/jquery-ui-1.7.2.custom.min.js'
+    = javascript_include_tag  'application'
+    - yield :javascript
+    = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
+    
+    -# --------------------
+    -# Google Analytics
+    -# --------------------
+    - if ! request.request_uri.include? 'localhost'
+      :javascript
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 
-    		try {
-    		var pageTracker = _gat._getTracker("UA-2083028-6");
-    		pageTracker._trackPageview();
-    		} catch(err) {}
+        try {
+        var pageTracker = _gat._getTracker("UA-2083028-6");
+        pageTracker._trackPageview();
+        } catch(err) {}

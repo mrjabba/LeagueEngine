@@ -1,9 +1,10 @@
-class LeaguesController < ApplicationController
+class Admin::LeaguesController < ApplicationController
   layout :determine_layout
   before_filter :require_user
 
   def index
-    @leagues = active_account.leagues
+    @leagues = active_account.leagues()
+    @stats = @league.stat_types.ordered
     
     respond_to do |format|
       format.html # index.html.erb

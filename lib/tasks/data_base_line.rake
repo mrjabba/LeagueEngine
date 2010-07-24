@@ -1,6 +1,6 @@
-namespace :db do
+namespace :data do
   desc 'load an data needed as a base in the dev db'
-  task :bootstrap => :environment do
+  task :baseline => :environment do
     puts "Creating dafault data..."
     
     puts "Creating dafault sparts."
@@ -23,14 +23,14 @@ namespace :db do
     AccountsUser.create(:account_id => a.id, :user_id => u.id, :role_id => 1, :active => 1)
 
     puts "Creating dafault stat_types."    
-    a.stats.create( :entity => 'LeagueStat',  :name => 'played',      :display => "Played",      :short_desc => 'P')
-    a.stats.create( :entity => 'LeagueStat',  :name => 'wins',        :display => "Wins",        :short_desc => 'W')
-    a.stats.create( :entity => 'LeagueStat',  :name => 'draws',       :display => "Draws",       :short_desc => 'D')
-    a.stats.create( :entity => 'LeagueStat',  :name => 'loses',       :display => "Loses",       :short_desc => 'L')
-    a.stats.create( :entity => 'LeagueStat',  :name => 'for',         :display => "For",         :short_desc => 'F')
-    a.stats.create( :entity => 'LeagueStat',  :name => 'against',     :display => "Against",     :short_desc => 'A')
-    a.stats.create( :entity => 'LeagueStat',  :name => 'difference',  :display => "Difference",  :short_desc => 'Diff')
-    a.stats.create( :entity => 'LeagueStat',  :name => 'points',      :display => "Points",      :short_desc => 'Pts')
+    a.stats.create( :entity => 'LeagueStat',  :name => 'played',      :display => "Played",      :short_desc => 'P',   :display_order => 1)
+    a.stats.create( :entity => 'LeagueStat',  :name => 'wins',        :display => "Wins",        :short_desc => 'W',   :display_order => 2)
+    a.stats.create( :entity => 'LeagueStat',  :name => 'draws',       :display => "Draws",       :short_desc => 'D',   :display_order => 3)
+    a.stats.create( :entity => 'LeagueStat',  :name => 'loses',       :display => "Loses",       :short_desc => 'L',   :display_order => 4)
+    a.stats.create( :entity => 'LeagueStat',  :name => 'for',         :display => "For",         :short_desc => 'F',   :display_order => 5)
+    a.stats.create( :entity => 'LeagueStat',  :name => 'against',     :display => "Against",     :short_desc => 'A',   :display_order => 6)
+    a.stats.create( :entity => 'LeagueStat',  :name => 'difference',  :display => "Difference",  :short_desc => 'Diff', :display_order => 7)
+    a.stats.create( :entity => 'LeagueStat',  :name => 'points',      :display => "Points",      :short_desc => 'Pts', :display_order => 8)
     
     a.stats.create( :entity => 'TeamStat',    :name => 'score',       :display => "Score",        :short_desc => 'Scr')
     
@@ -45,7 +45,7 @@ namespace :db do
     %w|Australia Brazil China Denmark|.each do |team|
       t = l.teams.create(:name => team)
       
-      %w|played wins draws loses for against difference points|.each do |stat|
+      %w|played wins draws loses for against difference points|.each_with_index do |stat, i|
         LeagueStat.create(:league_id => l.id, :team_id => t.id, :stat_type_id => StatType.find_by_name(stat).id, :value => 0)
       end
     end

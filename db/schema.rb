@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20100714061341) do
     t.integer "account_id"
     t.string  "short_desc"
     t.string  "display"
+    t.integer "display_order"
   end
 
   create_table "team_members", :force => true do |t|

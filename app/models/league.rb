@@ -1,6 +1,7 @@
 class League < ActiveRecord::Base
   belongs_to :account
   has_many :stats, :class_name => 'LeagueStat'
+  has_many :stat_types, :through => :stats
   has_many :teams
   has_many :games
   
