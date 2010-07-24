@@ -1,0 +1,10 @@
+%table.greentable
+  %thead
+    %tr
+	    %th
+	      Team
+      - @stats.each do |stat|
+        %th
+           = stat.short_desc.capitalize
+  %tbody
+	  = render(:partial => 'team', :collection => league.teams.ordered)
