@@ -3,8 +3,8 @@
     %tr
 	    %th
 	      Team
-      - @stats.each do |stat|
+      - @league.stats.display_order.each do |stat|
         %th
            = stat.short_desc.capitalize
   %tbody
-	  = render(:partial => 'team', :collection => league.teams.ordered)
+	  = render(:partial => 'team', :collection => league.teams.ordered(@order_stats))

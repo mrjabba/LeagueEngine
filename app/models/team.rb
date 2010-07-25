@@ -8,18 +8,34 @@ class Team < ActiveRecord::Base
   
   after_validation :create_tag
   
+  named_scope :ordered, lambda{|stats|
+    {
+    :select => "teams.*, teams.id as tid, " + stats.map{|s| "(select value from league_stats where team_id = tid and stat_type_id = #{s.id}) as #{s.short_desc}"}.join(','),
+    :order => stats.map{|s| s.short_desc}.join(',')
+    }
+  }  
+  
+  named_scope :colored, lambda { |color|
+        { :conditions => { :color => color } }
+      }
+  
+  #:select => sql.join(',')
+  #:order => stats.map{|s| s.name}.join(',')
+    
+  #select teams.id as tid, teams.name, 
+  #(select value from league_stats where team_id = tid and stat_type_id = 8) as pts,
+  #(select value from league_stats where team_id = tid and stat_type_id = 7) as diff,
+  #(select value from league_stats where team_id = tid and stat_type_id = 5) as f,
+  #(select value from league_stats where team_id = tid and stat_type_id = 2) as win
+  #from teams  
+    
+  #sql = ["teams.*, teams.id as tid"]
+  #stats.each do |s|
+  #  sql << "(select value from league_stats where team_id = tid and stat_type_id = #{s.id}) as #{s.name}"
+  #end
+
   def create_tag
     self.team_tag = name[0..2]
-  end
-  
-  def self.all_teams(account)
-    teams = []
-    for league in account.leagues
-      for team in league.teams
-        teams << team
-      end
-    end
-    return teams
   end
   
   def clear_players_numbers

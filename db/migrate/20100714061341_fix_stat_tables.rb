@@ -17,8 +17,9 @@ class FixStatTables < ActiveRecord::Migration
     add_column :player_stats, :period, :string
     add_column :stat_types, :short_desc, :string
     add_column :stat_types, :display, :string
-    add_column :stat_types, :display_order, :integer
-  
+    add_column :stat_types, :display_order, :integer, :default => 0
+    add_column :stat_types, :sort_order, :integer, :default => 0
+    
     drop_table :game_stats
     drop_table :league_lists
     drop_table :league_stat_types
