@@ -3,13 +3,13 @@ class Admin::LeaguesController < ApplicationController
   before_filter :require_user
 
   def index
-    @leagues = active_account.leagues()
-    @stats = @league.stat_types.ordered
+    @leagues = active_account.leagues
+    @display_stats = active_account.stats.all(:conditions => {:entity => 'LeagueStat', :display_order}) 
     
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @leagues }
-      #format.rss  # index.rss.builder
+      format.json  { render :json => @leagues.t_json }
     end
   end
   
@@ -47,17 +47,6 @@ class Admin::LeaguesController < ApplicationController
 		  @league.clean_delete(@league)
 	  end
 	  redirect_to(:action => :list) 
-  end
-  
-  def league_list
-    @league = League.find(params[:id])
-    
-    respond_to do |format|
-      format.html {}
-      format.xml  { render :xml => @league }
-      format.js   {}  
-      #format.rss  # index.rss.builder
-    end
   end
   
   def add_team
