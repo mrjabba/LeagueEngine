@@ -21,6 +21,7 @@ class Account < ActiveRecord::Base
   
   def create_default_data
     StatType.create_defaults(self)
-    League.create_default(self)
+    #League.create_default(self)
+    League.default.first.clone(self)
   end
 end

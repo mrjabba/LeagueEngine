@@ -16,7 +16,6 @@ class Admin::PlayersController < ApplicationController
         p.junior ? juniors << p.id : seniors << p.id 
       end
       
-      #debugger
       if @player_lists[t.name]      
         #add players but remove dupilcates
         @player_lists[t.name][:juniors] = @player_lists[t.name][:juniors] | juniors #join and remove duplicates

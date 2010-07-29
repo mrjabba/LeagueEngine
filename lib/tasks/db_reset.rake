@@ -1,6 +1,6 @@
 namespace :db do
   desc 'drop, create, merge, basline dev db'
-  task :killit => :environment do
+  task :reset_hard => :environment do
     puts "Creating dafault db..."
     
     Rake::Task["db:drop"].invoke

@@ -1,0 +1,16 @@
+%h3 
+  Login
+
+- form_for @user_session, :html => {:id => 'login_form'} do |f| 
+  = f.error_messages 
+  %ol
+    %li>
+      = f.label :username
+      = f.text_field :username
+    %li
+      = f.label :password
+      = f.password_field :password
+    %li
+      = f.submit "login"
+
+

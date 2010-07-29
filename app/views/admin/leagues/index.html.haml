@@ -2,5 +2,5 @@
   .league
     %h3
       = league.name
-    = render(:partial => 'league', :locals => { :league => league }
-    = link_to 'edit', edit_league_path(league)
+    = render :partial => 'league', :locals => { :league => league }
+    -#= link_to 'edit', edit_league_path(league)

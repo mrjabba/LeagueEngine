@@ -1,7 +1,7 @@
 Factory.define :account do |a|
   a.sequence(:name) {|n| "account#{n}" }
   a.owner_id 1
-  a.url 'test@test.com'
+  a.url 'http://www.tester.com'
   a.association :sport
 end
 

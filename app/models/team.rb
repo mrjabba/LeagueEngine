@@ -11,7 +11,7 @@ class Team < ActiveRecord::Base
   named_scope :ordered, lambda{|stats|
     {
     :select => "teams.*, teams.id as tid, " + stats.map{|s| "(select value from league_stats where team_id = tid and stat_type_id = #{s.id}) as #{s.short_desc}"}.join(','),
-    :order => stats.map{|s| s.short_desc}.join(',')
+    :order => stats.map{|s| "#{s.short_desc} DESC"}.join(',')
     }
   }  
   

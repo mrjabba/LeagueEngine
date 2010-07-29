@@ -4,7 +4,7 @@ module ActionView
       def error_messages_for(*params)
         options = params.extract_options!.symbolize_keys
         objects = params.collect {|name| instance_variable_get("@#{name}") }
-        debugger
+
         error_messages = objects.map {|o| o.errors.full_messages} 
         unless error_messages.flatten!.empty?
           if options[:partial]
