@@ -7,23 +7,28 @@ class League < ActiveRecord::Base
   
   named_scope :default, :conditions =>{:account_id => 1, :name => 'DefaultLeague'}
   
-  def self.create_default(account)
-    debugger
-    l = League.default.first.clone
-    l.account_id = account.id
-    l.save 
-  end
-  
-  def clone
-    new_league = League.new({:name => self.name, :account_id => self.account_id})
+  def clone(acc = self.account)
+    new_league = nil
+    League.transaction do
+      new_league = League.create({:name => self.name, :account_id => acc.id})
     
-    teams.each do |team|
-      new_team = new_league.teams.build(team.attributes)  
-      
-      team.league_stats.each do |stat|
-        new_team.league_stats.build(stat.attributes)  
+      teams.each do |team|
+        new_team = new_league.teams.create(team.attributes)  
+        
+        team.league_stats.each do |stat|
+          new_attrs = stat.attributes.merge({'league_id' => new_league.id})
+          
+          #only run this if new account is being created
+          if acc.id != self.account.id
+            new_stat = acc.stats.find_by_name(stat.stat_type.name)
+            new_attrs.merge!({'stat_type_id' => new_stat.id})
+          end
+          
+          ls = new_team.league_stats.create(new_attrs)  
+        end
       end
     end
+    
     new_league
   end
   

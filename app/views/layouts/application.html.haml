@@ -10,8 +10,8 @@
   %body
     - if current_user
       #top_nav
-        = link_to "Logout", user_sessions_path, :method => :destroy, :confirm => "Are you sure you want to logout?"
-      
+        -# = link_to "Logout", user_session_path, :method => :destroy, :confirm => "Are you sure you want to logout?"
+        = link_to 'Logout', logout_path, :confirm => 'Are you sure you want to logout?', :method => :delete
       #menu
         %ul
           %li

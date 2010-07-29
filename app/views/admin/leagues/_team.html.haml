@@ -1,0 +1,7 @@
+%tr{:class => cycle('odd', 'even')}
+  %td{:scope => 'row', :class=>'left'}
+    = team.name
+    -#link_to team.name, team_path(team)
+  - team.league_stats.ordered.each do |stat|
+    %td
+      = stat.value

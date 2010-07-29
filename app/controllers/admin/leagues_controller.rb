@@ -4,7 +4,8 @@ class Admin::LeaguesController < ApplicationController
 
   def index
     @leagues = active_account.leagues
-    @display_stats = active_account.stats.all(:conditions => {:entity => 'LeagueStat', :display_order}) 
+    @display_stats = active_account.stats.league_display 
+    @sorting_stats = active_account.stats.league_sorting
     
     respond_to do |format|
       format.html # index.html.erb

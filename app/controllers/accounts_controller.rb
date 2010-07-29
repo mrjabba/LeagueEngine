@@ -24,7 +24,6 @@ class AccountsController < ApplicationController
           @account.create_default_data
         end
       rescue ActiveRecord::RecordInvalid => e 
-        debugger
         @account.valid?
         @user.valid? # force checking of errors even if products failed 
         @sports = Sport.find(:all, :order => "name")
@@ -32,7 +31,7 @@ class AccountsController < ApplicationController
         #session[:user] = User.authenticate(@user.login, @user.password)
 
         flash[:message] = "Signup successful"
-        redirect_to :controller => "leagues", :action => "index"
+        redirect_to admin_leagues_path
       end
     end
   end

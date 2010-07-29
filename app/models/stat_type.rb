@@ -4,6 +4,10 @@ class StatType < ActiveRecord::Base
   has_many :team_stats
   has_many :player_stats
   
+  named_scope :league_display, :conditions => 'entity = \'LeagueStat\' and display_order is not null' , :order => 'display_order' 
+  named_scope :league_sorting, :conditions => 'entity = \'LeagueStat\' and sort_order is not null' , :order => 'sort_order' 
+  
+  
   named_scope :ordered, :group => 'name', :order => 'display_order'
   named_scope :player, :conditions =>{:entity => 'player'}
   named_scope :player_game_played, :conditions =>{:name => 'GamePlayed', :entity => 'player'}
