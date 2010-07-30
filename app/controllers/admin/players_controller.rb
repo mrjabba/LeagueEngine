@@ -1,4 +1,4 @@
-class Admin::PlayersController < ApplicationController
+class Admin::PlayersController < Admin::AdminController
   layout :determine_layout
   before_filter :require_user
   

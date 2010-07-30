@@ -1,6 +1,4 @@
-class Admin::LeaguesController < ApplicationController
-  layout :determine_layout
-  before_filter :require_user
+class Admin::LeaguesController < Admin::AdminController
 
   def index
     @leagues = active_account.leagues
@@ -72,12 +70,5 @@ class Admin::LeaguesController < ApplicationController
     for id in session[:items] do
       @teams << Team.find(id)
     end
-  end  
-  
-  def determine_layout 
-    return 'blank' if params[:action] =~ /league_plugin/ 
-    return 'application'
-    #return  "base2"
-    #return "test" 
-  end  
+  end   
 end

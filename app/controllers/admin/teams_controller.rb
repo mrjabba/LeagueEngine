@@ -1,4 +1,4 @@
-class Admin::TeamsController < ApplicationController
+class Admin::TeamsController < Admin::AdminController
   #layout 'master'
   before_filter :require_user
   #before_filter :validate_request, :except => [:index, :list, :edit]
