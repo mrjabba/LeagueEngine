@@ -57,12 +57,19 @@ table {
  baseline 
 ************************************************************************/
 
-body{ background-color: #d3f0bd; }
+body{ background-color: #d3f0bd; min-width: 500px; }
 
 /***********************************************************************
  containers
 ************************************************************************/
+#admin_content {
+  float: left;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
 .white_box{
+  display: inline-block;
   background-color: white;
   margin:  20px;
   padding: 20px;
@@ -72,6 +79,88 @@ body{ background-color: #d3f0bd; }
   -o-border-radius: 15px;
   -ms-border-radius: 15px;
 }
+
+/**********************************************************************
+*********            menus
+***********************************************************************/
+
+#menu{
+  float: left;
+  height: 100%;
+  display: inline-block;
+  background-color: white;
+  margin-top:  30px;
+  padding: 20px;
+  border-radius: 15px;
+  -moz-border-radius-topright: 15px;
+  -moz-border-radius-bottomright: 15px;
+  -webkit-border-radius: 15px;
+  -o-border-radius: 15px;
+  -ms-border-radius: 15px;  
+}
+
+#top_menu{
+  position: absolute;
+  top: 0;
+  right: 10%;
+  display: inline-block;
+  background-color: white;
+  margin-top:  0;
+  padding: 10px;
+  border-radius: 15px;
+  -moz-border-radius-bottomleft:  15px;
+  -moz-border-radius-bottomright: 15px;
+  -webkit-border-radius: 15px;
+  -o-border-radius: 15px;
+  -ms-border-radius: 15px;  
+}
+
+
+/**********************************************************************
+*********            green table
+***********************************************************************/
+
+table.greentable, table.greentable th {border: 0;border-collapse: collapse;font-family: Veranda, Arial, sans-serif; color: #4FA34F;}
+table.greentable td{ border-top: 1px solid #D4EED5; border-bottom: 1px solid #D4EED5;}
+
+table.greentable td.first{	padding-left: 20px; text-align: left; }
+
+table.greentable td.last{ padding-right:20px; }
+
+table.greentable td.league_col{ padding-left:30px; padding-right:30px; }
+
+caption { font-size: 150%; font-weight: bold; margin: 5px; }
+
+table.greentable td, table.greentable th { padding: 4px; }
+
+table.greentable th { text-align: center; background: #CFF5B4; color: #4FA34F; font-size: 90%;}
+
+table.greentable th { font-weight: bold;}
+table.greentable tbody tr { background: #FCFEFC; }
+table.greentable tbody tr.overdue { background: #fbbeaf; }
+table.greentable tbody tr.even { background: #F7FCF7; }
+table.greentable tbody tr.active { background: #FBFF94; }
+table.greentable tbody tr td { text-align: center;padding: 2px 6px; }
+
+table.greentable tbody tr td.left { text-align: left; }
+table.greentable tbody tr td.right { text-align: right;}
+table.greentable tbody tr td.extend{ border: 0; background:0;}
+
+table.greentable a:link { color: #718ABE; text-decoration: none; }
+table.greentable a:visited { color: #718ABE; text-decoration: none;}
+table.greentable a:hover { color: #718ABE; text-decoration: underline !important;}
+
+table.greentable tfoot th, table.greentabletfoot td { font-size: 85%;}
+
+
+table.greentable td div.row_left_options { position: absolute; width: 65px; right: 26px; top:2px; overflow: hidden; display:none;}
+  table.greentable div.row_left_options a { height: 16px; width:16px; display:block; overflow: hidden; float:left; text-indent: -9999px;}
+	table.greentable div.row_left_options a.edit { margin-right: 5px;
+		                                           background: transparent url(/images/btns/edit.png) no-repeat top left;}
+	table.greentable div.row_left_options a.delete { margin-right: 5px;
+		                                             background: transparent url(/images/btns/delete.png) no-repeat top left;}
+	table.greentable div.row_left_options a.merge {  margin-top: 2px;
+		                                             background: transparent url(/images/btns/merge.png) no-repeat top left; width:20px;}
 
 /***********************************************************************
  signup

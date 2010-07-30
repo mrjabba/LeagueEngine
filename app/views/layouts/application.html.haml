@@ -8,34 +8,6 @@
     = stylesheet_link_tag     '/javascripts/plugins/jquery-ui/smoothness/jquery-ui-1.7.2.custom.css', :media => "screen"
     = stylesheet_link_tag     'application'
   %body
-    - if current_user
-      #top_nav
-        -# = link_to "Logout", user_session_path, :method => :destroy, :confirm => "Are you sure you want to logout?"
-        = link_to 'Logout', logout_path, :confirm => 'Are you sure you want to logout?', :method => :delete
-      #menu
-        %ul
-          %li
-            %a{:href=>"/leagues"}
-              leagues
-            %ul
-              %li
-                %a{:href=>'/leagues/new'}
-                  new league
-          %li
-            %a{:href=>"/games"}
-              games
-            %ul
-              %li
-                %a{:href=>'/games/new'}
-                  new game
-          %li
-            %a{:href=>"/players"}
-              players
-            %ul
-              %li
-                %a{:href=>'/players/stats'}
-                  player stats
-    
     - flash.each do |name, msg|
       = content_tag :div, msg, :id => "flash_#{name}" 
 

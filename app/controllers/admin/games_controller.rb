@@ -1,4 +1,4 @@
-class Admin::GamesController < ApplicationController
+class Admin::GamesController < Admin::AdminController
   before_filter :require_user
 
   def index

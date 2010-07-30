@@ -1,5 +1,5 @@
 - @leagues.each do |league|
-  .league
+  %div{:class => 'white_box league'}
     %h3
       = league.name
     = render :partial => 'league', :locals => { :league => league }
