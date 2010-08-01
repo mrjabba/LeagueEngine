@@ -169,3 +169,9 @@ table.greentable td div.row_left_options { position: absolute; width: 65px; righ
   margin: 25px;
   width: 645px;
 }
+
+/***********************************************************************
+ admin leagues
+************************************************************************/
+#admin_leagues .league { position: relative; }
+  #admin_leagues .league a{ position: absolute; display: none; top: 7px; right: 15px; }

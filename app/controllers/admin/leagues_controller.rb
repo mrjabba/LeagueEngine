@@ -34,6 +34,8 @@ class Admin::LeaguesController < Admin::AdminController
   
   def edit
     @league = League.find(params[:id])
+    @display_stats = active_account.stats.league_display 
+    @sorting_stats = active_account.stats.league_sorting
   end
   
   def update
