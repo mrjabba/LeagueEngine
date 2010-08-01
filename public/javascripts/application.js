@@ -9,7 +9,7 @@ jQuery.ajaxSetup({
 	'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 });
 
-$(document).ready(function() {
+$(function() {
   LeaguesEditInit();
 
   $('.datePicker').datepicker({ dateFormat: 'dd MM yy'});
@@ -39,3 +39,18 @@ function flash_notice(msg){
 function flash_error(msg){
 	alert("Error: "+msg);
 }
+
+/**********************************************************************
+*********            admin leagues
+***********************************************************************/
+
+$(function() {
+  $('#admin_leagues .league').hover(
+    function () {
+      $(this).find('a').show();
+    }, 
+    function () {
+      $(this).find('a').hide();
+    }
+  );
+});

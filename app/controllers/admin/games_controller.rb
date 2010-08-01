@@ -15,7 +15,7 @@ class Admin::GamesController < Admin::AdminController
   
   def new
     @game = Game.new(params[:game])
-    3.times {@game.player_stats.build({:stat_type_id => 100})}
+    3.times {@game.player_stats.build()}
     @leagues = active_account().leagues
     @teams = Team.all_teams(active_account())
     @player_stat_types = active_account.stat_types.player_without_gameplayed
