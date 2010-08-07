@@ -1,0 +1,15 @@
+-form_for ['admin', @league] do |l|
+  %label{ :for=>'league_name'}
+    League name
+  =l.text_field :name
+  
+  %label
+    Teams
+  - fields_for 'team' do |t|
+    -@league.teams.all(:order => 'name').each do |team|
+      =t.text_field :name, :class => 'team_name'
+      %input.sml_del.x_remove_team{:type=>'button', :value=>'x'}
+    %input.sml_add.x_add_team{:type=>'button', :value=>'+'}
+  .btns    
+    = submit_tag 'Update League'
+    = link_to 'Cancel', admin_leagues_path, :class => 'cancel'

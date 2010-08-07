@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :games
   end
   
-  map.resources :accounts
+  map.resources :accounts, :only => [:new, :create]
   map.resources :user_sessions
   map.resources :users
   

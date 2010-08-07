@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe AccountsController do
-  describe 'should route' do
-  end
-  
+   
   describe 'creating a new account' do
     before(:each) do
       @default_league = Factory(:league, :name => 'DefaultLeague')
@@ -64,6 +62,6 @@ describe AccountsController do
           lambda{ @new_acc.stats.find(s.id)}.should raise_error ActiveRecord::RecordNotFound  
         end
       end      
-    end # describe 'when successful' do
+    end # describe 'when successful' do  
   end # describe 'creating a new account' do
 end

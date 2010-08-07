@@ -3,15 +3,15 @@
     %ul
       %li
         %label{:for => 'account_name' }
-          name
+          Name
         = f.text_field :name
       %li
         %label{:for=>'account_sport_id'}
-          sport
+          Sport
         = f.collection_select(:sport_id, @sports, :id, :name) 
       %li{:id =>'sport_other', :style => 'display: none;'}
         %label{:for=>'account_other'}
-          other
+          Other
         = f.text_field :other
     %h3
       Account Administrator
@@ -19,14 +19,14 @@
       %ul
         %li
           %label{ :for => 'user_username'}
-            username
+            Username
           = user.text_field :username
         %li  
           %label{ :for => 'user_password' }
-            password
+            Password
           = user.password_field :password
         %li
           %label{ :for => 'user_email'}
-            email
+            Email
           = user.text_field :email
-  = submit_tag 'Sign me up'
+    = submit_tag 'Create Account'
