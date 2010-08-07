@@ -59,6 +59,54 @@ table {
 
 body{ background-color: #d3f0bd; min-width: 500px; }
 
+h3 { margin: 10px 0 5px; }
+
+
+/* base from */
+form label { display:block; margin-top: 10px; }
+form input, form select  { display: block; margin-top: 5px; }
+form .btns { margin-top: 20px; }
+  form .btns input{ float:left; }
+  form .btns a{ float:left; }
+  form .btns a.cancel{ display:block; margin: 8px 0 0 5px; font-size: 0.85em; }
+  
+.sml_del { float: left; }
+
+
+/***********************************************************************
+ buttons 
+************************************************************************/
+.sml_add { clear: both;
+}
+
+.sml_del {
+  padding: 0.05em 0.3em 0.2em; line-height: 10px;
+	color: #606060;
+	border: solid 1px #fff;
+	background: #fff;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+	background: -moz-linear-gradient(top,  #fff,  #ededed);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+  font-size: 11px;
+  border-radius: 2em;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+}
+.sml_del:hover {
+  color: #de898c;
+  border: solid 1px #fff;
+  background: #fff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ed1c24), to(#aa1317));
+  azimuthbackground: -moz-linear-gradient(top,  #ed1c24,  #aa1317);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ed1c24', endColorstr='#aa1317');
+}
+.sml_del:active {
+	color: #de898c;
+	background: -webkit-gradient(linear, left top, left bottom, from(#aa1317), to(#ed1c24));
+	background: -moz-linear-gradient(top,  #aa1317,  #ed1c24);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#aa1317', endColorstr='#ed1c24');
+}
+
 /***********************************************************************
  containers
 ************************************************************************/
@@ -79,6 +127,8 @@ body{ background-color: #d3f0bd; min-width: 500px; }
   -o-border-radius: 15px;
   -ms-border-radius: 15px;
 }
+
+.white_box > h3 { margin-top: 0; }
 
 /**********************************************************************
 *********            menus
@@ -175,3 +225,9 @@ table.greentable td div.row_left_options { position: absolute; width: 65px; righ
 ************************************************************************/
 #admin_leagues .league { position: relative; }
   #admin_leagues .league a{ position: absolute; display: none; top: 7px; right: 15px; }
+  
+/* league form */
+.league_form { width: 300px;}
+.league_form #league_name { width: 130px; }
+.league_form .team_name { width: 130px; float: left; clear: both;}
+

@@ -1,5 +1,4 @@
-#edit_admin_league
-  %div{:class => 'white_box league'}
-    %h3
-      = @league.name
-    = render :partial => 'league', :locals => { :league => @league }
+#edit_admin_league.league_form.white_box
+  %h3 
+    Edit League
+  = render :partial => 'form'
