@@ -54,7 +54,7 @@ table {
 	border-spacing: 0;
 }
 /***********************************************************************
- baseline 
+ common 
 ************************************************************************/
 
 body{ background-color: #d3f0bd; min-width: 500px; }
@@ -70,23 +70,39 @@ form .btns { margin-top: 20px; }
   form .btns a{ float:left; }
   form .btns a.cancel{ display:block; margin: 8px 0 0 5px; font-size: 0.85em; }
   
-.sml_del { float: left; }
+input[type='button'], input[type='submit'] { cursor: pointer;}
 
+
+/***********************************************************************
+  fonts
+************************************************************************/
+  /* Verdana, Arial, Helvetica, sans-serif */
+body               { font-family: Verdana, Geneva, Tahoma; }
+h1, h2, h3, h4, h5 { font-family: Verdana, Tahoma, Geneva; }
+
+
+/***********************************************************************
+ delete confirmation 
+************************************************************************/
+
+.delete_confirm { float: left;}
+  .delete_confirm .confirm { display: none; }
+    
 
 /***********************************************************************
  buttons 
 ************************************************************************/
+
 .sml_add { clear: both;
 }
 
 .sml_del {
+  float: left;
+  margin-left: 2px;
   padding: 0.05em 0.3em 0.2em; line-height: 10px;
 	color: #606060;
 	border: solid 1px #fff;
 	background: #fff;
-	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
-	background: -moz-linear-gradient(top,  #fff,  #ededed);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
   font-size: 11px;
   border-radius: 2em;
   -webkit-border-radius: 2em;
@@ -94,11 +110,6 @@ form .btns { margin-top: 20px; }
 }
 .sml_del:hover {
   color: #de898c;
-  border: solid 1px #fff;
-  background: #fff;
-  background: -webkit-gradient(linear, left top, left bottom, from(#ed1c24), to(#aa1317));
-  azimuthbackground: -moz-linear-gradient(top,  #ed1c24,  #aa1317);
-  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ed1c24', endColorstr='#aa1317');
 }
 .sml_del:active {
 	color: #de898c;
@@ -229,5 +240,7 @@ table.greentable td div.row_left_options { position: absolute; width: 65px; righ
 /* league form */
 .league_form { width: 300px;}
 .league_form #league_name { width: 130px; }
+.league_form #teams { overflow: hidden;
+}
 .league_form .team_name { width: 130px; float: left; clear: both;}
 

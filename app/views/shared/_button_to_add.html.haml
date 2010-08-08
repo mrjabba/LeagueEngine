@@ -1,0 +1,8 @@
+%input{:type=>'button', :class=>"small_add x_add_#{klass.to_s.underscore}", :value=>"#{button_text}"}
+.hidden
+  <!-- blank #{klass.class} row for js addition -->
+  %script{:type=>'text/javascript'}
+    - blank = %Q|#{render :partial => partial, :object => klass.new}|
+    - blank.gsub!(/(\s{2,} |\n)/, "")
+    - blank.gsub!(/"/, "'")
+    var blank_#{klass.to_s.underscore} = "#{ blank }";
