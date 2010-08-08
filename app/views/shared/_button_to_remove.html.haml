@@ -1,0 +1,9 @@
+.delete_confirm
+  .button
+    %input.sml_del.x_del{:type=>'button', :value=>"#{button_text}"}    
+  .confirm
+    Delete ? 
+    %a{:href=>'-', :class=>"x_del_#{klass.to_s.underscore}"} 
+      yes
+    %a.x_del_cancel{:href=>'-'} 
+      no

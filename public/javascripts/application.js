@@ -41,11 +41,27 @@ function flash_error(msg){
 }
 
 /**********************************************************************
+*********    common
+***********************************************************************/
+$(function() {
+  $('.x_del').live('click', function(){
+    $(this).parent().toggle();
+    $(this).parent().next().toggle();
+  });
+
+  $('.x_del_cancel').live('click', function(){
+    $(this).parent().toggle();
+    $(this).parent().prev().toggle();
+    return false;
+  });
+});
+
+/**********************************************************************
 *********            admin leagues
 ***********************************************************************/
 
 $(function() {
-  $('#admin_leagues .league').hover(
+  $('#admin_leagues .league').live('hover',
     function () {
       $(this).find('a').show();
     }, 
@@ -53,4 +69,13 @@ $(function() {
       $(this).find('a').hide();
     }
   );
+  
+  $('#edit_admin_league .x_add_team').live('click', function(){
+    $(this).prev().append(blank_team);
+  });
+  
+  $('#edit_admin_league .x_del_team').live('click', function(){
+    $(this).parents('.team').remove();
+    return false;
+  });
 });
