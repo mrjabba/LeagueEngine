@@ -6,9 +6,11 @@
   #teams
     %label
       Teams
-    = render :partial => 'fteam', :collection => @league.teams.all(:order => 'name')
+    - teams = @teams || @league.teams.all(:order => 'name')
+    = render :partial => 'fteam', :collection => teams
   = button_to_add( Team, 'fteam')
     
   .btns    
-    = submit_tag 'Update League'
+    - btn_txt = request.path =~ /new/ ? 'Create League' : 'Update League'
+    = submit_tag btn_txt 
     = link_to 'Cancel', admin_leagues_path, :class => 'cancel'

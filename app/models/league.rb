@@ -6,6 +6,29 @@ class League < ActiveRecord::Base
   has_many :games
   
   named_scope :default, :conditions =>{:account_id => 1, :name => 'DefaultLeague'}
+  named_scope :latest, :order => :created_at
+  
+  def new_team_attributes=(attrs)
+    attrs.each do |team_attrs|
+      team   = teams.first
+      team ||= account.leagues.first.teams.first
+      team ||= Team.default.first
+      
+      new_team = team.clone(self)
+      new_team.update_attribute('name', attrs[:name])     
+    end
+  end
+  
+  def existing_team_attributes=(attrs)
+    teams.reject(&:new_record?).each do |team|
+      attributes = attrs[team.id.to_s]   
+      if attributes
+        team.update_attributes(attributes)
+      else 
+        teams.delete(team)
+      end
+    end
+  end
   
   def clone(acc = self.account)
     new_league = nil
@@ -13,19 +36,7 @@ class League < ActiveRecord::Base
       new_league = League.create({:name => self.name, :account_id => acc.id})
     
       teams.each do |team|
-        new_team = new_league.teams.create(team.attributes)  
-        
-        team.league_stats.each do |stat|
-          new_attrs = stat.attributes.merge({'league_id' => new_league.id})
-          
-          #only run this if new account is being created
-          if acc.id != self.account.id
-            new_stat = acc.stats.find_by_name(stat.stat_type.name)
-            new_attrs.merge!({'stat_type_id' => new_stat.id})
-          end
-          
-          ls = new_team.league_stats.create(new_attrs)  
-        end
+        team.clone(new_league)
       end
     end
     

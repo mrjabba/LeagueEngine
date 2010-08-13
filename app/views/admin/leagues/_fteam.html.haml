@@ -3,4 +3,4 @@
   - prefix = "league[#{new_or_existing}_team_attributes][]" 
   - fields_for prefix, fteam do |f| 
     = f.text_field :name, :class => 'team_name'
-    = button_to_remove(Team)
+    = button_to_remove(Team , :new_object => fteam.id.nil?)

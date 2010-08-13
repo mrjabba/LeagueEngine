@@ -14,17 +14,21 @@ class Admin::LeaguesController < Admin::AdminController
   
   def new
     @league = League.new(params[:league])
+    @teams = []
+    4.times{ @teams << Team.new}
   end
   
   def create
-    @league = League.new(params[:league])
-    @league.account_id = active_account.id
-    if @league.save
-      @league.generate_league_data
-      flash[:notice] = "League Created"
-      redirect_to :controller => "leagues", :action => "index"
-    else
-      render :action => :new
+    @league = nil
+    League.transaction do
+      begin
+        @league = League.create(params[:league].merge({:account_id => active_account.id})) 
+      rescue Exception => e
+        render :action => :new
+      else
+        flash[:notice] = "League Created"
+        redirect_to :action => "index"
+      end
     end
   end
   
@@ -34,12 +38,17 @@ class Admin::LeaguesController < Admin::AdminController
   
   def edit
     @league = League.find(params[:id])
-    @display_stats = active_account.stats.league_display 
-    @sorting_stats = active_account.stats.league_sorting
   end
   
   def update
     @league = League.find(params[:id])
+    if @league.update_attributes(params[:league])
+      flash[:notice] = "League Updated"
+      redirect_to :action => "index"
+    else
+      flash[:notice] = "League Updated"
+      redirect_to @league 
+    end  
   end
   
   def destroy
