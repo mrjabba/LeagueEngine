@@ -15,12 +15,10 @@
       #menu
         %ul
           %li
-            %a{:href=>"/leagues"}
-              leagues
+            = link_to 'leagues', admin_leagues_path
             %ul
               %li
-                %a{:href=>'/leagues/new'}
-                  new league
+                = link_to 'new league', new_admin_league_path
           %li
             %a{:href=>"/games"}
               games

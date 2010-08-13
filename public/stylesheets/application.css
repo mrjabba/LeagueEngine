@@ -85,10 +85,12 @@ h1, h2, h3, h4, h5 { font-family: Verdana, Tahoma, Geneva; }
  delete confirmation 
 ************************************************************************/
 
-.delete_confirm { float: left;}
-  .delete_confirm .confirm { display: none; }
+.delete_confirm                      { float: left;}
+  .delete_confirm .confirm           { display: none; background-color: #6BC9FF; font-size: 0.75em; padding: 4px; margin: 5px 0 0 3px; }
+  .delete_confirm .confirm            { border-left: 0; border-right: 0;  }
+    .delete_confirm .confirm a       {  font-size: 0.90em; color: black; margin-left: 2px;  } 
+    .delete_confirm .confirm a:hover {    } 
     
-
 /***********************************************************************
  buttons 
 ************************************************************************/
@@ -100,7 +102,7 @@ h1, h2, h3, h4, h5 { font-family: Verdana, Tahoma, Geneva; }
   float: left;
   margin-left: 2px;
   padding: 0.05em 0.3em 0.2em; line-height: 10px;
-	color: #606060;
+	color: ##f00020;
 	border: solid 1px #fff;
 	background: #fff;
   font-size: 11px;
@@ -109,13 +111,7 @@ h1, h2, h3, h4, h5 { font-family: Verdana, Tahoma, Geneva; }
   -moz-border-radius: 2em;
 }
 .sml_del:hover {
-  color: #de898c;
-}
-.sml_del:active {
-	color: #de898c;
-	background: -webkit-gradient(linear, left top, left bottom, from(#aa1317), to(#ed1c24));
-	background: -moz-linear-gradient(top,  #aa1317,  #ed1c24);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#aa1317', endColorstr='#ed1c24');
+  color: #f00020;
 }
 
 /***********************************************************************

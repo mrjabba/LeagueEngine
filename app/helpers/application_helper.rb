@@ -12,8 +12,11 @@ module ApplicationHelper
                                                        :button_text => button_text }
   end
 
-  def button_to_remove( klass, button_text = 'x')
-    render :partial => 'shared/button_to_remove', :locals => { :klass => klass, 
-                                                               :button_text => button_text }
+  def button_to_remove( klass, options ={})
+    options = { :new_object => false,  :button_text => 'x'}.merge(options)
+    
+    render :partial => 'shared/button_to_remove', :locals => { :klass => klass,
+                                                               :new_object => options[:new_object],  
+                                                               :button_text => options[:button_text] }
   end
 end

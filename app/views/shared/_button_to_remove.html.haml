@@ -1,9 +1,12 @@
 .delete_confirm
   .button
-    %input.sml_del.x_del{:type=>'button', :value=>"#{button_text}"}    
+    - js_del_class = "x_del_#{klass.to_s.underscore}"
+    - btn_class = new_object ? js_del_class : 'x_show_confirm'
+    %input.sml_del{:type=>'button', :value=>"#{button_text}", :class=>btn_class}    
   .confirm
-    Delete ? 
-    %a{:href=>'-', :class=>"x_del_#{klass.to_s.underscore}"} 
-      yes
+    %span
+      Delete? 
+    %a{:href=>'-', :class=>js_del_class} 
+      Yes 
     %a.x_del_cancel{:href=>'-'} 
-      no
+      No

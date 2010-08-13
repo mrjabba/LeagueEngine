@@ -44,7 +44,7 @@ function flash_error(msg){
 *********    common
 ***********************************************************************/
 $(function() {
-  $('.x_del').live('click', function(){
+  $('.x_show_confirm').live('click', function(){
     $(this).parent().toggle();
     $(this).parent().next().toggle();
   });
@@ -70,11 +70,11 @@ $(function() {
     }
   );
   
-  $('#edit_admin_league .x_add_team').live('click', function(){
+  $('.league_form .x_add_team').live('click', function(){
     $(this).prev().append(blank_team);
   });
   
-  $('#edit_admin_league .x_del_team').live('click', function(){
+  $('.league_form .x_del_team').live('click', function(){
     $(this).parents('.team').remove();
     return false;
   });

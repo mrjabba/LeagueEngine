@@ -8,6 +8,7 @@ class Team < ActiveRecord::Base
   
   after_validation :create_tag
   
+  named_scope :default, :conditions =>{:team_id => 1}
   named_scope :ordered, lambda{|stats|
     {
     :select => "teams.*, teams.id as tid, " + stats.map{|s| "(select value from league_stats where team_id = tid and stat_type_id = #{s.id}) as #{s.short_desc}"}.join(','),
@@ -15,24 +16,32 @@ class Team < ActiveRecord::Base
     }
   }  
   
-  named_scope :colored, lambda { |color|
-        { :conditions => { :color => color } }
-      }
-  
-  #:select => sql.join(',')
-  #:order => stats.map{|s| s.name}.join(',')
+  def clone(other_league = nil)
+    attrs = self.attributes
+    attrs.merge!({:league_id => other_league.id}) if other_league
+    new_team = nil
     
-  #select teams.id as tid, teams.name, 
-  #(select value from league_stats where team_id = tid and stat_type_id = 8) as pts,
-  #(select value from league_stats where team_id = tid and stat_type_id = 7) as diff,
-  #(select value from league_stats where team_id = tid and stat_type_id = 5) as f,
-  #(select value from league_stats where team_id = tid and stat_type_id = 2) as win
-  #from teams  
-    
-  #sql = ["teams.*, teams.id as tid"]
-  #stats.each do |s|
-  #  sql << "(select value from league_stats where team_id = tid and stat_type_id = #{s.id}) as #{s.name}"
-  #end
+    Team.transaction do
+      new_team = Team.create(attrs)
+      
+      league_stats.each do |stat|
+        new_stat_attrs = stat.attributes.merge({:value => 0})
+        
+        if other_league
+          new_stat_attrs.merge!({:league_id => other_league.id})
+          
+          # if this league is on a different need to update to the local league stat reference
+          if league.account != other_league.account
+            local_stat = league.account.stats.find_by_name(stat.stat_type.name)
+            new_stat_attrs.merge!({'stat_type_id' => local_stat.id})
+          end
+        end
+        
+        ls = new_team.league_stats.create(new_stat_attrs)  
+      end # league_stats.each do |stat|
+    end # Team.transaction do
+    new_team
+  end  
 
   def create_tag
     self.team_tag = name[0..2]
