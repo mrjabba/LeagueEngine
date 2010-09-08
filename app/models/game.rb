@@ -13,7 +13,7 @@ class Game < ActiveRecord::Base
              
   validates_associated :player_stats
   
-  attr_accessor :team1_stats, :team2_stats, :new_player_stats, :completed_before_save
+  attr_accessor :team1_stats, :team2_stats, :new_player_stats, :completed_before_save, :team1_goals, :team2_goals
   
   def game_completed=(game_completed)
     self.completed = 1 if game_completed

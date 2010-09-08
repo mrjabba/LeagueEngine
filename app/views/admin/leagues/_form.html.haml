@@ -6,7 +6,7 @@
   #teams
     %label
       Teams
-    - teams = @teams || @league.teams.all(:order => 'name')
+    - teams = @teams || @league.teams
     = render :partial => 'fteam', :collection => teams
   = button_to_add( Team, 'fteam')
     

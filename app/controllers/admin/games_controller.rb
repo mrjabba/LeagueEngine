@@ -18,7 +18,7 @@ class Admin::GamesController < Admin::AdminController
     3.times {@game.player_stats.build()}
     @leagues = active_account().leagues
     @teams = Team.all_teams(active_account())
-    @player_stat_types = active_account.stat_types.player_without_gameplayed
+    #@player_stat_types = active_account.stat_types.player_without_gameplayed
     @player_game_played = StatType.player_game_played
     @game.date = Time.now
     @game.team1 = @teams[0]
