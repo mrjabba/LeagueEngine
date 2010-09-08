@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
   private
   
   def active_account
-    au = AccountsUser.find_active_account(current_user)
-    return au.account
+    au = current_user.active_accounts
+    return au.try(:first)
   end
   
   def current_user_session
