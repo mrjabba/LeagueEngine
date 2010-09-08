@@ -1,6 +1,5 @@
 class Account < ActiveRecord::Base
   validates_presence_of :name
-  validates_presence_of :name, :sport
   validates_uniqueness_of :name, :case_sensitive => false,
         :message => "already exists, please choose another name"
   validates_format_of :name, :with => /^[a-zA-Z0-9\s]+$/,
