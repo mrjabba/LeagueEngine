@@ -23,9 +23,8 @@ class StatType < ActiveRecord::Base
   #  find(:first, :conditions => {:name => 'GamePlayed', :entity => 'player'})
   #end
 
-  def self.create_defaults(account)
-    Account.default.first.stats.each do |stat|
-      account.stats.create(stat.attributes)
-    end
+  def self.default(attributes = {})
+    s = StatType.new({
+    }.merge(attributes))
   end
 end
