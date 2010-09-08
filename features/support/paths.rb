@@ -14,7 +14,12 @@ module NavigationHelpers
     when /new_account_path/
       '/accounts/new'
       
-      
+    when /new_leagues_path/
+      '/admin/leagues/new'
+    
+    when /login_path/
+      '/user_sessions/new'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

@@ -41,12 +41,9 @@ Factory.define :league_stat do |s|
 end
 
 Factory.define :user do |u|
-  u.username "Admin"
-  u.sequence(:email) {|n| "user#{n}@gmail.com" }
+  u.sequence(:username) {|n| "admin_#{n}"}
+  u.sequence(:email) {|n| "user#{n}@test.com" }
   u.password "test123"
-  #u.crypted_password "8a1a0739a0fb1a9549f551179cbe2459e5449111b51293050f72299a169ef474333c506496866f027cd9e206f2dcb0826b3303a1576ee3f5ded8b46a19e1397b"
-  #u.password_salt "WfwI1WAKQ3RoYNG9uEiV"
-  #u.persistence_token "32da3d598e2d807b5a77178f3e74269a8e580da59d0502a6d79664a6b30198b365befb3f91c051729086bc01729ca076acb01233e16587bafb015bf56cb526bd"
 end
 
 Factory.define :accounts_user do |a|

@@ -2,23 +2,20 @@
   %fieldset
     %ul
       %li
-        %label{:for => 'account_name' }
+        %label{ :for => 'account_name' }
           Name
         = f.text_field :name
       %li
-        %label{:for=>'account_sport_id'}
+        %label{ :for=>'account_sport_id' }
           Sport
-        = f.collection_select(:sport_id, @sports, :id, :name) 
-      %li{:id =>'sport_other', :style => 'display: none;'}
-        %label{:for=>'account_other'}
-          Other
-        = f.text_field :other
+        = f.collection_select(:sport_id, @sports, :id, :name, {:include_blank => 'Other'}) 
+        = f.text_field :other_sport_name
     %h3
       Account Administrator
-    -fields_for @user do |user| 
+    - fields_for @user do |user| 
       %ul
         %li
-          %label{ :for => 'user_username'}
+          %label{ :for => 'user_username' }
             Username
           = user.text_field :username
         %li  
@@ -26,7 +23,7 @@
             Password
           = user.password_field :password
         %li
-          %label{ :for => 'user_email'}
+          %label{ :for => 'user_email' }
             Email
           = user.text_field :email
     = submit_tag 'Create Account'

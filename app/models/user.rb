@@ -8,5 +8,7 @@ class User < ActiveRecord::Base
   
   has_and_belongs_to_many :roles
   has_many :accounts_users
+  has_many :accounts, :through => :accounts_users
+  has_many :active_accounts, :through => :accounts_users, :source => :account, :conditions => ["active = ?", 1]
   
 end

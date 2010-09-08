@@ -9,6 +9,6 @@ Feature: create account
          | account_name   | newAccount     |
          | username       | user           |
          | password       | somepassword   |
-         | email          | me@gmail.com   |
+         | email          | test@test.com   |
     And I press "Create Account"
     Then I should see "Account Created"
