@@ -8,7 +8,7 @@ class Team < ActiveRecord::Base
   
   after_validation :create_tag
   
-  named_scope :default, :conditions =>{:team_id => 1}
+  named_scope :default, :conditions =>{:id => 1}
   named_scope :ordered, lambda{|stats|
     {
     :select => "teams.*, teams.id as tid, " + stats.map{|s| "(select value from league_stats where team_id = tid and stat_type_id = #{s.id}) as #{s.short_desc}"}.join(','),
@@ -43,6 +43,16 @@ class Team < ActiveRecord::Base
     new_team
   end  
 
+  def self.all_teams(account)
+     teams = []
+     account.leagues.each do |l|
+       l.teams.each do |t|
+         teams << t
+       end
+     end
+     return teams
+   end
+  
   def create_tag
     self.team_tag = name[0..2]
   end

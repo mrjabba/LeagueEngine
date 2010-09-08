@@ -17,8 +17,8 @@ namespace :data do
     Role.create ( :name => 'mturk')
 
     puts "Creating dafault Account."
-                                                                               #'p4wy8*jy9i#'    
-    u = User.create ( :username => 'reg', :email => 'teeerevor@gmail.com', :password => 'lengine')
+                                                                                 
+    u = User.create ( :username => 'admin', :email => 'teeerevor@gmail.com', :password => 'password')
     a = Account.create( :name => 'Default', :sport_id => Sport.find(1).id, :owner_id => u.id)
     AccountsUser.create(:account_id => a.id, :user_id => u.id, :role_id => 1, :active => 1)
 

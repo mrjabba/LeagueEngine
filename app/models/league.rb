@@ -1,21 +1,22 @@
 class League < ActiveRecord::Base
   belongs_to :account
-  has_many :stats, :class_name => 'LeagueStat'
+  has_many :stats, :class_name => 'LeagueStat', :dependent => :destroy
   has_many :stat_types, :through => :stats
-  has_many :teams
-  has_many :games
+  has_many :teams, :dependent => :destroy
+  has_many :games, :dependent => :destroy
   
   named_scope :default, :conditions =>{:account_id => 1, :name => 'DefaultLeague'}
   named_scope :latest, :order => :created_at
   
   def new_team_attributes=(attrs)
     attrs.each do |team_attrs|
+      debugger
       team   = teams.first
-      team ||= account.leagues.first.teams.first
+      team ||= account.leagues.first.teams.first rescue nil
       team ||= Team.default.first
       
       new_team = team.clone(self)
-      new_team.update_attribute('name', attrs[:name])     
+      new_team.update_attribute('name', team_attrs[:name])     
     end
   end
   
