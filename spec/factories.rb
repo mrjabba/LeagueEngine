@@ -42,7 +42,7 @@ end
 
 Factory.define :user do |u|
   u.username "Admin"
-  u.email "teeerevor@gmail.com"
+  u.sequence(:email) {|n| "user#{n}@gmail.com" }
   u.password "test123"
   #u.crypted_password "8a1a0739a0fb1a9549f551179cbe2459e5449111b51293050f72299a169ef474333c506496866f027cd9e206f2dcb0826b3303a1576ee3f5ded8b46a19e1397b"
   #u.password_salt "WfwI1WAKQ3RoYNG9uEiV"

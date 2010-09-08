@@ -10,7 +10,7 @@ development:
   adapter: mysql
   database: league_engine_dev
   username: root
-  password: password
+  password: 
   host: localhost
   port: 3306
 
@@ -21,7 +21,7 @@ test: &test
   adapter: mysql
   database: league_engine_test
   username: root
-  password: password
+  password: 
   host: localhost
   port: 3306
 

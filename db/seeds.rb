@@ -1,19 +1,5 @@
-#LeagueStat.create(:league_id => 0, :name => 'played', :tag => 'p', :order => 1)
-#LeagueStat.create(:league_id => 0, :name => 'wins', :tag => 'w', :order => 2)
-#LeagueStat.create(:league_id => 0, :name => 'draws', :tag => 'd', :order => 3)
-#LeagueStat.create(:league_id => 0, :name => 'losses', :tag => 'l', :order => 4)
-#LeagueStat.create(:league_id => 0, :name => 'for', :tag => 'f', :order => 5)
-#LeagueStat.create(:league_id => 0, :name => 'against', :tag => 'a', :order => 6)
-#LeagueStat.create(:league_id => 0, :name => 'difference', :tag => 'diff', :order => 7)
-#LeagueStat.create(:league_id => 0, :name => 'points', :tag => 'pts', :order => 8)
-
 ["Water Polo", "Cricket", "Netball", "Soccer", "Hockey"].each do |s|
-  Sport.find_or_create_by_name(s)
+  sport  =   Sport.find_by_name(s)
+  sport ||=  Sport.create(:name => s)
 end
-    
-StatType.create(:name => 'GamePlayed', :entity =>'Player')
-StatType.create(:name => 'Goals', :entity =>'Team')
-StatType.create(:name => 'Goals', :entity =>'Player')
-StatType.create(:name => 'Exclusion', :entity =>'Player')
-StatType.create(:name => 'Goals Multi', :entity =>'Player')
-StatType.create(:name => 'Exclusion Multi', :entity =>'Player')
+
