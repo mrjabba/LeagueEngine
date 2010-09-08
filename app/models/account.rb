@@ -10,6 +10,7 @@ class Account < ActiveRecord::Base
   
   has_many :accounts_users
   has_many :users, :through => :accounts_users
+  has_many :active_users, :through => :accounts_users, :source => :user, :conditions => ["active = ?", 1]
   has_one  :owner, :class_name => 'User', :foreign_key => "owner_id"
   has_many :leagues
   has_many :games, :through => :leagues
