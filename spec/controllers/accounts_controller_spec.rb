@@ -14,7 +14,7 @@ describe AccountsController do
       (1..4).each do |i|
         team = Factory(:team, :league_id => @default_league.id)
         (1..3).each do |j|
-          Factory(:league_stat, :league_id => @default_league.id, :team_id => team.id, :stat_type_id => StatType.find(j).id)
+          Factory(:league_stat, :league_id => @default_league.id, :team_id => team.id, :stat_type_id => StatType.all[j-1].id)
         end
       end
     end
@@ -22,8 +22,8 @@ describe AccountsController do
     describe 'when successful' do
       before do
         @good_params = {
-          :account => {:name => 'new', :sport_id => 1},
-          :user => {:username => 'new_guy', :password => 'password', :email => 'new_guy@somewhere.com'}
+          :account => {:name => 'new', :other_sport_name => 'Slacking'},
+          :user =>    {:username => 'new_guy', :password => 'password', :email => 'new_guy@somewhere.com'}
         }
       
         post :create, @good_params
