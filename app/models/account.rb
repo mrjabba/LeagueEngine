@@ -10,6 +10,7 @@ class Account < ActiveRecord::Base
 
   has_many   :accounts_users
   has_many   :users, :through => :accounts_users
+  has_many   :active_users, :through => :accounts_users, :source => :user, :conditions => ["active = ?", 1]
   has_one    :owner, :class_name => 'User', :foreign_key => "owner_id"
   has_many   :leagues
   has_many   :games, :through => :leagues
@@ -17,13 +18,6 @@ class Account < ActiveRecord::Base
   has_many   :players, :through => :teams
   has_many   :stats, :class_name => 'StatType'
   belongs_to :sport
-
-  named_scope :default, :conditions => { :id => 1 }
-
-  def create_default_data
-    StatType.create_defaults(self)
-    League.default.first.clone(self)
-  end
 
   def other_sport_name_validation
     if other_sport_name.present? and sport.present?
@@ -35,5 +29,17 @@ class Account < ActiveRecord::Base
       errors.add(:other_sport_name, 'or sport should be provided')
       return
     end
+  end
+
+  def self.default(attributes = {})
+    a = Account.new({
+      :name => 'Default',
+      :other_sport_name => 'Other Sport'
+    }.merge(attributes))
+
+    a.stats   << StatType.default
+    a.leagues << League.default
+
+    return a
   end
 end

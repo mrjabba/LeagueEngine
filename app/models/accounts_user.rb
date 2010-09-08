@@ -1,6 +1,7 @@
 class AccountsUser < ActiveRecord::Base
   belongs_to :account
   belongs_to :user
+  belongs_to :role
 
   def self.find_active_account(user)
     return AccountsUser.find(:first,

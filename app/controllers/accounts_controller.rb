@@ -6,13 +6,14 @@ class AccountsController < ApplicationController
   end
   
   def create
-    @account = Account.new(params[:account])
+    @account = Account.default(params[:account])
     @user = User.new(params[:user])
     
     if request.post?
       au = AccountsUser.new
-      au.role_id = 2 #give them an admin role
-      au.active = 1
+      au.role = Role.admin
+      au.active = true
+
       begin          
         Account.transaction do
           @user.save!
@@ -21,7 +22,6 @@ class AccountsController < ApplicationController
           au.account_id = @account.id
           au.user_id = @user.id
           au.save!
-          @account.create_default_data
         end
       rescue ActiveRecord::RecordInvalid => e 
         @account.valid?
@@ -33,6 +33,7 @@ class AccountsController < ApplicationController
         flash[:message] = "Signup successful"
         redirect_to admin_leagues_path
       end
+
     end
   end
 end
