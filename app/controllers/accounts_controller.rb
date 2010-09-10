@@ -33,7 +33,7 @@ class AccountsController < ApplicationController
       else
         #session[:user] = User.authenticate(@user.login, @user.password)
 
-        flash[:message] = "Signup successful"
+        flash[:message] = "Welcome to League Engine"
         redirect_to admin_leagues_path
       end
 
