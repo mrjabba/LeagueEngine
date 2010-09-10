@@ -20,22 +20,15 @@ class Account < ActiveRecord::Base
   belongs_to :sport
 
   def other_sport_name_validation
-    if other_sport_name.present? and sport.present?
-      errors.add(:other_sport_name, 'should be empty if a sport is selected')
-      return
-    end
-
-    if other_sport_name.blank? and sport.blank?
-      errors.add(:other_sport_name, 'or sport should be provided')
-      return
-    end
+    errors.add(:other_sport_name, 'should be empty if a sport is selected') if other_sport_name.present? and sport.present?
+    errors.add(:other_sport_name, 'or sport should be provided') if other_sport_name.blank? and sport.blank?
   end
 
   def self.default(attributes = {})
     a = Account.new({
       :name => 'Default',
       :other_sport_name => 'Other Sport'
-    }.merge(attributes))
+    }.with_indifferent_access.merge(attributes))
 
     a.stats   << StatType.default
     a.leagues << League.default
