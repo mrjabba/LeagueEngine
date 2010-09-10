@@ -8,6 +8,25 @@ class League < ActiveRecord::Base
   named_scope :default, :conditions =>{:account_id => 1, :name => 'DefaultLeague'}
   named_scope :latest, :order => :created_at
   
+  def self.default(attributes = {})
+    l = League.new({
+      :name => 'DefaultLeague'
+    }.with_indifferent_access.merge(attributes))
+    
+    # BLITZ Review: is this cool 
+    %w(Australia Brazil China Denmark).each do |team|
+      t = Team.new({:name => team})
+      l.account.stats.league.each do |stat|
+        ls = LeagueStat.new({:stat_type => stat, :value => 0}) 
+        l.stats << ls
+        t.league_stats << ls
+      end
+      l.teams << t
+    end
+    
+    return l
+  end
+  
   def new_team_attributes=(attrs)
     attrs.each do |team_attrs|
       debugger
@@ -42,19 +61,5 @@ class League < ActiveRecord::Base
     end
     
     new_league
-  end
-  
-  def refresh_league!
-    league_stats = ordered_league_stats
-    league_lists.each do |ll|
-      league_stats.each do |ls|
-        ll.stats[ls.name] = 0
-        ll.save
-      end
-    end
-    
-    games.each do |g|
-      add_result(g) if g.completed?
-    end
   end
 end
