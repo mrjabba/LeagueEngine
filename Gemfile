@@ -30,10 +30,12 @@ gem "haml"
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-  gem 'webrat'
-  gem "rspec", :require => 'spec'
-  gem "rspec-rails", :require => false
-  gem "cucumber"
-  gem "cucumber-rails"    
-  gem "factory_girl"
+  #gem 'webrat'
+  #gem "rspec", :require => 'spec'
+  gem "rspec-rails", ">= 2.0.0.beta.19"
+  #gem "cucumber"
+  #gem "cucumber-rails"    
+  #gem "factory_girl"
+  gem "factory_girl_rails"
+  gem "test-unit", "~> 1.2.3"
 end

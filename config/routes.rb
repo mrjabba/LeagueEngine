@@ -1,7 +1,7 @@
 LeagueEngine::Application.routes.draw do
-  #match 'user_sessions#new', :as => :login
-  #match 'user_sessions#destroy', :as => :logout
-  #match 'account#new', :as => :signup
+  match 'login' => 'user_sessions#new', :as => 'login'
+  match 'logout' => 'user_sessions#destroy', :as => 'logout'
+  match 'signup' => 'accounts#new', :as => 'signup'
 
   namespace "admin" do
     resources :leagues
