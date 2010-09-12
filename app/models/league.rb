@@ -13,29 +13,34 @@ class League < ActiveRecord::Base
       :name => 'DefaultLeague'
     }.with_indifferent_access.merge(attributes))
     
-    # BLITZ Review: is this cool 
-    %w(Australia Brazil China Denmark).each do |team|
-      t = Team.new({:name => team})
-      l.account.stats.league.each do |stat|
-        ls = LeagueStat.new({:stat_type => stat, :value => 0}) 
-        l.stats << ls
-        t.league_stats << ls
+     # BLITZ Review: Defaults?
+    if l.account
+      #account needs to be set so that we know what league stats
+      #we need to create for the default teams
+      %w(Australia Brazil China Denmark).each do |team|
+        t = Team.new({:name => team})
+        l.account.stats.league.each do |stat|
+          ls = LeagueStat.new({:stat_type => stat, :value => 0}) 
+          # BLITZ Review: is this ok
+          l.stats << ls
+          t.league_stats << ls
+        end
+        l.teams << t
       end
-      l.teams << t
     end
-    
+      
     return l
   end
   
   def new_team_attributes=(attrs)
     attrs.each do |team_attrs|
-      debugger
-      team   = teams.first
-      team ||= account.leagues.first.teams.first rescue nil
-      team ||= Team.default.first
-      
-      new_team = team.clone(self)
-      new_team.update_attribute('name', team_attrs[:name])     
+      t = Team.new({:name => team_attrs[:name]})
+      self.account.stats.league.each do |stat|
+        ls = LeagueStat.new({:stat_type => stat, :value => 0}) 
+        self.stats << ls
+        t.league_stats << ls
+      end
+      self.teams << t     
     end
   end
   
@@ -48,18 +53,5 @@ class League < ActiveRecord::Base
         teams.delete(team)
       end
     end
-  end
-  
-  def clone(acc = self.account)
-    new_league = nil
-    League.transaction do
-      new_league = League.create({:name => self.name, :account_id => acc.id})
-    
-      teams.each do |team|
-        team.clone(new_league)
-      end
-    end
-    
-    new_league
   end
 end

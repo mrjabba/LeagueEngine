@@ -6,7 +6,7 @@ Factory.define :account do |a|
 end
 
 Factory.define :stat_type do |s|
-  s.name 'stat'  
+  s.sequence(:name) {|n| "stat#{n}" }  
   s.entity 'team'
 end
 
@@ -31,8 +31,6 @@ Factory.define :team do |t|
   t.sequence(:team_tag) {|n| "t#{n}" }
 end
 
-#more often then not league team and stat_type 
-#will already be created
 Factory.define :league_stat do |s|
   s.association :league
   s.association :team
@@ -46,9 +44,13 @@ Factory.define :user do |u|
   u.password "test123"
 end
 
+Factory.define :role do |r|
+  r.name 'admin'
+end
+
 Factory.define :accounts_user do |a|
   a.association :account
   a.association :user
-  a.role_id 1
+  a.association :role
   a.active 1
 end

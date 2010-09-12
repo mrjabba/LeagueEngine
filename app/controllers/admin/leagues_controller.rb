@@ -14,27 +14,17 @@ class Admin::LeaguesController < Admin::AdminController
   
   def new
     @league = League.new(params[:league])
-    4.times{ @league.teams.build }
+    4.times{ @league.teams.build } if params[:league].blank?
   end
 
   def create
-    League.transaction do
-      begin
-        @league ||= active_account.leagues.first.clone
-        @league ||= League.default.first.clone(active_account)
-        
-        @leage.update_attribute(:name, params)
-        @league = League.create(params[:league].merge({:account_id => active_account.id})) 
-      rescue Exception => e
-        @league = League.new(params[:league])
-        render :action => :new
-      else
-        flash[:notice] = "League Created"
-        redirect_to :action => "index"
-      end # begin
-    end # League.transaction do
-  end #def create
-  
+    @league = League.new(params[:league].merge({:account => active_account}))
+    if @league.save
+      flash[:notice] = "League Created"
+      redirect_to :action => "index"
+    end
+  end #def create 
+
   def show
     @league = League.find(params[:id])
   end
@@ -54,36 +44,19 @@ class Admin::LeaguesController < Admin::AdminController
       redirect_to @league 
     end  
   end
+
+  def clone_league
+    # this will clone and reset the league back to 0
+  end
+
+  def archive
+  end
   
   def destroy
 	  if request.post?
 		  @league = League.find(params[:id])
-		  @league.clean_delete(@league)
+		  @league.delete
 	  end
 	  redirect_to(:action => :list) 
-  end
-  
-  def add_team
-    @leagues = active_account().leagues
-    @team = Team.new(params[:team])
-    @team.league_id = params[:id] if params[:id]
-    if request.post?
-      if @team.save
-        @team.generate_team_data()
-        flash[:notice] = "Team Created"
-        
-        #resets form ready to add another team
-        l = @team.league_id
-        @team = Team.new()
-        @team.league_id = l
-      end
-    end
-  end
-  
-  def remove_team
-    @teams = []
-    for id in session[:items] do
-      @teams << Team.find(id)
-    end
   end   
 end
