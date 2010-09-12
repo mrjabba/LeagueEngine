@@ -2,7 +2,7 @@ class AccountsController < ApplicationController
   def new
     @account = Account.new()
     @user = User.new()
-    @sports = Sport.find(:all, :order => "name")      
+    @sports = Sport.order(:name)
   end
   
   def create
@@ -29,7 +29,7 @@ class AccountsController < ApplicationController
       rescue ActiveRecord::RecordInvalid => e 
         @account.valid?
         @user.valid? # force checking of errors even if accounts failed 
-        @sports = Sport.find(:all, :order => "name")
+        @sports = Sport.order(:name)
       else
         #session[:user] = User.authenticate(@user.login, @user.password)
 
