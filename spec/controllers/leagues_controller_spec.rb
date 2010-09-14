@@ -8,6 +8,7 @@ describe Admin::LeaguesController do
         @user = Factory(:user, :username => 'test')
         au = Factory(:accounts_user, :user => @user)
         @account = au.account
+        controller.stub!(:active_account).and_return(@account)
         
         activate_authlogic
         UserSession.create @user

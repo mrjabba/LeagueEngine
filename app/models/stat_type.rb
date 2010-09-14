@@ -4,17 +4,17 @@ class StatType < ActiveRecord::Base
   has_many :team_stats
   has_many :player_stats
   
-  named_scope :league,         :conditions => {:entity => 'LeagueStat'}
-  named_scope :league_display, :conditions => 'entity = \'LeagueStat\' and display_order is not null' , :order => 'display_order' 
-  named_scope :league_sorting, :conditions => 'entity = \'LeagueStat\' and sort_order is not null' , :order => 'sort_order' 
+  scope :league,         :conditions => {:entity => 'LeagueStat'}
+  scope :league_display, :conditions => 'entity = \'LeagueStat\' and display_order is not null' , :order => 'display_order' 
+  scope :league_sorting, :conditions => 'entity = \'LeagueStat\' and sort_order is not null' , :order => 'sort_order' 
   
   
-  named_scope :ordered, :group => 'name', :order => 'display_order'
-  named_scope :player, :conditions =>{:entity => 'player'}
-  named_scope :player_game_played, :conditions =>{:name => 'GamePlayed', :entity => 'player'}
-  named_scope :player_without_gameplayed, :conditions => "entity = 'player' AND name <> 'GamePlayed'"
+  scope :ordered, :group => 'name', :order => 'display_order'
+  scope :player, :conditions =>{:entity => 'player'}
+  scope :player_game_played, :conditions =>{:name => 'GamePlayed', :entity => 'player'}
+  scope :player_without_gameplayed, :conditions => "entity = 'player' AND name <> 'GamePlayed'"
   
-  named_scope :team_score, :conditions =>{:name => 'score', :entity => 'team'}
+  scope :team_score, :conditions =>{:name => 'score', :entity => 'team'}
   
   def self.default_stats
     [

@@ -1,19 +1,19 @@
-ActionController::Routing::Routes.draw do |map|
-  map.login 'login', :controller => 'user_sessions', :action => 'new'
-  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
-  map.signup 'signup', :controller => 'account', :action => 'index'    
+LeagueEngine::Application.routes.draw do
+  match 'login' => 'user_sessions#new', :as => 'login'
+  match 'logout' => 'user_sessions#destroy', :as => 'logout'
+  match 'signup' => 'accounts#new', :as => 'signup'
 
-  map.namespace(:admin) do |admin|
-    admin.resources :leagues
-    admin.resources :games
+  namespace "admin" do
+    resources :leagues
+    resources :games
   end
   
-  map.resources :accounts, :only => [:new, :create]
-  map.resources :user_sessions
-  map.resources :users
+  resources :accounts, :only => [:new, :create]
+  resources :user_sessions
+  resources :users
 
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  match ':controller/:action/:id'
+  match ':controller/:action/:id.:format'
 
-  map.connect '/', :controller => 'welcome'
+  #root :to => 'welcome#index'
 end

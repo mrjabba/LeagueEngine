@@ -20,13 +20,13 @@ describe Account do
     it do
       @account.should have_many(:accounts_users)
       @account.should have_many(:users)
-      @account.should have_one(:owner)
       @account.should have_many(:leagues)
       @account.should have_many(:games)
       @account.should have_many(:teams)
       @account.should have_many(:players)
       @account.should have_many(:stats)
       @account.should belong_to(:sport)
+      @account.should belong_to(:owner)
     end
 
   end
@@ -35,7 +35,7 @@ describe Account do
 
     it do
       @account.should validate_presence_of(:name)
-      @account.should validate_uniqueness_of(:name)
+      #@account.should validate_uniqueness_of(:name)
     end
 
     describe 'name' do

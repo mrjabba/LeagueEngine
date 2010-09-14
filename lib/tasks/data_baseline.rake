@@ -1,8 +1,9 @@
 namespace :data do
+=begin    
   desc 'load any data needed as a base in the dev db'
   task :baseline => :environment do
     puts "Creating dafault data..."
-    
+
     puts "Creating dafault sparts."
     Sport.create( :name => 'Soccer')
     Sport.create( :name => 'Netball')
@@ -52,4 +53,5 @@ namespace :data do
     
     puts "Done."
   end
+=end  
 end
