@@ -8,18 +8,42 @@ class League < ActiveRecord::Base
   named_scope :default, :conditions =>{:account_id => 1, :name => 'DefaultLeague'}
   named_scope :latest, :order => :created_at
   
-  def new_team_attributes=(attrs)
-    attrs.each do |team_attrs|
-      debugger
-      team   = teams.first
-      team ||= account.leagues.first.teams.first rescue nil
-      team ||= Team.default.first
-      
-      new_team = team.clone(self)
-      new_team.update_attribute('name', team_attrs[:name])     
+  def self.default(attributes = {})
+    l = League.new({
+      :name => 'DefaultLeague'
+    }.with_indifferent_access.merge(attributes))
+    
+     # BLITZ Review: Defaults?
+    if l.account
+      #account needs to be set so that we know what league stats
+      #we need to create for the default teams
+      %w(Australia Brazil China Denmark).each do |team|
+        t = Team.new({:name => team})
+        l.account.stats.league.each do |stat|
+          ls = LeagueStat.new({:stat_type => stat, :value => 0}) 
+          # BLITZ Review: is this ok
+          l.stats << ls
+          t.league_stats << ls
+        end
+        l.teams << t
+      end
     end
+      
+    return l
   end
   
+  def new_team_attributes=(attrs)
+    attrs.each do |team_attrs|
+      t = Team.new({:name => team_attrs[:name]})
+      self.account.stats.league.each do |stat|
+        ls = LeagueStat.new({:stat_type => stat, :value => 0}) 
+        self.stats << ls
+        t.league_stats << ls
+      end
+      self.teams << t     
+    end
+  end
+
   def existing_team_attributes=(attrs)
     teams.reject(&:new_record?).each do |team|
       attributes = attrs[team.id.to_s]   
@@ -28,33 +52,6 @@ class League < ActiveRecord::Base
       else 
         teams.delete(team)
       end
-    end
-  end
-  
-  def clone(acc = self.account)
-    new_league = nil
-    League.transaction do
-      new_league = League.create({:name => self.name, :account_id => acc.id})
-    
-      teams.each do |team|
-        team.clone(new_league)
-      end
-    end
-    
-    new_league
-  end
-  
-  def refresh_league!
-    league_stats = ordered_league_stats
-    league_lists.each do |ll|
-      league_stats.each do |ls|
-        ll.stats[ls.name] = 0
-        ll.save
-      end
-    end
-    
-    games.each do |g|
-      add_result(g) if g.completed?
     end
   end
 end

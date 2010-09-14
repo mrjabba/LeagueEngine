@@ -11,4 +11,4 @@ Feature: create account
          | password       | somepassword   |
          | email          | test@test.com   |
     And I press "Create Account"
-    Then I should see "Account Created"
+    Then I should see "LeagueEngine - Leagues"

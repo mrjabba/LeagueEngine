@@ -1,0 +1,65 @@
+<html>
+<head>
+  <title>LeagueEngine - <%= controller.controller_name.capitalize %></title>
+  
+	<%= javascript_include_tag  'jquery-1.4.2' %>
+	
+	<script src="/javascripts/plugins/jquery-ui/jquery-ui-1.7.2.custom.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="/javascripts/plugins/jquery-ui/smoothness/jquery-ui-1.7.2.custom.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	
+	<%= stylesheet_link_tag 'back' %>
+	<%= javascript_include_tag  'application' %>
+	<%= yield :javascript%>
+	<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+</head>
+<body>
+    <% if current_user%>
+		<div id="top_nav">
+		  		<!--%= link_to "My Account", account_path %--> |
+				<%= link_to "Logout", user_session_path, :method => :destroy %>
+		</div>
+		
+		<div id="menu">
+			<ul>
+				<li><a href="/leagues">leagues</a>
+					<ul>
+						<li><a href='/leagues/new'>new league</a></li>
+					</ul>
+				</li>
+				<li>
+				  <a href="/games">games</a>
+					<ul>
+						<li><a href='/games/new'>new game</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="/players">players</a>
+			    <ul>
+						<li><a href="/players/stats">player stats</a></li>
+			    </ul>
+			  </li>
+			</ul>
+		</div>
+		<% end %>
+		
+		<div id="content">
+	  	<%- flash.each do |name, msg| -%>
+				<%= content_tag :div, msg, :id => "flash_#{name}" %>
+			<%- end -%>
+	
+			<%= yield %>
+		</div>
+		
+		<% if ! request.request_uri.include? 'localhost' %>
+		<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">
+		try {
+		var pageTracker = _gat._getTracker("UA-2083028-6");
+		pageTracker._trackPageview();
+		} catch(err) {}</script>
+		<% end %>
+</body>
+</html>

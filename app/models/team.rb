@@ -14,34 +14,7 @@ class Team < ActiveRecord::Base
     :select => "teams.*, teams.id as tid, " + stats.map{|s| "(select value from league_stats where team_id = tid and stat_type_id = #{s.id}) as #{s.short_desc}"}.join(','),
     :order => stats.map{|s| "#{s.short_desc} DESC"}.join(',')
     }
-  }  
-  
-  def clone(other_league = nil)
-    attrs = self.attributes
-    attrs.merge!({:league_id => other_league.id}) if other_league
-    new_team = nil
-    
-    Team.transaction do
-      new_team = Team.create(attrs)
-      
-      league_stats.each do |stat|
-        new_stat_attrs = stat.attributes.merge({:value => 0})
-        
-        if other_league
-          new_stat_attrs.merge!({:league_id => other_league.id})
-          
-          # if this league is on a different need to update to the local league stat reference
-          if league.account != other_league.account
-            local_stat = league.account.stats.find_by_name(stat.stat_type.name)
-            new_stat_attrs.merge!({'stat_type_id' => local_stat.id})
-          end
-        end
-        
-        ls = new_team.league_stats.create(new_stat_attrs)  
-      end # league_stats.each do |stat|
-    end # Team.transaction do
-    new_team
-  end  
+  }    
 
   def self.all_teams(account)
      teams = []
@@ -53,6 +26,7 @@ class Team < ActiveRecord::Base
      return teams
    end
   
+
   def create_tag
     self.team_tag = name[0..2]
   end

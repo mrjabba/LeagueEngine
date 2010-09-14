@@ -14,25 +14,18 @@ class Admin::LeaguesController < Admin::AdminController
   
   def new
     @league = League.new(params[:league])
-    4.times{ @league.teams.build }
+    4.times{ @league.teams.build } if params[:league].blank?
   end
 
   def create
-    League.transaction do
-      begin
-        @league ||= active_account.leagues.first.clone
-        @league ||= League.default.first.clone(active_account)
-        
-        @leage.update_attribute(:name, params)
-        @league = League.create(params[:league].merge({:account_id => active_account.id})) 
-      rescue Exception => e
-        @league = League.new(params[:league])
-        render :action => :new
-      else
-        flash[:notice] = "League Created"
-        redirect_to :action => "index"
-      end # begin
-    end # League.transaction do
+    league_params = params[:league].merge({:account_id => active_account.id})
+    @league = League.new(league_params)
+    if @league.save    
+      flash[:notice] = "League Created"
+      redirect_to :action => "index"
+    else
+      render :action => :new
+    end # begin
   end #def create
   
   def show

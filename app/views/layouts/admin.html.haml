@@ -20,19 +20,15 @@
               %li
                 = link_to 'new league', new_admin_league_path
           %li
-            %a{:href=>"/games"}
-              games
+            = link_to 'games', admin_games_path
             %ul
               %li
-                %a{:href=>'/games/new'}
-                  new game
+                = link_to 'new games', new_admin_game_path
           %li
-            %a{:href=>"/players"}
-              players
+            =# link_to 'players', admin_players_path
             %ul
               %li
-                %a{:href=>'/players/stats'}
-                  player stats
+                =# link_to 'players stats', admin_players_stats_path
     
     - flash.each do |name, msg|
       = content_tag :div, msg, :id => "flash_#{name}" 
@@ -42,7 +38,7 @@
     
     
     -# --------------------
-    -# Google Analytics
+    -# JS includes
     -# --------------------    
     = javascript_include_tag  'jquery-1.4.2'
     = javascript_include_tag  'plugins/jquery-ui/jquery-ui-1.7.2.custom.min.js'

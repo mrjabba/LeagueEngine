@@ -30,9 +30,6 @@ class Account < ActiveRecord::Base
       :other_sport_name => 'Other Sport'
     }.with_indifferent_access.merge(attributes))
 
-    a.stats   << StatType.default
-    a.leagues << League.default
-
     return a
   end
 end
