@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+=begin
 describe AccountsUser do
   before(:each) do
   end
@@ -30,3 +30,4 @@ describe AccountsUser do
     AccountsUser.is_active(account_user.account, account_user.user).should_not be_true
   end
 end
+=end
