@@ -5,8 +5,8 @@ class League < ActiveRecord::Base
   has_many :teams, :dependent => :destroy
   has_many :games, :dependent => :destroy
   
-  named_scope :default, :conditions =>{:account_id => 1, :name => 'DefaultLeague'}
-  named_scope :latest, :order => :created_at
+  scope :default, :conditions =>{:account_id => 1, :name => 'DefaultLeague'}
+  scope :latest, :order => :created_at
   
   def self.default(attributes = {})
     l = League.new({
@@ -33,6 +33,7 @@ class League < ActiveRecord::Base
   end
   
   def new_team_attributes=(attrs)
+    debugger
     attrs.each do |team_attrs|
       t = Team.new({:name => team_attrs[:name]})
       self.account.stats.league.each do |stat|

@@ -15,7 +15,7 @@ gem 'capistrano'
 
 # To use debugger
 #gem 'ruby-debug'
-#gem 'ruby-debug19', :require => 'ruby-debug'
+gem 'ruby-debug19', :require => 'ruby-debug'
 
 # Bundle the extra gems:
 # gem 'bj'
@@ -32,7 +32,8 @@ gem "haml"
 group :development, :test do
   #gem 'webrat'
   #gem "rspec", :require => 'spec'
-  gem "rspec-rails", ">= 2.0.0.beta.19"
+  gem "rspec-rails", ">= 2.0.0.beta.22"
+  gem "shoulda"
   #gem "cucumber"
   #gem "cucumber-rails"    
   #gem "factory_girl"

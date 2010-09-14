@@ -18,7 +18,9 @@ class Admin::LeaguesController < Admin::AdminController
   end
 
   def create
-    @league = League.new(params[:league].merge({:account => active_account}))
+    debugger
+    l_params = params[:league].merge({:account => active_account.id})
+    @league = League.new(l_params)
     if @league.save
       flash[:notice] = "League Created"
       redirect_to :action => "index"
