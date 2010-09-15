@@ -56,6 +56,7 @@ class Game < ActiveRecord::Base
     self.date = DateTime.new(date.year, date.mon, date.day, t.hour, t.min, 0)
   end
 
+=begin
   def before_save
     g = Game.find(id) if !id.nil?
     self.completed_before_save = g.completed if !g.nil?
@@ -71,17 +72,18 @@ class Game < ActiveRecord::Base
     save_game_stats
     save_player_stats
   end
-
-  def completed_changed?
-    completed_before_save != completed
-  end
-
+  
   def after_find
     self.team1_score = team1.score
     self.team1_score ||= 0
 
     self.team2_score = team2.score
     self.team2_score ||= 0
+  end
+=end
+
+  def completed_changed?
+    completed_before_save != completed
   end
 
 

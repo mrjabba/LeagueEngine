@@ -33,7 +33,7 @@ class League < ActiveRecord::Base
   end
   
   def new_team_attributes=(attrs)
-    debugger
+    #debugger
     attrs.each do |team_attrs|
       t = Team.new({:name => team_attrs[:name]})
       self.account.stats.league.each do |stat|

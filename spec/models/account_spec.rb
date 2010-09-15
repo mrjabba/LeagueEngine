@@ -58,7 +58,7 @@ describe Account do
 
         @account.other_sport_name = 'Basket Ball'
         @account.should_not be_valid
-        @account.errors.on(:other_sport_name).should_not be_nil
+        @account.errors[:other_sport_name].should_not be_nil
       end
 
       it "should be provided if no sport is provided" do
@@ -68,7 +68,7 @@ describe Account do
 
         @account.other_sport_name = ''
         @account.should_not be_valid
-        @account.errors.on(:other_sport_name).should_not be_nil
+        @account.errors[:other_sport_name].should_not be_nil
       end
 
     end # other sport
