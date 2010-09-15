@@ -1,7 +1,7 @@
 
 puts 'Creating dafault data.'
 
-['Water Polo', 'Cricket', 'Netball', 'Soccer', 'Hockey', 'Basketball'].each do |s|
+['Water Polo', 'Cricket', 'Netball', 'Soccer', 'Hockey', 'Basketball', '-Not in this list'].each do |s|
   sport  =   Sport.find_by_name(s)
   sport ||=  Sport.create(:name => s)
 end
