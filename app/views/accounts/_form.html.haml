@@ -1,4 +1,5 @@
 - form_for @account do |f|
+  = render "shared/error_messages", :target => @account
   %fieldset
     %ul
       %li
@@ -8,11 +9,13 @@
       %li
         %label{ :for=>'account_sport_id' }
           Sport
-        = f.collection_select(:sport_id, @sports, :id, :name, {:include_blank => 'Other'}) 
-        = f.text_field :other_sport_name
+        = f.collection_select(:sport_id, @sports, :id, :name, {:include_blank => '-- select sport --'}) 
+        %div{:style => "display:none;"}
+          = f.text_field :other_sport_name
     %h3
       Account Administrator
-    - fields_for @user do |user| 
+    = fields_for @user do |user| 
+      = render "shared/error_messages", :target => @user
       %ul
         %li
           %label{ :for => 'user_username' }
