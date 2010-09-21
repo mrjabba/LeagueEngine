@@ -1,10 +1,10 @@
 !!!
 %html
   %head
-    %title 
+    %title
       LeagueEngine - #{controller.controller_name.capitalize}
-    
-    -# included javascripts at bottom  
+
+    -# included javascripts at bottom
     = stylesheet_link_tag     '/javascripts/plugins/jquery-ui/smoothness/jquery-ui-1.7.2.custom.css', :media => "screen"
     = stylesheet_link_tag     'application'
   %body
@@ -29,27 +29,26 @@
             %ul
               %li
                 =# link_to 'players stats', admin_players_stats_path
-    
+
     - flash.each do |name, msg|
-      = content_tag :div, msg, :id => "flash_#{name}" 
-    
+      = content_tag :div, msg, :id => "flash_#{name}"
+
     #admin_content
       = yield
-    
-    
+
     -# --------------------
     -# JS includes
-    -# --------------------    
+    -# --------------------
     = javascript_include_tag  'jquery-1.4.2'
     = javascript_include_tag  'plugins/jquery-ui/jquery-ui-1.7.2.custom.min.js'
     = javascript_include_tag  'application'
     = yield :javascript
     = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
-    
+
     -# --------------------
     -# Google Analytics
     -# --------------------
-    - if ! request.request_uri.include? 'localhost'
+    - unless request.server_name =~ /localhost/
       :javascript
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
         document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
