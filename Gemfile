@@ -23,7 +23,9 @@ gem 'ruby-debug19', :require => 'ruby-debug'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 
-gem "authlogic"
+#gem "authlogic"
+#will need to fix this when Authlogic gem is fix
+gem 'authlogic', :git => 'git://github.com/odorcicd/authlogic.git', :branch => 'rails3'
 gem "haml"
 
 # Bundle gems for the local environment. Make sure to
