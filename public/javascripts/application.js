@@ -69,13 +69,27 @@ $(function() {
       $(this).find('a').hide();
     }
   );
-  
+
   $('.league_form .x_add_team').live('click', function(){
     $(this).prev().append(blank_team);
   });
-  
+
   $('.league_form .x_del_team').live('click', function(){
     $(this).parents('.team').remove();
     return false;
+  });
+});
+
+/**********************************************************************
+*********            account new
+***********************************************************************/
+
+$(function() {
+  $('#sport select').change(function(){
+    if ($(this).find("option:selected").text() == '-Not in this list'){
+      $('.other_sport').show();
+    }else{
+      $('.other_sport').hide();
+    }
   });
 });

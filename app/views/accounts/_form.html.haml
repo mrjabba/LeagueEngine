@@ -1,4 +1,4 @@
-- form_for @account do |f|
+= form_for @account do |f|
   = render "shared/error_messages", :target => @account
   %fieldset
     %ul
@@ -6,22 +6,22 @@
         %label{ :for => 'account_name' }
           Name
         = f.text_field :name
-      %li
+      %li#sport
         %label{ :for=>'account_sport_id' }
           Sport
         = f.collection_select(:sport_id, @sports, :id, :name, {:include_blank => '-- select sport --'}) 
-        %div{:style => "display:none;"}
-          = f.text_field :other_sport_name
+        .other_sport{:style => "display:none;"}
+          = f.text_field :other_sport_name, :placeholder =>"Frisbee, Snooker... what ever!"
     %h3
       Account Administrator
-    = fields_for @user do |user| 
+    = fields_for @user do |user|
       = render "shared/error_messages", :target => @user
       %ul
         %li
           %label{ :for => 'user_username' }
             Username
           = user.text_field :username
-        %li  
+        %li
           %label{ :for => 'user_password' }
             Password
           = user.password_field :password
