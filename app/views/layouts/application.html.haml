@@ -3,7 +3,7 @@
   %head
     %title 
       LeagueEngine - #{controller.controller_name.capitalize}
-    
+
     -# included javascripts at bottom  
     = stylesheet_link_tag     '/javascripts/plugins/jquery-ui/smoothness/jquery-ui-1.7.2.custom.css', :media => "screen"
     = stylesheet_link_tag     'application'
@@ -12,17 +12,16 @@
       = content_tag :div, msg, :id => "flash_#{name}" 
 
     = yield
-    
-    
+
     -# --------------------
-    -# Google Analytics
-    -# --------------------    
+    -# javascripts 
+    -# --------------------
     = javascript_include_tag  'jquery-1.4.2'
     = javascript_include_tag  'plugins/jquery-ui/jquery-ui-1.7.2.custom.min.js'
     = javascript_include_tag  'application'
     = yield :javascript
     = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
-    
+
     -# --------------------
     -# Google Analytics
     -# --------------------

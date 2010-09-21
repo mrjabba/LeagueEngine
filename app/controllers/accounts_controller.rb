@@ -4,25 +4,25 @@ class AccountsController < ApplicationController
     @user = User.new()
     @sports = Sport.order(:name)
   end
-  
+
   def create
     @account = Account.default(params[:account])
     @user = User.new(params[:user])
-    
+
     if request.post?
       au = AccountsUser.new
       au.role = Role.admin
       au.active = true
 
-      begin          
+      begin
         Account.transaction do
           @user.save!
           @account.owner_id = @user.id
           @account.save!
           @account.stats   << StatType.default_stats #@account.sport ? self.sport.stats : StatType.DEFAULT_STATS
           @account.leagues << League.default({:account => @account})
-          
-          
+
+
           AccountsUser.create({
             :role => Role.admin, 
             :active => true,

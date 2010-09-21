@@ -4,16 +4,16 @@ class League < ActiveRecord::Base
   has_many :stat_types, :through => :stats
   has_many :teams, :dependent => :destroy
   has_many :games, :dependent => :destroy
-  
+
   scope :default, :conditions =>{:account_id => 1, :name => 'DefaultLeague'}
   scope :latest, :order => :created_at
-  
+
   def self.default(attributes = {})
     l = League.new({
       :name => 'DefaultLeague'
     }.with_indifferent_access.merge(attributes))
-    
-     # BLITZ Review: Defaults?
+
+    # BLITZ Review: Defaults?
     if l.account
       #account needs to be set so that we know what league stats
       #we need to create for the default teams
@@ -28,26 +28,25 @@ class League < ActiveRecord::Base
         l.teams << t
       end
     end
-      
     return l
   end
-  
+
   def new_team_attributes=(attrs)
     #debugger
     attrs.each do |team_attrs|
       t = Team.new({:name => team_attrs[:name]})
-      self.account.stats.league.each do |stat|
+      account.stats.league.each do |stat|
         ls = LeagueStat.new({:stat_type => stat, :value => 0}) 
         self.stats << ls
         t.league_stats << ls
       end
-      self.teams << t     
+      self.teams << t
     end
   end
 
   def existing_team_attributes=(attrs)
     teams.reject(&:new_record?).each do |team|
-      attributes = attrs[team.id.to_s]   
+      attributes = attrs[team.id.to_s]
       if attributes
         team.update_attributes(attributes)
       else 

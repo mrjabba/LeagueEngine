@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  
+
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false,
         :message => "already exists, please choose another name"
@@ -12,7 +12,7 @@ class Account < ActiveRecord::Base
   has_many   :accounts_users
   has_many   :users, :through => :accounts_users
   has_many   :active_users, :through => :accounts_users, :source => :user, :conditions => ["active = ?", 1]
-  
+
   has_many   :leagues
   has_many   :games, :through => :leagues
   has_many   :teams, :through => :leagues
