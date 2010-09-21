@@ -227,13 +227,22 @@ table.greentable td div.row_left_options { position: absolute; width: 65px; righ
   width: 645px;
 }
 
+/***********************************
+ * login
+ * ********************************/
+#login_form label{display: none;}
+#login_form input[type='text'], #login_form input[type='password']{margin-top: 10px;}
+
+
 /***********************************************************************
  admin leagues
 ************************************************************************/
 #admin_leagues .league { position: relative; }
   #admin_leagues .league a{ position: absolute; display: none; top: 7px; right: 15px; }
-  
-/* league form */
+
+/*************************************
+ * league form 
+ * ***********************************/
 .league_form { width: 300px;}
 .league_form #league_name { width: 130px; }
 .league_form #teams { overflow: hidden;

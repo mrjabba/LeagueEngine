@@ -1,16 +1,18 @@
-%h3 
-  Login
-
-- form_for @user_session, :html => {:id => 'login_form'} do |f| 
-  = f.error_messages 
-  %ol
-    %li>
-      = f.label :username
-      = f.text_field :username
-    %li
-      = f.label :password
-      = f.password_field :password
-    %li
-      = f.submit "login"
+.white_box
+  %h3
+    Login
+  = form_for @user_session, :html => {:id => 'login_form'} do |f|
+    = render "shared/error_messages", :target => @user_session
+    %ol
+      %li
+        %label{:for => 'user_session_username'}
+          username
+        = f.text_field :username, :placeholder => 'Username'
+      %li
+        %label{:for => 'user_session_password'}
+          password
+        = f.password_field :password, :placeholder => 'Password'
+      %li
+        = f.submit "login"
 
 
