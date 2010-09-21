@@ -1,26 +1,26 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery  
   helper :all # include all helpers, all the time
-  
-  helper_method :current_user, :current_user_session
-  
+
+  helper_method :current_user, :current_user_session, :active_account
+
   private
-  
+
   def active_account
     au = current_user.active_accounts
     return au.try(:first)
   end
-  
+
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
   end
-  
+
   def current_user
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.record
   end
-  
+
   def require_user
     unless current_user
       store_location
@@ -38,20 +38,20 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
-  
+
   def store_location
     session[:return_to] = request.request_uri
   end
-  
+
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
   end
-  
+
   def store_referrer
     session[:referrer] = request.referrer
   end
-  
+
   def redirect_to_referrer_or_default(default)
     redirect_to(session[:referrer] || default)
     session[:referrer] = nil
