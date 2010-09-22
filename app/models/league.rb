@@ -31,14 +31,15 @@ class League < ActiveRecord::Base
     return l
   end
 
+  # BLITZ Review: plenty of duplication between this and self.default
   def new_team_attributes=(attrs)
-    #debugger
+    debugger
     attrs.each do |team_attrs|
       t = Team.new({:name => team_attrs[:name]})
       account.stats.league.each do |stat|
-        ls = LeagueStat.new({:stat_type => stat, :value => 0}) 
-        self.stats << ls
-        t.league_stats << ls
+       ls = LeagueStat.new({:stat_type => stat, :value => 0}) 
+       self.stats << ls
+       t.league_stats << ls
       end
       self.teams << t
     end
@@ -49,7 +50,7 @@ class League < ActiveRecord::Base
       attributes = attrs[team.id.to_s]
       if attributes
         team.update_attributes(attributes)
-      else 
+      else
         teams.delete(team)
       end
     end
