@@ -33,7 +33,6 @@ class League < ActiveRecord::Base
 
   # BLITZ Review: plenty of duplication between this and self.default
   def new_team_attributes=(attrs)
-    debugger
     attrs.each do |team_attrs|
       t = Team.new({:name => team_attrs[:name]})
       account.stats.league.each do |stat|

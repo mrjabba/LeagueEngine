@@ -4,7 +4,7 @@ module ApplicationHelper
     return date.strftime("%d %b") if date.year == Time.now.year
     return date.strftime("%d %b %y")
   end
-  
+
   def button_to_add( klass, partial, button_text = '+')
     render :partial => 'shared/button_to_add', :locals => { :klass => klass, 
                                                        :partial => partial,
@@ -13,7 +13,7 @@ module ApplicationHelper
 
   def button_to_remove( klass, options ={})
     options = { :new_object => false,  :button_text => 'x'}.merge(options)
-    
+
     render :partial => 'shared/button_to_remove', :locals => { :klass => klass,
                                                                :new_object => options[:new_object],  
                                                                :button_text => options[:button_text] }

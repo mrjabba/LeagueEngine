@@ -18,7 +18,6 @@ class Admin::LeaguesController < Admin::AdminController
   end
 
   def create
-    debugger
     league_params = {:account => active_account}.merge(params[:league])
     @league = League.new(league_params)
     if @league.save

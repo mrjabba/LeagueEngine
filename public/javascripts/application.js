@@ -64,7 +64,7 @@ $(function() {
   $('#admin_leagues .league').live('hover',
     function () {
       $(this).find('a').show();
-    }, 
+    },
     function () {
       $(this).find('a').hide();
     }

@@ -3,15 +3,15 @@
   %label{ :for=>'league_name'}
     League name
   =l.text_field :name
-  
+
   #teams
     %label
       Teams
     - teams = @teams || @league.teams
     = render :partial => 'fteam', :collection => teams
   = button_to_add( Team, 'fteam')
-    
-  .btns    
+
+  .btns
     - btn_txt = request.path =~ /new/ ? 'Create League' : 'Update League'
-    = submit_tag btn_txt 
+    = submit_tag btn_txt
     = link_to 'Cancel', admin_leagues_path, :class => 'cancel'

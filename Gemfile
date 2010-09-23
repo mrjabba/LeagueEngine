@@ -41,4 +41,5 @@ group :development, :test do
   #gem "factory_girl"
   gem "factory_girl_rails"
   gem "test-unit", "~> 1.2.3"
+  gem 'jquery-rails'
 end
